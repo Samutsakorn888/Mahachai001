@@ -1,0 +1,159 @@
+{
+  "chatbot_name": "@samutsakorn mahachai Facebook Chatbot",
+  "version": "1.2.0",
+  "blocks": [
+    {
+      "id": "block_1_welcome",
+      "name": "Welcome Message & Main Menu",
+      "trigger": {
+        "event": "GET_STARTED",
+        "keywords": ["hello", "hi", "สวัสดี", "ดีครับ", "ดีค่ะ", "สนใจ", "ห้องพัก", "จอง", "ราคา"]
+      },
+      "message": {
+        "text": "สวัสดีครับ/ค่ะ 🙏 ยินดีต้อนรับสู่ แอทสมุทรสาคร สาขามหาชัย (@samutsakorn mahachai) ต้องการสอบถามข้อมูลหรือดูห้องพักประเภทไหน เลือกเมนูด้านล่างได้เลยครับ",
+        "buttons": [
+          {
+            "type": "block_link",
+            "title": "🏨 เลือกดูห้องพัก",
+            "target_block_id": "block_2_rooms_menu"
+          },
+          {
+            "type": "block_link",
+            "title": "📍 แผนที่เดินทาง",
+            "target_block_id": "block_3_location"
+          },
+          {
+            "type": "web_url",
+            "title": "🌐 ดูเว็บไซต์",
+            "url": "https://atsamutsakorn.com"
+          }
+        ]
+      }
+    },
+    {
+      "id": "block_2_rooms_menu",
+      "name": "Rooms Main Menu",
+      "message": {
+        "text": "แอทสมุทรสาคร สาขามหาชัย มีให้บริการทั้งห้องพักรายวัน (Daily) และห้องพักรายเดือน (Monthly) กรุณาเลือกประเภทห้องพักที่คุณต้องการดูข้อมูลครับ",
+        "buttons": [
+          {
+            "type": "block_link",
+            "title": "🏨 ห้องพักรายวัน",
+            "target_block_id": "block_2a_daily_rooms"
+          },
+          {
+            "type": "block_link",
+            "title": "🏢 ห้องพักรายเดือน",
+            "target_block_id": "block_2b_monthly_rooms"
+          },
+          {
+            "type": "admin_notify",
+            "title": "📞 ติดต่อแอดมิน",
+            "payload": "USER_REQUEST_ADMIN_CHAT"
+          }
+        ]
+      }
+    },
+    {
+      "id": "block_2a_daily_rooms",
+      "name": "Daily Rooms Showcase",
+      "message": {
+        "type": "carousel",
+        "cards": [
+          {
+            "title": "ห้องพักเตียงเดี่ยว (Single Bed)",
+            "subtitle": "ราคา 799 บาท/คืน | พักผ่อนสบาย เป็นส่วนตัว แอร์เย็นฉ่ำ ทีวี ตู้เสื้อผ้าบิ้วอิน เครื่องทำน้ำอุ่น ตู้เย็น",
+            "image_url": "https://atsamutsakorn.com/images/single.png",
+            "buttons": [
+              {
+                "type": "web_url",
+                "title": "ดูรูปเพิ่มเติม & จอง",
+                "url": "https://atsamutsakorn.com/rooms/single"
+              }
+            ]
+          },
+          {
+            "title": "ห้องพักเตียงคู่ (Twin Bed)",
+            "subtitle": "ราคา 799 บาท/คืน | กว้างขวาง เหมาะสำหรับมาเป็นคู่หรือเพื่อนซี้ พร้อมสิ่งอำนวยความสะดวกครบ",
+            "image_url": "https://atsamutsakorn.com/images/twin.png",
+            "buttons": [
+              {
+                "type": "web_url",
+                "title": "ดูรูปเพิ่มเติม & จอง",
+                "url": "https://atsamutsakorn.com/rooms/twin"
+              }
+            ]
+          },
+          {
+            "title": "ห้องพักเตียงเสริม (Extra Bed)",
+            "subtitle": "ราคา 899 บาท/คืน | รองรับครอบครัวหรือกลุ่มเพื่อน เพิ่มพื้นที่พักผ่อนที่กว้างขวางขึ้น",
+            "image_url": "https://atsamutsakorn.com/images/extra.png",
+            "buttons": [
+              {
+                "type": "web_url",
+                "title": "ดูรูปเพิ่มเติม & จอง",
+                "url": "https://atsamutsakorn.com/rooms/extra"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "block_2b_monthly_rooms",
+      "name": "Monthly Rooms Showcase",
+      "message": {
+        "text": "🏢 อัตราค่าเช่ารายเดือน แอทสมุทรสาคร สาขามหาชัย:\n\n1️⃣ ห้องเปล่าไม่มีแอร์: 3,100 - 3,400 บาท (มัดจำ 8,000 บ.)\n2️⃣ ห้องเปล่ามีแอร์: 3,900 บาท (มัดจำ 8,500 บ.)\n3️⃣ ห้องเฟอร์นิเจอร์ 8 ชิ้น (แอร์): 4,500 - 5,000 บาท (มัดจำ 10,000 บ.)\n4️⃣ ห้องเฟอร์นิเจอร์ 12 ชิ้น (แอร์): 5,500 บาท (มัดจำ 15,000 บ.)\n5️⃣ ห้องเฟอร์นิเจอร์ เตียงคู่ + มุม: 6,000 บาท (มัดจำ 15,000 บ.)\n6️⃣ ห้องเฟอร์นิเจอร์ เตียงคู่ + แอร์พรีเมียม: 8,400 บาท (มัดจำ 18,500 บ.)\n7️⃣ ห้องเฟอร์นิเจอร์ เตียงคู่ ระเบียงใหญ่ + มุม: 6,500 บาท (มัดจำ 15,000 บ.)\n\n⚡ ค่าไฟฟ้า: 9 บาท / หน่วย\n💧 ค่าน้ำประปา: 1-5 หน่วยแรก 200 บาท (หน่วยถัดไป 35 บาท/หน่วย)\n🏢 ค่าส่วนกลาง: 200 บาท / เดือน\n🚗 ที่จอดรถยนต์: 1,000 บาท / เดือน\n🏍️ ที่จอดรถมอเตอร์ไซค์: 100 บาท / เดือน\n🔑 ค่าเปิดห้องกรณีลืมกุญแจ: 300 บาท / ครั้ง\n\nสนใจสอบถามรายละเอียดหรือติดต่อดูห้องพัก กดปุ่มด้านล่างได้เลยครับ",
+        "buttons": [
+          {
+            "type": "admin_notify",
+            "title": "📞 จอง/ดูห้องรายเดือน",
+            "payload": "USER_BOOK_MONTHLY"
+          },
+          {
+            "type": "block_link",
+            "title": "↩️ ย้อนกลับเมนูหลัก",
+            "target_block_id": "block_1_welcome"
+          }
+        ]
+      }
+    },
+    {
+      "id": "block_3_location",
+      "name": "Location & Map",
+      "message": {
+        "text": "🏢 แอทสมุทรสาคร สาขามหาชัย\n📍 ที่ตั้ง: อยู่ในเมือง ตรงข้ามบิ๊กซี มหาชัย ถนนเศรษฐกิจ\n\nติดต่อแอดมิน: 099 095 4541 / 065 464 7459\nสามารถคลิกปุ่มด้านล่างเพื่อเปิดแผนที่และนำทางได้ทันทีครับ 🚗",
+        "buttons": [
+          {
+            "type": "web_url",
+            "title": "📍 เปิด Google Maps",
+            "url": "https://maps.app.goo.gl/x2v1CSky2nLNr7gZ9"
+          },
+          {
+            "type": "block_link",
+            "title": "↩️ ย้อนกลับเมนูหลัก",
+            "target_block_id": "block_1_welcome"
+          }
+        ]
+      }
+    },
+    {
+      "id": "block_4_deposit_faq",
+      "name": "Deposit Refund FAQ",
+      "trigger": {
+        "event": "KEYWORDS",
+        "keywords": ["มัดจำ", "เงินคืน", "ได้คืนตอนไหน", "คืนมัดจำ", "คืนเงินประกัน", "มัดจำคืน"]
+      },
+      "message": {
+        "text": "💰 ข้อมูลการคืนเงินมัดจำประกันห้องพัก:\n\nหลังจากแม่บ้าน/พนักงานตรวจเช็คห้องพักเสร็จเรียบร้อยและไม่พบสิ่งของเสียหาย ทางที่พักจะดำเนินการโอนเงินมัดจำคืนให้ท่านไม่เกินเวลา 12:00 น. (เที่ยงตรง) ของวันที่เช็คเอ้าท์ออกครับ 🙏",
+        "buttons": [
+          {
+            "type": "block_link",
+            "title": "↩️ ย้อนกลับเมนูหลัก",
+            "target_block_id": "block_1_welcome"
+          }
+        ]
+      }
+    }
+  ]
+}
