@@ -53,7 +53,7 @@ export const LineModal: React.FC<LineModalProps> = ({ isOpen, onClose, t }) => {
           
           <div className="modal-actions">
             <button className="btn btn-primary" onClick={handleCopyId}>
-              📋 {t.copyIdBtn}
+              {t.copyIdBtn}
             </button>
           </div>
         </div>
@@ -61,7 +61,7 @@ export const LineModal: React.FC<LineModalProps> = ({ isOpen, onClose, t }) => {
 
       {showToast && (
         <div className="alert-toast">
-          ✨ {t.copiedAlert}
+          {t.copiedAlert}
         </div>
       )}
     </>

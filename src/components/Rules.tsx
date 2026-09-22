@@ -15,8 +15,8 @@ export const Rules: React.FC<RulesProps> = ({ t, language = 'th', siteData, isAd
   const [isLeaseModalOpen, setIsLeaseModalOpen] = useState(false);
 
   const ruleIcons = [
-    '🚭', '🍺', '👊', '🤫', '🥾',
-    '🔥', '🐕', '🚽', '🔨', '🚪'
+    '', '', '', '', '',
+    '', '', '', '', ''
   ];
 
   const rulesList = (language === 'th' && siteData?.rulesList && siteData.rulesList.length > 0) ? siteData.rulesList : (t.rulesList || []);
@@ -28,7 +28,7 @@ export const Rules: React.FC<RulesProps> = ({ t, language = 'th', siteData, isAd
         {isAdmin && (
           <div className="admin-inline-trigger-container" style={{ marginBottom: '16px', textAlign: 'center' }}>
             <button className="admin-quick-edit-btn" onClick={onEditRules}>
-              ✏️ แก้ไขกฎระเบียบ & ประกาศของหอพัก
+              แก้ไขกฎระเบียบ & ประกาศของหอพัก
             </button>
           </div>
         )}
@@ -42,7 +42,7 @@ export const Rules: React.FC<RulesProps> = ({ t, language = 'th', siteData, isAd
             {rulesList.map((ruleText, idx) => (
               <div key={idx} className="rule-item-card">
                 <div className="rule-icon-badge">
-                  <span>{ruleIcons[idx] || '📝'}</span>
+                  <span>{ruleIcons[idx] || ''}</span>
                 </div>
                 <span className="rule-text">{ruleText}</span>
               </div>
@@ -50,7 +50,7 @@ export const Rules: React.FC<RulesProps> = ({ t, language = 'th', siteData, isAd
           </div>
 
           <div className="rules-notice-card">
-            <div className="notice-icon-box">⚠️</div>
+            <div className="notice-icon-box"></div>
             <div className="rules-notice-text">
               {rulesNotice}
             </div>

@@ -65,7 +65,7 @@ export const Faq: React.FC<FaqProps> = ({ t }) => {
                     borderTop: '1px solid var(--primary-light)',
                     paddingTop: '16px'
                   }}>
-                    💡 {item.a}
+                    {item.a}
                   </div>
                 )}
               </div>

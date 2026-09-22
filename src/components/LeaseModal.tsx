@@ -49,15 +49,15 @@ export const LeaseModal: React.FC<LeaseModalProps> = ({ isOpen, onClose }) => {
           {/* Section 1: Utility & Basic Rates */}
           <div className="contract-section" style={{ marginBottom: '20px' }}>
             <h4 style={{ color: '#004088', fontSize: '1.1rem', marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <span>📌</span> <span>1. อัตราค่าเช่าและค่าบริการสาธารณูปโภค</span>
+              <span></span> <span>1. อัตราค่าเช่าและค่าบริการสาธารณูปโภค</span>
             </h4>
             <div style={{ backgroundColor: '#f8fafc', padding: '16px', borderRadius: '10px', border: '1px solid #e2e8f0', fontSize: '0.92rem', lineHeight: '1.7' }}>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
-                <div><strong>💧 ค่าน้ำประปา:</strong> หน่วยละ 35 บาท (ขั้นต่ำ 200 บาท/เดือน ไม่เกิน 5 หน่วย)</div>
-                <div><strong>⚡ ค่าไฟฟ้า:</strong> หน่วยละ 9 บาท</div>
-                <div><strong>🏢 ค่าส่วนกลาง:</strong> 200 บาท / เดือน</div>
-                <div><strong>💳 ค่าซื้อคีย์การ์ดเข้าอาคาร:</strong> 100 บาท / ใบ</div>
-                <div><strong>🔑 ค่าเปิดห้อง (กรณีลืมกุญแจ):</strong> 300 บาท / ครั้ง</div>
+                <div><strong>ค่าน้ำประปา:</strong> หน่วยละ 35 บาท (ขั้นต่ำ 200 บาท/เดือน ไม่เกิน 5 หน่วย)</div>
+                <div><strong>ค่าไฟฟ้า:</strong> หน่วยละ 9 บาท</div>
+                <div><strong>ค่าส่วนกลาง:</strong> 200 บาท / เดือน</div>
+                <div><strong>ค่าซื้อคีย์การ์ดเข้าอาคาร:</strong> 100 บาท / ใบ</div>
+                <div><strong>ค่าเปิดห้อง (กรณีลืมกุญแจ):</strong> 300 บาท / ครั้ง</div>
                 <div><strong>🕒 กำหนดชำระเงิน:</strong> วันที่ 25 - 30 ของทุกเดือน</div>
               </div>
             </div>
@@ -66,7 +66,7 @@ export const LeaseModal: React.FC<LeaseModalProps> = ({ isOpen, onClose }) => {
           {/* Section 2: Parking Rates & Rules */}
           <div className="contract-section" style={{ marginBottom: '20px' }}>
             <h4 style={{ color: '#004088', fontSize: '1.1rem', marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <span>🛵</span> <span>2. อัตราค่าจอดรถยนต์ และรถมอเตอร์ไซค์</span>
+              <span></span> <span>2. อัตราค่าจอดรถยนต์ และรถมอเตอร์ไซค์</span>
             </h4>
             <div style={{ backgroundColor: '#f8fafc', padding: '16px', borderRadius: '10px', border: '1px solid #e2e8f0', fontSize: '0.92rem', lineHeight: '1.7' }}>
               <ul style={{ margin: 0, paddingLeft: '20px' }}>
@@ -76,7 +76,7 @@ export const LeaseModal: React.FC<LeaseModalProps> = ({ isOpen, onClose }) => {
                 <li><strong>รถยนต์รายเดือน:</strong> ตามเรทลงทะเบียนระบุในสัญญา</li>
                 <li><strong>ผู้มาติดต่อ/รถชั่วคราวไม่ได้ลงทะเบียน:</strong> รถยนต์ 100 บาท/ครั้ง | มอเตอร์ไซค์ 50 บาท/ครั้ง (โอนเงินชำระล่วงหน้า)</li>
                 <li style={{ color: '#c53030', fontWeight: 'bold', marginTop: '4px' }}>
-                  ⚠️ กรณีจอดโดยไม่แจ้งหรือมิได้ลงทะเบียน: ปรับ 2 เท่าของค่าจอด (ผู้เช่าที่ไม่ลงทะเบียนจอดปรับคันละ 1,000 บาท/ครั้ง)
+                  กรณีจอดโดยไม่แจ้งหรือมิได้ลงทะเบียน: ปรับ 2 เท่าของค่าจอด (ผู้เช่าที่ไม่ลงทะเบียนจอดปรับคันละ 1,000 บาท/ครั้ง)
                 </li>
               </ul>
             </div>
@@ -85,7 +85,7 @@ export const LeaseModal: React.FC<LeaseModalProps> = ({ isOpen, onClose }) => {
           {/* Section 3: Payment Penalties & Late Rules */}
           <div className="contract-section" style={{ marginBottom: '20px' }}>
             <h4 style={{ color: '#004088', fontSize: '1.1rem', marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <span>⏱️</span> <span>3. เงื่อนไขการชำระเงิน และค่าปรับชำระล่าช้า</span>
+              <span></span> <span>3. เงื่อนไขการชำระเงิน และค่าปรับชำระล่าช้า</span>
             </h4>
             <div style={{ backgroundColor: '#fff5f5', padding: '16px', borderRadius: '10px', border: '1px solid #fed7d7', fontSize: '0.92rem', lineHeight: '1.7', color: '#9b2c2c' }}>
               <ul style={{ margin: 0, paddingLeft: '20px' }}>
@@ -99,23 +99,23 @@ export const LeaseModal: React.FC<LeaseModalProps> = ({ isOpen, onClose }) => {
           {/* Section 4: 10 Tenant Regulations */}
           <div className="contract-section" style={{ marginBottom: '20px' }}>
             <h4 style={{ color: '#004088', fontSize: '1.1rem', marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <span>🚫</span> <span>4. กฎระเบียบข้อบังคับ 10 ประการของการพักอาศัย</span>
+              <span></span> <span>4. กฎระเบียบข้อบังคับ 10 ประการของการพักอาศัย</span>
             </h4>
             <div style={{ backgroundColor: '#f8fafc', padding: '16px', borderRadius: '10px', border: '1px solid #e2e8f0', fontSize: '0.9rem', lineHeight: '1.7' }}>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px 16px' }}>
-                <div>1. 🚭 <strong>ห้ามสูบบุหรี่</strong> ในอาคารหรือห้องพัก</div>
-                <div>2. 🍺 <strong>ห้ามดื่มสุรา</strong> ในพื้นที่ส่วนกลาง</div>
-                <div>3. 👊 <strong>ห้ามทะเลาะวิวาท</strong> หรือมั่วสุม</div>
-                <div>4. 🤫 <strong>ห้ามส่งเสียงดัง</strong> รบกวนผู้อื่น</div>
-                <div>5. 🥾 <strong>ห้ามถอดวางรองเท้า</strong> ไว้หน้าห้อง</div>
-                <div>6. 🔥 <strong>ห้ามใช้เตาแก๊ส / ถังแก๊ส</strong> (ใช้ได้เฉพาะเตาไฟฟ้า)</div>
-                <div>7. 🐕 <strong>ห้ามเลี้ยงสัตว์</strong> ทุกชนิด</div>
-                <div>8. 🚽 <strong>ห้ามทิ้งสิ่งของ</strong> ลงชักโครก/ท่อระบายน้ำ</div>
-                <div>9. 🔨 <strong>ห้ามเจาะผนัง ตอกตะปู ติดเทปกาว</strong> (ปรับจุดละ 500 บ.)</div>
-                <div>10. 🚪 <strong>ห้ามเปิด-ปิดประตูเสียงดัง</strong></div>
+                <div>1. <strong>ห้ามสูบบุหรี่</strong> ในอาคารหรือห้องพัก</div>
+                <div>2. <strong>ห้ามดื่มสุรา</strong> ในพื้นที่ส่วนกลาง</div>
+                <div>3. <strong>ห้ามทะเลาะวิวาท</strong> หรือมั่วสุม</div>
+                <div>4. <strong>ห้ามส่งเสียงดัง</strong> รบกวนผู้อื่น</div>
+                <div>5. <strong>ห้ามถอดวางรองเท้า</strong> ไว้หน้าห้อง</div>
+                <div>6. <strong>ห้ามใช้เตาแก๊ส / ถังแก๊ส</strong> (ใช้ได้เฉพาะเตาไฟฟ้า)</div>
+                <div>7. <strong>ห้ามเลี้ยงสัตว์</strong> ทุกชนิด</div>
+                <div>8. <strong>ห้ามทิ้งสิ่งของ</strong> ลงชักโครก/ท่อระบายน้ำ</div>
+                <div>9. <strong>ห้ามเจาะผนัง ตอกตะปู ติดเทปกาว</strong> (ปรับจุดละ 500 บ.)</div>
+                <div>10. <strong>ห้ามเปิด-ปิดประตูเสียงดัง</strong></div>
               </div>
               <div style={{ marginTop: '12px', padding: '8px 12px', backgroundColor: '#feebc8', color: '#744210', borderRadius: '6px', fontWeight: 'bold', fontSize: '0.85rem', textAlign: 'center' }}>
-                ⚠️ การฝ่าฝืนกฎ: ครั้งที่ 1 เตือนด้วยวาจา | ครั้งที่ 2 ปรับครั้งละ 2,000 บาท / ครั้ง
+                การฝ่าฝืนกฎ: ครั้งที่ 1 เตือนด้วยวาจา | ครั้งที่ 2 ปรับครั้งละ 2,000 บาท / ครั้ง
               </div>
             </div>
           </div>
@@ -123,7 +123,7 @@ export const LeaseModal: React.FC<LeaseModalProps> = ({ isOpen, onClose }) => {
           {/* Section 5: Move-Out Rules */}
           <div className="contract-section" style={{ marginBottom: '20px' }}>
             <h4 style={{ color: '#004088', fontSize: '1.1rem', marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <span>📦</span> <span>5. เงื่อนไขการครบสัญญาและการย้ายออก</span>
+              <span></span> <span>5. เงื่อนไขการครบสัญญาและการย้ายออก</span>
             </h4>
             <div style={{ backgroundColor: '#ebf8ff', padding: '16px', borderRadius: '10px', border: '1px solid #bee3f8', fontSize: '0.9rem', lineHeight: '1.7', color: '#2b6cb0' }}>
               <ul style={{ margin: 0, paddingLeft: '20px' }}>
@@ -140,7 +140,7 @@ export const LeaseModal: React.FC<LeaseModalProps> = ({ isOpen, onClose }) => {
           {/* Section 6: Damage Fee Schedule Table */}
           <div className="contract-section" style={{ marginBottom: '10px' }}>
             <h4 style={{ color: '#004088', fontSize: '1.1rem', marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <span>📋</span> <span>6. ตารางอัตราค่าชดเชยอุปกรณ์และทรัพย์สินชำรุดเสียหาย</span>
+              <span></span> <span>6. ตารางอัตราค่าชดเชยอุปกรณ์และทรัพย์สินชำรุดเสียหาย</span>
             </h4>
             <div style={{ overflowX: 'auto' }}>
               <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.85rem', textAlign: 'left' }}>
@@ -208,7 +208,7 @@ export const LeaseModal: React.FC<LeaseModalProps> = ({ isOpen, onClose }) => {
                     <td style={{ padding: '6px 12px', border: '1px solid #e2e8f0', textAlign: 'right' }}>6,900</td>
                   </tr>
                   <tr style={{ backgroundColor: '#ffffff' }}>
-                    <td style={{ padding: '6px 12px', border: '1px solid #e2e8f0' }}>🔑 ค่าบริการเปิดห้อง (กรณีลืมกุญแจ)</td>
+                    <td style={{ padding: '6px 12px', border: '1px solid #e2e8f0' }}>ค่าบริการเปิดห้อง (กรณีลืมกุญแจ)</td>
                     <td style={{ padding: '6px 12px', border: '1px solid #e2e8f0', textAlign: 'right' }}>300 / ครั้ง</td>
                     <td style={{ padding: '6px 12px', border: '1px solid #e2e8f0' }}>-</td>
                     <td style={{ padding: '6px 12px', border: '1px solid #e2e8f0', textAlign: 'right' }}>-</td>
@@ -229,7 +229,7 @@ export const LeaseModal: React.FC<LeaseModalProps> = ({ isOpen, onClose }) => {
             ปิดหน้าต่าง
           </button>
           <button className="btn-modal-outline" onClick={() => window.print()}>
-            🖨️ พิมพ์สัญญา / บันทึก PDF
+            พิมพ์สัญญา / บันทึก PDF
           </button>
         </div>
 

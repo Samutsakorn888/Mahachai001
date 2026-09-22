@@ -354,13 +354,13 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
   const totalMonthlyAvailableCount = monthlyRoomsData.reduce((acc, r) => acc + (r.availableRoomsList?.length || 0), 0);
 
   const utilityFees = [
-    { label: t.electricityLabel, val: t.electricityVal, icon: '⚡' },
-    { label: t.waterLabel, val: t.waterVal, icon: '💧' },
-    { label: t.maintenanceLabel, val: t.maintenanceVal, icon: '🏢' },
-    { label: t.keycardFeeLabel || 'ค่าซื้อคีย์การ์ดเข้าอาคาร', val: t.keycardFeeVal || '100 บาท / ใบ', icon: '💳' },
-    { label: t.carParkingLabel, val: t.carParkingVal, icon: '🚗' },
-    { label: t.motoParkingLabel, val: t.motoParkingVal, icon: '🏍️' },
-    { label: t.keyUnlockFeeLabel || (t as any).keyUnlockLabel || 'ค่าบริการเปิดห้อง (กรณีลืมกุญแจ)', val: t.keyUnlockFeeVal || (t as any).keyUnlockVal || '300 บาท / ครั้ง', icon: '🔑' }
+    { label: t.electricityLabel, val: t.electricityVal, icon: '' },
+    { label: t.waterLabel, val: t.waterVal, icon: '' },
+    { label: t.maintenanceLabel, val: t.maintenanceVal, icon: '' },
+    { label: t.keycardFeeLabel || 'ค่าซื้อคีย์การ์ดเข้าอาคาร', val: t.keycardFeeVal || '100 บาท / ใบ', icon: '' },
+    { label: t.carParkingLabel, val: t.carParkingVal, icon: '' },
+    { label: t.motoParkingLabel, val: t.motoParkingVal, icon: '' },
+    { label: t.keyUnlockFeeLabel || (t as any).keyUnlockLabel || 'ค่าบริการเปิดห้อง (กรณีลืมกุญแจ)', val: t.keyUnlockFeeVal || (t as any).keyUnlockVal || '300 บาท / ครั้ง', icon: '' }
   ];
 
   return (
@@ -372,7 +372,7 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
               className="admin-quick-edit-btn"
               onClick={() => onAddNewRoom ? onAddNewRoom() : (onEditRoom && onEditRoom(0, activeTab))}
             >
-              ✏️ จัดการประเภทห้องพัก & เพิ่มห้องใหม่
+              จัดการประเภทห้องพัก & เพิ่มห้องใหม่
             </button>
           </div>
         )}
@@ -403,14 +403,14 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
               className="btn btn-quick-action"
               onClick={() => setIsComparisonModalOpen(true)}
             >
-              📊 {t.compareRoomsBtn || 'ตารางเปรียบเทียบห้องพักรายเดือน'}
+              {t.compareRoomsBtn || 'ตารางเปรียบเทียบห้องพักรายเดือน'}
             </button>
           )}
           <button
             className="btn btn-quick-action"
             onClick={() => setIsPromptPayModalOpen(true)}
           >
-            💳 {t.promptPayBtn || 'สแกน PromptPay / บัญชีโอนเงิน'}
+            {t.promptPayBtn || 'สแกน PromptPay / บัญชีโอนเงิน'}
           </button>
         </div>
 
@@ -440,7 +440,7 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
               boxShadow: '0 4px 12px rgba(0, 64, 136, 0.15)'
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                <span style={{ fontSize: '1.6rem' }}>📊</span>
+                <span style={{ fontSize: '1.6rem' }}></span>
                 <div>
                   <h4 style={{ margin: 0, fontSize: '1.05rem', fontWeight: 'bold', color: '#ffffff' }}>
                     {(t.dailyRoomsOverviewTitle || 'สถานะห้องพักรายวัน (รวมทั้งหมด {total} ห้อง)').replace('{total}', String(totalDailyRoomsCount))}
@@ -453,13 +453,13 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
 
               <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
                 <div style={{ backgroundColor: 'rgba(255,255,255,0.18)', padding: '6px 14px', borderRadius: '8px', fontSize: '0.88rem', fontWeight: 'bold' }}>
-                  🏢 {t.totalRoomsLabel || 'ทั้งหมด:'} <strong>{totalDailyRoomsCount}</strong> {t.roomsUnit || 'ห้อง'}
+                  {t.totalRoomsLabel || 'ทั้งหมด:'} <strong>{totalDailyRoomsCount}</strong> {t.roomsUnit || 'ห้อง'}
                 </div>
                 <div style={{ backgroundColor: 'rgba(239, 68, 68, 0.3)', padding: '6px 14px', borderRadius: '8px', fontSize: '0.88rem', fontWeight: 'bold' }}>
-                  🔴 {t.occupiedRoomsLabel || 'เต็มแล้ว:'} <strong>{totalDailyOccupiedCount}</strong> {t.roomsUnit || 'ห้อง'}
+                  {t.occupiedRoomsLabel || 'เต็มแล้ว:'} <strong>{totalDailyOccupiedCount}</strong> {t.roomsUnit || 'ห้อง'}
                 </div>
                 <div style={{ backgroundColor: 'rgba(34, 197, 94, 0.3)', padding: '6px 14px', borderRadius: '8px', fontSize: '0.88rem', fontWeight: 'bold' }}>
-                  🟢 {t.availableRoomsLabel || 'เหลือว่าง:'} <strong>{totalDailyAvailableCount}</strong> {t.roomsUnit || 'ห้อง'}
+                  {t.availableRoomsLabel || 'เหลือว่าง:'} <strong>{totalDailyAvailableCount}</strong> {t.roomsUnit || 'ห้อง'}
                 </div>
               </div>
             </div>
@@ -474,7 +474,7 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
                         style={{ width: '100%', fontSize: '0.8rem', padding: '4px 10px' }}
                         onClick={() => onEditRoom(roomIdx, 'daily')}
                       >
-                        ✏️ แก้ไขข้อมูล/ราคาห้องนี้
+                        แก้ไขข้อมูล/ราคาห้องนี้
                       </button>
                     </div>
                   )}
@@ -552,7 +552,7 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
                           alignItems: 'center',
                           gap: '6px'
                         }}>
-                          {room.data.availableRooms > 0 ? (language === 'en' ? '🟢 Available' : language === 'cn' ? '🟢 可入住' : language === 'mm' ? '🟢 လစ်လပ်' : '🟢 สถานะ: ว่าง') : (language === 'en' ? '🔴 Full (Occupied)' : language === 'cn' ? '🔴 已满 (Occupied)' : language === 'mm' ? '🔴 ပြည့်ပြီး' : '🔴 สถานะ: เต็มแล้ว')}
+                          {room.data.availableRooms > 0 ? (language === 'en' ? 'Available' : language === 'cn' ? '可入住' : language === 'mm' ? 'လစ်လပ်' : 'สถานะ: ว่าง') : (language === 'en' ? 'Full (Occupied)' : language === 'cn' ? '已满 (Occupied)' : language === 'mm' ? 'ပြည့်ပြီး' : 'สถานะ: เต็มแล้ว')}
                         </span>
                         {room.data.availableRooms > 0 && (
                           <span style={{
@@ -571,9 +571,9 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
                       </div>
 
                       <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.78rem', color: '#475569', marginTop: '2px' }}>
-                        <span>🏢 {t.totalRoomsLabel || 'ทั้งหมด:'} <strong>{room.data.totalRooms}</strong> {t.roomsUnit || 'ห้อง'}</span>
-                        <span>🔴 {t.occupiedRoomsLabel || 'เต็มแล้ว:'} <strong>{room.data.occupiedRooms}</strong> {t.roomsUnit || 'ห้อง'}</span>
-                        <span>🟢 {t.availableRoomsLabel || 'เหลือว่าง:'} <strong>{room.data.availableRooms}</strong> {t.roomsUnit || 'ห้อง'}</span>
+                        <span>{t.totalRoomsLabel || 'ทั้งหมด:'} <strong>{room.data.totalRooms}</strong> {t.roomsUnit || 'ห้อง'}</span>
+                        <span>{t.occupiedRoomsLabel || 'เต็มแล้ว:'} <strong>{room.data.occupiedRooms}</strong> {t.roomsUnit || 'ห้อง'}</span>
+                        <span>{t.availableRoomsLabel || 'เหลือว่าง:'} <strong>{room.data.availableRooms}</strong> {t.roomsUnit || 'ห้อง'}</span>
                       </div>
                     </div>
 
@@ -582,7 +582,7 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
                         className="btn btn-outline"
                         onClick={() => setSelectedDetailsRoom(room)}
                       >
-                        🔍 {t.viewDetails}
+                        {t.viewDetails}
                       </button>
                       <button
                         className="btn btn-primary"
@@ -593,7 +593,7 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
                           cursor: room.data.availableRooms <= 0 ? 'not-allowed' : 'pointer'
                         }}
                       >
-                        {room.data.availableRooms > 0 ? `💬 ${t.bookNow}` : (language === 'en' ? '🔴 Full' : language === 'cn' ? '🔴 已满' : language === 'mm' ? '🔴 ပြည့်ပြီး' : '🔴 เต็มแล้ว')}
+                        {room.data.availableRooms > 0 ? `${t.bookNow}` : (language === 'en' ? 'Full' : language === 'cn' ? '已满' : language === 'mm' ? 'ပြည့်ပြီး' : 'เต็มแล้ว')}
                       </button>
                     </div>
                   </div>
@@ -604,7 +604,7 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
             {/* Check-in & Check-out Section - ONLY for Daily Rooms */}
             <div style={{ marginTop: '56px' }}>
               <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--primary-color)', textAlign: 'center', marginBottom: '8px' }}>
-                🔑 {t.checkInTitle.split('(')[0]} & {t.checkOutTitle.split('(')[0]} (สำหรับห้องพักรายวัน)
+                {t.checkInTitle.split('(')[0]} & {t.checkOutTitle.split('(')[0]} (สำหรับห้องพักรายวัน)
               </h3>
               <p style={{ textAlign: 'center', color: 'var(--text-muted)', marginBottom: '32px' }}>
                 ขั้นตอนการเข้าพัก การชำระเงิน และการคืนห้องพักสำหรับผู้เข้าพักรายวัน
@@ -624,7 +624,7 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
                 }}>
                   <div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px', color: '#2b6cb0' }}>
-                      <span style={{ fontSize: '1.8rem' }}>📥</span>
+                      <span style={{ fontSize: '1.8rem' }}></span>
                       <h4 style={{ fontSize: '1.25rem', fontWeight: 'bold', margin: 0 }}>{t.checkInTitle}</h4>
                     </div>
 
@@ -637,7 +637,7 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
                       marginBottom: '20px'
                     }}>
                       <div style={{ fontWeight: 'bold', color: '#2c5282', fontSize: '0.95rem', marginBottom: '4px' }}>
-                        🏦 {t.bankAccountTitle}
+                        {t.bankAccountTitle}
                       </div>
                       <div style={{ fontSize: '1.25rem', fontWeight: 'bold', color: '#c53030' }}>
                         {t.bankNameVal}: {t.bankAccountVal}
@@ -650,7 +650,7 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
                         style={{ marginTop: '10px', padding: '6px 14px', fontSize: '0.85rem', borderColor: '#3182ce', color: '#3182ce' }}
                         onClick={() => handleCopyText(t.bankAccountVal, 'เลขบัญชี')}
                       >
-                        📋 คัดลอกเลขบัญชี ({t.bankAccountVal})
+                        คัดลอกเลขบัญชี ({t.bankAccountVal})
                       </button>
                     </div>
 
@@ -681,14 +681,14 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
                     gap: '8px'
                   }}>
                     <div>
-                      <span style={{ fontWeight: 'bold' }}>📶 {t.wifiTitle}:</span> <code style={{ backgroundColor: '#edf2f7', padding: '2px 8px', borderRadius: '4px', fontSize: '1.1rem', fontWeight: 'bold', color: '#2d3748' }}>{t.wifiPass}</code>
+                      <span style={{ fontWeight: 'bold' }}>{t.wifiTitle}:</span> <code style={{ backgroundColor: '#edf2f7', padding: '2px 8px', borderRadius: '4px', fontSize: '1.1rem', fontWeight: 'bold', color: '#2d3748' }}>{t.wifiPass}</code>
                     </div>
                     <button
                       className="btn btn-outline"
                       style={{ padding: '4px 10px', fontSize: '0.8rem' }}
                       onClick={() => handleCopyText(t.wifiPass, 'รหัส Wi-Fi')}
                     >
-                      📋 คัดลอกรหัส Wi-Fi
+                      คัดลอกรหัส Wi-Fi
                     </button>
                   </div>
                 </div>
@@ -706,7 +706,7 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
                 }}>
                   <div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px', color: '#276749' }}>
-                      <span style={{ fontSize: '1.8rem' }}>📤</span>
+                      <span style={{ fontSize: '1.8rem' }}></span>
                       <h4 style={{ fontSize: '1.25rem', fontWeight: 'bold', margin: 0 }}>{t.checkOutTitle}</h4>
                     </div>
 
@@ -733,7 +733,7 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
                     fontWeight: '500',
                     fontSize: '0.95rem'
                   }}>
-                    💚 ขอบคุณที่เข้าพักกับ <strong>@samutsakorn mahachai</strong>
+                    ขอบคุณที่เข้าพักกับ <strong>@samutsakorn mahachai</strong>
                   </div>
                 </div>
               </div>
@@ -768,7 +768,7 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
               boxShadow: '0 4px 12px rgba(43, 108, 176, 0.15)'
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                <span style={{ fontSize: '1.6rem' }}>🏢</span>
+                <span style={{ fontSize: '1.6rem' }}></span>
                 <div>
                   <h4 style={{ margin: 0, fontSize: '1.05rem', fontWeight: 'bold', color: '#ffffff' }}>
                     {t.monthlyOverviewTitle || `สถานะห้องพักรายเดือน (${monthlyRoomsData.length} รูปแบบห้องพัก)`}
@@ -781,10 +781,10 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
 
               <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', alignItems: 'center' }}>
                 <div style={{ backgroundColor: 'rgba(255,255,255,0.18)', padding: '6px 14px', borderRadius: '8px', fontSize: '0.88rem', fontWeight: 'bold' }}>
-                  🏢 {language === 'en' ? 'Room Types:' : language === 'cn' ? '房型种类:' : language === 'mm' ? 'အခန်းပုံစံ:' : 'รูปแบบห้อง:'} <strong>{monthlyRoomsData.length}</strong> {language === 'en' ? 'types' : language === 'cn' ? '种' : language === 'mm' ? 'မျိုး' : 'แบบ'}
+                  {language === 'en' ? 'Room Types:' : language === 'cn' ? '房型种类:' : language === 'mm' ? 'အခန်းပုံစံ:' : 'รูปแบบห้อง:'} <strong>{monthlyRoomsData.length}</strong> {language === 'en' ? 'types' : language === 'cn' ? '种' : language === 'mm' ? 'မျိုး' : 'แบบ'}
                 </div>
                 <div style={{ backgroundColor: 'rgba(34, 197, 94, 0.3)', padding: '6px 14px', borderRadius: '8px', fontSize: '0.88rem', fontWeight: 'bold' }}>
-                  🟢 {(t.monthlyAvailableBadge || 'มีห้องว่างทั้งหมด {count} ห้อง').replace('{count}', String(totalMonthlyAvailableCount))}
+                  {(t.monthlyAvailableBadge || 'มีห้องว่างทั้งหมด {count} ห้อง').replace('{count}', String(totalMonthlyAvailableCount))}
                 </div>
               </div>
             </div>
@@ -815,7 +815,7 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
                         borderBottom: '1px solid #e2e8f0',
                         padding: '20px'
                       }}>
-                        <span style={{ fontSize: '3.5rem', marginBottom: '8px' }}>📦</span>
+                        <span style={{ fontSize: '3.5rem', marginBottom: '8px' }}></span>
                         <span style={{ fontSize: '1rem', fontWeight: 'bold' }}>{room.name}</span>
                         <span style={{ fontSize: '0.8rem', color: '#718096', marginTop: '4px' }}>{room.desc}</span>
                       </div>
@@ -842,7 +842,7 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
                       </div>
 
                       <div style={{ marginTop: '10px', fontSize: '0.92rem', color: 'var(--text-muted)', fontWeight: '500' }}>
-                        🔑 {t.depositLabel}: <strong>฿{room.deposit}</strong> {language === 'en' ? 'THB' : language === 'cn' ? '泰铢' : language === 'mm' ? 'ဘတ်' : 'บาท'}
+                        {t.depositLabel}: <strong>฿{room.deposit}</strong> {language === 'en' ? 'THB' : language === 'cn' ? '泰铢' : language === 'mm' ? 'ဘတ်' : 'บาท'}
                       </div>
 
                       {/* Monthly Room Availability Status Box */}
@@ -872,7 +872,7 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
                             alignItems: 'center',
                             gap: '6px'
                           }}>
-                            {hasAvailable ? (language === 'en' ? '🟢 Ready' : language === 'cn' ? '🟢 随时可入住' : language === 'mm' ? '🟢 အသင့်နေနိုင်သည်' : '🟢 สถานะ: ว่าง') : (language === 'en' ? '🔴 Full (Occupied)' : language === 'cn' ? '🔴 已满 (Occupied)' : language === 'mm' ? '🔴 ပြည့်ပြီး' : '🔴 สถานะ: เต็มแล้ว')}
+                            {hasAvailable ? (language === 'en' ? 'Ready' : language === 'cn' ? '随时可入住' : language === 'mm' ? 'အသင့်နေနိုင်သည်' : 'สถานะ: ว่าง') : (language === 'en' ? 'Full (Occupied)' : language === 'cn' ? '已满 (Occupied)' : language === 'mm' ? 'ပြည့်ပြီး' : 'สถานะ: เต็มแล้ว')}
                           </span>
                           {hasAvailable && (
                             <span style={{
@@ -892,7 +892,7 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
 
                         {hasAvailable ? (
                           <div style={{ fontSize: '0.82rem', color: '#1e293b', marginTop: '4px' }}>
-                            🔑 <strong>{language === 'en' ? 'Vacant Rooms:' : language === 'cn' ? '可用房号:' : language === 'mm' ? 'လစ်လပ်ခန်းများ:' : 'เลขห้องว่าง:'}</strong>{' '}
+                            <strong>{language === 'en' ? 'Vacant Rooms:' : language === 'cn' ? '可用房号:' : language === 'mm' ? 'လစ်လပ်ခန်းများ:' : 'เลขห้องว่าง:'}</strong>{' '}
                             {room.availableRoomsList.map((roomNo: string, i: number) => (
                               <span key={i} style={{
                                 display: 'inline-block',
@@ -911,7 +911,7 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
                           </div>
                         ) : (
                           <div style={{ fontSize: '0.78rem', color: '#991b1b', marginTop: '2px' }}>
-                            ⚠️ {language === 'en' ? 'Currently full for this type (Inquire for queue)' : language === 'cn' ? '目前该房型已满 (可咨询排队)' : language === 'mm' ? 'လက်ရှိတွင် ဤအခန်းပြည့်နေပါသည်' : 'ปัจจุบันไม่มีห้องว่างในโซนนี้ (สอบถามคิวล่วงหน้า)'}
+                            {language === 'en' ? 'Currently full for this type (Inquire for queue)' : language === 'cn' ? '目前该房型已满 (可咨询排队)' : language === 'mm' ? 'လက်ရှိတွင် ဤအခန်းပြည့်နေပါသည်' : 'ปัจจุบันไม่มีห้องว่างในโซนนี้ (สอบถามคิวล่วงหน้า)'}
                           </div>
                         )}
                       </div>
@@ -922,7 +922,7 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
                           onClick={() => setSelectedDetailsRoom({ ...room, data: room, isMonthly: true })}
                           style={{ flex: 1 }}
                         >
-                          🔍 {t.viewDetails}
+                          {t.viewDetails}
                         </button>
                         <button
                           className="btn btn-primary"
@@ -934,7 +934,7 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
                             cursor: hasAvailable ? 'pointer' : 'not-allowed'
                           }}
                         >
-                          {hasAvailable ? `💬 ${t.bookNow}` : (language === 'en' ? '🔴 Full' : language === 'cn' ? '🔴 已满' : language === 'mm' ? '🔴 ပြည့်ပြီး' : '🔴 เต็มแล้ว')}
+                          {hasAvailable ? `${t.bookNow}` : (language === 'en' ? 'Full' : language === 'cn' ? '已满' : language === 'mm' ? 'ပြည့်ပြီး' : 'เต็มแล้ว')}
                         </button>
                       </div>
                     </div>
@@ -962,15 +962,15 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
               boxShadow: '0 2px 8px rgba(234, 179, 8, 0.08)'
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <span style={{ fontSize: '1.4rem' }}>💡</span>
+                <span style={{ fontSize: '1.4rem' }}></span>
                 <span><strong>{language === 'en' ? 'Additional Option Terms (Surcharges):' : language === 'cn' ? '附加选项费用 (Surcharges):' : language === 'mm' ? 'အပိုထပ်ဆောင်းကုန်ကျစရိတ်များ (Surcharges):' : 'ข้อกำหนดรายละเอียดยิบย่อยเพิ่มเติม (Surcharges):'}</strong></span>
               </div>
               <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap', fontWeight: 'bold' }}>
                 <span style={{ backgroundColor: '#fef3c7', padding: '4px 12px', borderRadius: '8px', border: '1px solid #fde047' }}>
-                  📐 {language === 'en' ? 'Corner Room:' : language === 'cn' ? '角房:' : language === 'mm' ? 'ဒေါင့်ခန်း:' : 'ห้องมุม:'} <strong>{language === 'en' ? '+500 THB / month' : language === 'cn' ? '+500 泰铢 / 月' : language === 'mm' ? '+၅၀၀ ဘတ် / လ' : '+500 บาท / เดือน'}</strong>
+                  {language === 'en' ? 'Corner Room:' : language === 'cn' ? '角房:' : language === 'mm' ? 'ဒေါင့်ခန်း:' : 'ห้องมุม:'} <strong>{language === 'en' ? '+500 THB / month' : language === 'cn' ? '+500 泰铢 / 月' : language === 'mm' ? '+၅၀၀ ဘတ် / လ' : '+500 บาท / เดือน'}</strong>
                 </span>
                 <span style={{ backgroundColor: '#fef3c7', padding: '4px 12px', borderRadius: '8px', border: '1px solid #fde047' }}>
-                  🌅 {language === 'en' ? 'Large Balcony:' : language === 'cn' ? '超大阳台:' : language === 'mm' ? 'လသာဆောင်ကြီး:' : 'ระเบียงใหญ่:'} <strong>{language === 'en' ? '+500 THB / month' : language === 'cn' ? '+500 泰铢 / 月' : language === 'mm' ? '+၅၀၀ ဘတ် / လ' : '+500 บาท / เดือน'}</strong>
+                  {language === 'en' ? 'Large Balcony:' : language === 'cn' ? '超大阳台:' : language === 'mm' ? 'လသာဆောင်ကြီး:' : 'ระเบียงใหญ่:'} <strong>{language === 'en' ? '+500 THB / month' : language === 'cn' ? '+500 泰铢 / 月' : language === 'mm' ? '+၅၀၀ ဘတ် / လ' : '+500 บาท / เดือน'}</strong>
                 </span>
               </div>
             </div>
@@ -1150,7 +1150,7 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
                   <strong>ราคา:</strong> ฿{selectedDetailsRoom.data?.price} {selectedDetailsRoom.isMonthly ? '/ เดือน' : '/ คืน'}
                 </p>
                 <p style={{ fontSize: '1.05rem', marginBottom: '16px', color: '#e63946', fontWeight: 'bold' }}>
-                  ⚠️ ต้องจ่ายค่ามัดจำห้องละ {selectedDetailsRoom.data?.deposit ? `฿${selectedDetailsRoom.data.deposit}` : '฿500'} บาท
+                  ต้องจ่ายค่ามัดจำห้องละ {selectedDetailsRoom.data?.deposit ? `฿${selectedDetailsRoom.data.deposit}` : '฿500'} บาท
                 </p>
                 <div className="room-features">
                   {selectedDetailsRoom.data?.features?.map((f: string, i: number) => (
@@ -1173,7 +1173,7 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
                     ← ย้อนกลับ
                   </button>
                   <div className="modal-header-brand">
-                    <span className="hotel-badge-pill">✨ @Samutsakorn Mahachai</span>
+                    <span className="hotel-badge-pill">@Samutsakorn Mahachai</span>
                     <h3>สรุปรายการจองห้องพัก</h3>
                   </div>
                 </div>
@@ -1196,8 +1196,8 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
                       </div>
                     </div>
                     <div className="formal-hotel-address">
-                      <p>📍 <strong>ที่อยู่โครงการ:</strong> 1/9 ถนนกิโลเมตร 28 ต.มหาชัย อ.เมืองสมุทรสาคร จ.สมุทรสาคร 74000 (ตรงข้าม Big C มหาชัย ถนนเศรษฐกิจ 1)</p>
-                      <p>📞 <strong>โทรติดต่อ:</strong> 099-095-4541, 064-138-0777 &nbsp;|&nbsp; 💬 <strong>Line ID:</strong> 0990954541</p>
+                      <p><strong>ที่อยู่โครงการ:</strong> 1/9 ถนนกิโลเมตร 28 ต.มหาชัย อ.เมืองสมุทรสาคร จ.สมุทรสาคร 74000 (ตรงข้าม Big C มหาชัย ถนนเศรษฐกิจ 1)</p>
+                      <p><strong>โทรติดต่อ:</strong> 099-095-4541, 064-138-0777 &nbsp;|&nbsp; <strong>Line ID:</strong> 0990954541</p>
                     </div>
                   </div>
 
@@ -1220,7 +1220,7 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
                     <div className="booking-room-banner">
                       <div className="room-banner-info">
                         <span className="room-type-pill">
-                          {isMonthly ? '🏢 ห้องพักรายเดือน (Monthly)' : '🏨 ห้องพักรายวัน (Daily)'}
+                          {isMonthly ? 'ห้องพักรายเดือน (Monthly)' : '🏨 ห้องพักรายวัน (Daily)'}
                         </span>
                         <h4 className="room-banner-title">
                           {selectedBookingItems.length === 1 
@@ -1229,7 +1229,7 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
                         </h4>
                         <div className="room-banner-meta">
                           <span>👥 รวมทั้งสิ้น: {totalRoomsCount} ห้อง</span>
-                          <span>📍 ใจกลางมหาชัย (ตรงข้าม Big C)</span>
+                          <span>ใจกลางมหาชัย (ตรงข้าม Big C)</span>
                         </div>
                       </div>
                       <div className="room-banner-price-tag">
@@ -1282,7 +1282,7 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
                         {/* Multi-Room Item Selector */}
                         <div className="booking-input-group full-width">
                           <label style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <span>🛏️ รายการห้องพักที่ต้องการจอง (รวม {totalRoomsCount} ห้อง)</span>
+                            <span>รายการห้องพักที่ต้องการจอง (รวม {totalRoomsCount} ห้อง)</span>
                             <span style={{ fontSize: '0.8rem', color: '#64748b', fontWeight: 'normal' }}>สามารถเลือกเพิ่มประเภทห้องและปรับจำนวนคืน/เดือนแยกได้</span>
                           </label>
                           
@@ -1299,7 +1299,7 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
                                     <span className="room-item-price">฿{effectivePriceNum.toLocaleString()} / {isMonthly ? 'เดือน' : 'คืน'}</span>
                                     {isShortTerm && (
                                       <span style={{ fontSize: '0.74rem', color: '#dc2626', fontWeight: 'bold', display: 'block', marginTop: '2px' }}>
-                                        ⚠️ สัญญาน้อยกว่า 12 เดือน (+1,000 บ./เดือน)
+                                        สัญญาน้อยกว่า 12 เดือน (+1,000 บ./เดือน)
                                       </span>
                                     )}
                                   </div>
@@ -1371,7 +1371,7 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
                               }}
                               style={{ flex: 1, fontSize: '0.9rem', padding: '8px 12px' }}
                             >
-                              <option value="">➕ เลือกเพิ่มประเภทห้องพักอื่น...</option>
+                              <option value="">เลือกเพิ่มประเภทห้องพักอื่น...</option>
                               {availableRoomsList.map((r: any, i: number) => {
                                 const roomObj = (r as any).data || r;
                                 return (
@@ -1385,7 +1385,7 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
                         </div>
 
                         <div className="booking-input-group">
-                          <label>📅 วันที่เริ่มเข้าพัก (Check-in Date)</label>
+                          <label>วันที่เริ่มเข้าพัก (Check-in Date)</label>
                           <input
                             type="date"
                             className="booking-text-input"
@@ -1396,7 +1396,7 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
 
                         {isMonthly ? (
                           <div className="booking-input-group">
-                            <label>🗓️ ระยะเวลาเข้าพักตั้งต้น (สัญญาขั้นต่ำ 12 เดือน / 1 ปี)</label>
+                            <label>ระยะเวลาเข้าพักตั้งต้น (สัญญาขั้นต่ำ 12 เดือน / 1 ปี)</label>
                             <div className="counter-input-box">
                               <button
                                 type="button"
@@ -1419,13 +1419,13 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
                             </div>
                             <span style={{ fontSize: '0.78rem', color: ((bookingMonths as number) || 12) < 12 ? '#dc2626' : '#0284c7', fontWeight: 'bold', marginTop: '4px', display: 'block' }}>
                               {((bookingMonths as number) || 12) < 12
-                                ? '⚠️ สัญญาน้อยกว่า 12 เดือน: คิดอัตราค่าห้องเพิ่ม +1,000 บาท/เดือน'
-                                : '📌 สัญญาเช่ารายเดือนขั้นต่ำ 12 เดือน (1 ปี)'}
+                                ? 'สัญญาน้อยกว่า 12 เดือน: คิดอัตราค่าห้องเพิ่ม +1,000 บาท/เดือน'
+                                : 'สัญญาเช่ารายเดือนขั้นต่ำ 12 เดือน (1 ปี)'}
                             </span>
                           </div>
                         ) : (
                           <div className="booking-input-group">
-                            <label>🌙 จำนวนคืนที่พักตั้งต้น (Nights)</label>
+                            <label>จำนวนคืนที่พักตั้งต้น (Nights)</label>
                             <div className="counter-input-box">
                               <button
                                 type="button"
@@ -1466,12 +1466,12 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
                             boxShadow: '0 4px 16px rgba(2, 132, 199, 0.15)'
                           }}>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                              <span style={{ fontSize: '1.2rem' }}>📅</span>
+                              <span style={{ fontSize: '1.2rem' }}></span>
                               <span><strong>เช็คอิน:</strong> <span style={{ color: '#0284c7', fontWeight: 800, fontSize: '1.05rem' }}>{formatThaiDate(checkInDate)}</span></span>
                             </div>
                             <div style={{ color: '#0284c7', fontWeight: 'bold', fontSize: '1.3rem' }}>➔</div>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                              <span style={{ fontSize: '1.2rem' }}>🏁</span>
+                              <span style={{ fontSize: '1.2rem' }}></span>
                               <span><strong>เช็คเอ้าท์ (ถึงวันที่):</strong> <span style={{ color: '#dc2626', fontWeight: 800, fontSize: '1.15rem' }}>{formatThaiDateObj(checkOutDateObj)}</span></span>
                             </div>
                             <div style={{
@@ -1489,7 +1489,7 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
                         </div>
 
                         <div className="booking-input-group">
-                          <label>👤 ชื่อผู้เข้าพัก (Guest Name)</label>
+                          <label>ชื่อผู้เข้าพัก (Guest Name)</label>
                           <input
                             type="text"
                             className="booking-text-input"
@@ -1500,7 +1500,7 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
                         </div>
 
                         <div className="booking-input-group">
-                          <label>📞 เบอร์โทรติดต่อ (Phone Number)</label>
+                          <label>เบอร์โทรติดต่อ (Phone Number)</label>
                           <input
                             type="tel"
                             className="booking-text-input"
@@ -1512,7 +1512,7 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
 
                         {isMonthly ? (
                           <div className="booking-input-group full-width">
-                            <label>🔒 ยอดเงินมัดจำประกันห้องและค่าคีย์การ์ดเพื่อยืนยันการจอง (รวม {totalRoomsCount} ห้อง)</label>
+                            <label>ยอดเงินมัดจำประกันห้องและค่าคีย์การ์ดเพื่อยืนยันการจอง (รวม {totalRoomsCount} ห้อง)</label>
                             <div style={{
                               backgroundColor: '#ebf8ff',
                               border: '1.5px solid #93c5fd',
@@ -1526,11 +1526,11 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
                               gap: '6px'
                             }}>
                               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                                <span>🛡️ เงินมัดจำประกันห้องพัก ({totalRoomsCount} ห้อง):</span>
+                                <span>เงินมัดจำประกันห้องพัก ({totalRoomsCount} ห้อง):</span>
                                 <span>฿{totalDeposit.toLocaleString()} บาท</span>
                               </div>
                               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                                <span>💳 ค่าซื้อคีย์การ์ดเข้าอาคาร ({totalRoomsCount} ใบ):</span>
+                                <span>ค่าซื้อคีย์การ์ดเข้าอาคาร ({totalRoomsCount} ใบ):</span>
                                 <span>฿{totalKeycardFee.toLocaleString()} บาท</span>
                               </div>
                               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '6px', borderTop: '1px dashed #93c5fd', marginTop: '2px' }}>
@@ -1541,7 +1541,7 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
                           </div>
                         ) : (
                           <div className="booking-input-group full-width">
-                            <label>🔒 การชำระค่ามัดจำประกันห้อง (รวม ฿{totalDeposit.toLocaleString()} บาท / {totalRoomsCount} ห้อง)</label>
+                            <label>การชำระค่ามัดจำประกันห้อง (รวม ฿{totalDeposit.toLocaleString()} บาท / {totalRoomsCount} ห้อง)</label>
                             <div className="deposit-toggle-group">
                               <div
                                 className={`deposit-toggle-card ${!payDepositNow ? 'active' : ''}`}
@@ -1595,15 +1595,15 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
                                   <td>
                                     <strong>ค่าเช่าห้องพัก {item.roomData?.name}</strong> ({isMonthly ? 'รายเดือน' : 'รายวัน'})
                                     <div className="table-sub-detail">
-                                      📅 กำหนดเข้าพัก: {formatThaiDate(checkInDate)} ➔ {formatThaiDateObj(itemCheckOutDate)} ({itemDur} {isMonthly ? 'เดือน' : 'คืน'})
+                                      กำหนดเข้าพัก: {formatThaiDate(checkInDate)} ➔ {formatThaiDateObj(itemCheckOutDate)} ({itemDur} {isMonthly ? 'เดือน' : 'คืน'})
                                     </div>
                                     {isShortTerm && (
                                       <div className="table-sub-detail" style={{ color: '#c53030', fontWeight: 'bold' }}>
-                                        ⚠️ สัญญาน้อยกว่า 12 เดือน: ปรับราคาเพิ่ม +1,000 บ./เดือน (จากราคาปกติ ฿{basePriceNum.toLocaleString()})
+                                        สัญญาน้อยกว่า 12 เดือน: ปรับราคาเพิ่ม +1,000 บ./เดือน (จากราคาปกติ ฿{basePriceNum.toLocaleString()})
                                       </div>
                                     )}
                                     <div className="table-sub-detail">
-                                      👤 ผู้เข้าพัก: {guestName.trim() || 'ยังไม่ระบุ'} ({guestPhone.trim() || 'ยังไม่ระบุ'})
+                                      ผู้เข้าพัก: {guestName.trim() || 'ยังไม่ระบุ'} ({guestPhone.trim() || 'ยังไม่ระบุ'})
                                     </div>
                                   </td>
                                   <td style={{ textAlign: 'center' }}>
@@ -1640,7 +1640,7 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
                                   <td>
                                     <strong>ค่าซื้อคีย์การ์ดเข้าอาคาร (Keycard Fee)</strong>
                                     <div className="table-sub-detail" style={{ color: '#475569' }}>
-                                      💳 ค่าคีย์การ์ดสำหรับเข้า-ออกอาคารและห้องพัก (100 บาท / ใบ)
+                                      ค่าคีย์การ์ดสำหรับเข้า-ออกอาคารและห้องพัก (100 บาท / ใบ)
                                     </div>
                                   </td>
                                   <td style={{ textAlign: 'center' }}>{totalRoomsCount} ใบ</td>
@@ -1668,7 +1668,7 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
                                   <td>
                                     <strong>ค่ามัดจำประกันห้องพัก (ชำระวันเข้าพัก รวม {totalRoomsCount} ห้อง)</strong>
                                     <div className="table-sub-detail" style={{ color: '#d97706', fontWeight: 600 }}>
-                                      ⚠️ ชำระ ฿{totalDeposit.toLocaleString()} หน้าเคาน์เตอร์วันเช็คอิน (คืนเงินมัดจำวันเช็คเอ้าท์)
+                                      ชำระ ฿{totalDeposit.toLocaleString()} หน้าเคาน์เตอร์วันเช็คอิน (คืนเงินมัดจำวันเช็คเอ้าท์)
                                     </div>
                                   </td>
                                   <td style={{ textAlign: 'center' }}>{totalRoomsCount} ห้อง</td>
@@ -1702,7 +1702,7 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
 
                       {/* Terms & Guidelines Box */}
                       <div className="formal-terms-box">
-                        <div className="terms-title">📌 ข้อกำหนดการเข้าพักและเงื่อนไข (Terms & Guidelines):</div>
+                        <div className="terms-title">ข้อกำหนดการเข้าพักและเงื่อนไข (Terms & Guidelines):</div>
                         <ul>
                           {isMonthly && (
                             <li style={{ color: '#004088', fontWeight: 'bold' }}>
@@ -1748,10 +1748,10 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
                 </button>
                 <div className="modal-btn-group">
                   <button className="btn-modal-outline" onClick={() => handleDownload('png')}>
-                    📥 บันทึกรูปภาพ (PNG)
+                    บันทึกรูปภาพ (PNG)
                   </button>
                   <button className="btn-modal-outline" onClick={() => window.print()}>
-                    🖨️ พิมพ์เอกสาร / PDF
+                    พิมพ์เอกสาร / PDF
                   </button>
                   {(() => {
                     const isMonthly = selectedBookingRoom.isMonthly || false;
@@ -1789,10 +1789,10 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
                     const lineText = `สวัสดีครับ/ค่ะ สนใจจองห้องพัก:
 ${roomItemsText}
 (รวมทั้งสิ้น ${totalRoomsCount} ห้อง)
-📅 วันที่เข้าพัก: ${formatThaiDate(checkInDate)}
-🏁 เช็คเอ้าท์ชุดสุดท้าย: ${formatThaiDateObj(checkOutDateObj)}
-👤 ชื่อผู้เข้าพัก: ${guestName.trim() || 'ไม่ระบุ'}
-📞 เบอร์โทรติดต่อ: ${guestPhone.trim() || 'ไม่ระบุ'}
+วันที่เข้าพัก: ${formatThaiDate(checkInDate)}
+เช็คเอ้าท์ชุดสุดท้าย: ${formatThaiDateObj(checkOutDateObj)}
+ชื่อผู้เข้าพัก: ${guestName.trim() || 'ไม่ระบุ'}
+เบอร์โทรติดต่อ: ${guestPhone.trim() || 'ไม่ระบุ'}
 💰 ยอดรวมทั้งสิ้น: ฿${grandTotalCalc.toLocaleString()}`;
 
                     return (
@@ -1802,7 +1802,7 @@ ${roomItemsText}
                         rel="noopener noreferrer"
                         className="btn-modal-line-booking"
                       >
-                        💬 ยืนยันจองทาง LINE
+                        ยืนยันจองทาง LINE
                       </a>
                     );
                   })()}
@@ -1844,7 +1844,7 @@ ${roomItemsText}
 
         {copiedToast && (
           <div className="alert-toast">
-            ✨ คัดลอก{copiedToast}สำเร็จแล้ว!
+            คัดลอก{copiedToast}สำเร็จแล้ว!
           </div>
         )}
       </div>

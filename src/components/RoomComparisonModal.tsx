@@ -31,7 +31,7 @@ export const RoomComparisonModal: React.FC<RoomComparisonModalProps> = ({
           ← ย้อนกลับ
         </button>
         <div className="modal-header">
-          <h3 style={{ marginLeft: '100px' }}>📊 {t.compareModalTitle || 'ตารางเปรียบเทียบคุณสมบัติห้องพักรายเดือน 7 รูปแบบ'}</h3>
+          <h3 style={{ marginLeft: '100px' }}>{t.compareModalTitle || 'ตารางเปรียบเทียบคุณสมบัติห้องพักรายเดือน 7 รูปแบบ'}</h3>
           <button className="modal-close-btn" onClick={onClose}>✕</button>
         </div>
 
@@ -73,9 +73,9 @@ export const RoomComparisonModal: React.FC<RoomComparisonModalProps> = ({
                   else if (index >= 6) furnText = t.compareFurnYes || 'มีเฟอร์นิเจอร์';
 
                   const hasAvailable = room.availableRoomsList && room.availableRoomsList.length > 0;
-                  const availBadgeText = (t.compareAvailableBadge || '🟢 ว่าง {count} ห้อง')
+                  const availBadgeText = (t.compareAvailableBadge || 'ว่าง {count} ห้อง')
                     .replace('{count}', String(room.availableRoomsList ? room.availableRoomsList.length : 0));
-                  const fullBadgeText = t.compareFullBadge || '🔴 เต็มแล้ว';
+                  const fullBadgeText = t.compareFullBadge || 'เต็มแล้ว';
 
                   return (
                     <tr key={index}>

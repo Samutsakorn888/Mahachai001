@@ -29,7 +29,7 @@ export const NearbyPlaces: React.FC<NearbyPlacesProps> = ({ t }) => {
                     <div className="nearby-logo-wrapper">
                       <img src={imgUrl} alt={item.title} className="nearby-logo-img" />
                     </div>
-                    <span className="nearby-badge">📍 {item.distance}</span>
+                    <span className="nearby-badge">{item.distance}</span>
                   </div>
                   <h3 className="nearby-item-title">{item.title}</h3>
                   <p className="nearby-item-desc">{item.desc}</p>
@@ -52,7 +52,7 @@ export const NearbyPlaces: React.FC<NearbyPlacesProps> = ({ t }) => {
               rel="noopener noreferrer"
               className="btn btn-primary btn-gps"
             >
-              {t.openGoogleMapsBtn || '📍 นำทางด้วย Google Maps'}
+              {t.openGoogleMapsBtn || 'นำทางด้วย Google Maps'}
             </a>
           </div>
 

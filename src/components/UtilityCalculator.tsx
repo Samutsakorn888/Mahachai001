@@ -73,21 +73,21 @@ export const UtilityCalculator: React.FC<UtilityCalculatorProps> = ({ t, languag
   const pm = t.perMonth || 'บาท/เดือน';
 
   const handleCopySummary = async () => {
-    const summaryText = `🏢 [${t.calculatorTitle || 'สรุปประมาณการค่าใช้จ่ายรายเดือน @สมุทรสาคร มหาชัย'}]
+    const summaryText = `[${t.calculatorTitle || 'สรุปประมาณการค่าใช้จ่ายรายเดือน @สมุทรสาคร มหาชัย'}]
 ------------------------------------------------
-📍 ${t.calcRoomTypeLabel || 'ประเภทห้อง'}: ${currentRoomName}
+${t.calcRoomTypeLabel || 'ประเภทห้อง'}: ${currentRoomName}
 💰 ${t.calcRentBreakdown || 'ค่าเช่าห้องพัก'}: ${roomPrice.toLocaleString()} ${pm}
-⚡ ${t.calcElecBreakdown || 'ค่าไฟฟ้าประมาณ'}: (${elecUnits} ${unitLabel} @ 9 ${thb}) = ${elecCost.toLocaleString()} ${thb}
-💧 ${t.calcWaterBreakdown || 'ค่าน้ำประปาประมาณ'}: (${waterUnits} ${unitLabel}) = ${waterCost.toLocaleString()} ${thb}
-🏢 ${t.calcCommonFeeBreakdown || 'ค่าส่วนกลาง'}: ${maintenanceCost.toLocaleString()} ${thb}
-🚗 ${t.calcCarBreakdown || 'ค่าจอดรถยนต์'}: ${carCost > 0 ? '1,000' : '0'} ${thb}
-🏍️ ${t.calcMotoBreakdown || 'ค่าจอดรถมอเตอร์ไซค์'}: ${motoCost > 0 ? '100' : '0'} ${thb}
+${t.calcElecBreakdown || 'ค่าไฟฟ้าประมาณ'}: (${elecUnits} ${unitLabel} @ 9 ${thb}) = ${elecCost.toLocaleString()} ${thb}
+${t.calcWaterBreakdown || 'ค่าน้ำประปาประมาณ'}: (${waterUnits} ${unitLabel}) = ${waterCost.toLocaleString()} ${thb}
+${t.calcCommonFeeBreakdown || 'ค่าส่วนกลาง'}: ${maintenanceCost.toLocaleString()} ${thb}
+${t.calcCarBreakdown || 'ค่าจอดรถยนต์'}: ${carCost > 0 ? '1,000' : '0'} ${thb}
+${t.calcMotoBreakdown || 'ค่าจอดรถมอเตอร์ไซค์'}: ${motoCost > 0 ? '100' : '0'} ${thb}
 ------------------------------------------------
-✨ ${t.calcTotalMonthly || 'ยอดรวมประมาณการรายเดือน'}: ${totalMonthlyCost.toLocaleString()} ${pm}
+${t.calcTotalMonthly || 'ยอดรวมประมาณการรายเดือน'}: ${totalMonthlyCost.toLocaleString()} ${pm}
 🔐 ${t.calcMoveInDeposit || 'เงินประกันมัดจำแรกเข้า'}: ${roomDeposit.toLocaleString()} ${thb}
 💵 ${t.calcTotalMoveIn || 'รวมงบแรกเข้าพักสุทธิ'}: ${initialMoveIn.toLocaleString()} ${thb}
 ------------------------------------------------
-📞 LINE ID: 0990954541`;
+LINE ID: 0990954541`;
 
     try {
       await navigator.clipboard.writeText(summaryText);
@@ -116,7 +116,7 @@ export const UtilityCalculator: React.FC<UtilityCalculatorProps> = ({ t, languag
             <div className="calculator-inputs">
               <div className="calc-group">
                 <label className="calc-label">
-                  🏢 {t.calcRoomTypeLabel || 'เลือกรูปแบบห้องพักรายเดือน'}
+                  {t.calcRoomTypeLabel || 'เลือกรูปแบบห้องพักรายเดือน'}
                 </label>
                 <select
                   className="calc-select"
@@ -134,7 +134,7 @@ export const UtilityCalculator: React.FC<UtilityCalculatorProps> = ({ t, languag
               <div className="calc-group">
                 <div className="calc-label-row">
                   <label className="calc-label">
-                    ⚡ {t.calcElecLabel || 'ประมาณการหน่วยไฟฟ้าที่ใช้ (หน่วยละ 9 บาท)'}
+                    {t.calcElecLabel || 'ประมาณการหน่วยไฟฟ้าที่ใช้ (หน่วยละ 9 บาท)'}
                   </label>
                   <span className="calc-val-badge">{elecUnits} {unitLabel}</span>
                 </div>
@@ -158,7 +158,7 @@ export const UtilityCalculator: React.FC<UtilityCalculatorProps> = ({ t, languag
               <div className="calc-group">
                 <div className="calc-label-row">
                   <label className="calc-label">
-                    💧 {t.calcWaterLabel || 'ประมาณการหน่วยน้ำประปาที่ใช้'}
+                    {t.calcWaterLabel || 'ประมาณการหน่วยน้ำประปาที่ใช้'}
                   </label>
                   <span className="calc-val-badge">{waterUnits} {unitLabel}</span>
                 </div>
@@ -187,7 +187,7 @@ export const UtilityCalculator: React.FC<UtilityCalculatorProps> = ({ t, languag
                       checked={hasCar}
                       onChange={(e) => setHasCar(e.target.checked)}
                     />
-                    <span>{t.calcCarLabel || '🚗 จอดรถยนต์ (1,000 บาท/เดือน)'}</span>
+                    <span>{t.calcCarLabel || 'จอดรถยนต์ (1,000 บาท/เดือน)'}</span>
                   </label>
                   <label className={`calc-checkbox-card ${hasMoto ? 'active' : ''}`}>
                     <input
@@ -195,7 +195,7 @@ export const UtilityCalculator: React.FC<UtilityCalculatorProps> = ({ t, languag
                       checked={hasMoto}
                       onChange={(e) => setHasMoto(e.target.checked)}
                     />
-                    <span>{t.calcMotoLabel || '🏍️ จอดมอเตอร์ไซค์ (100 บาท/เดือน)'}</span>
+                    <span>{t.calcMotoLabel || 'จอดมอเตอร์ไซค์ (100 บาท/เดือน)'}</span>
                   </label>
                 </div>
               </div>
@@ -256,7 +256,7 @@ export const UtilityCalculator: React.FC<UtilityCalculatorProps> = ({ t, languag
               </div>
 
               <button className="btn btn-copy-calc" onClick={handleCopySummary}>
-                📋 {t.calcCopySummary || 'คัดลอกสรุปรายการคำนวณ'}
+                {t.calcCopySummary || 'คัดลอกสรุปรายการคำนวณ'}
               </button>
 
               {toastMessage && <div className="calc-toast">{toastMessage}</div>}

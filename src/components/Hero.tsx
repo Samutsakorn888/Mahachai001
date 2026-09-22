@@ -79,14 +79,14 @@ export const Hero: React.FC<HeroProps> = ({
           {isAdmin && (
             <div className="admin-inline-trigger-container">
               <button className="admin-quick-edit-btn" onClick={onEditHero}>
-                ✏️ แก้ไข Hero (ข้อความต้อนรับ & สโลแกน)
+                แก้ไข Hero (ข้อความต้อนรับ & สโลแกน)
               </button>
             </div>
           )}
 
           {/* Top Gold Badge */}
           <div className="hero-gold-badge">
-            <span className="gold-sparkle">✨</span>
+            <span className="gold-sparkle"></span>
             <span>{t.heroBadge || '@Samutsakorn Mahachai • ที่พักสมุทรสาคร'}</span>
           </div>
 
@@ -112,15 +112,15 @@ export const Hero: React.FC<HeroProps> = ({
           {/* Luxury Feature Pills Bar */}
           <div className="hero-pills-bar">
             <div className="hero-pill-item">
-              <span className="pill-icon">📍</span>
+              <span className="pill-icon"></span>
               <span>{t.heroOpposite || 'ตรงข้าม Big C มหาชัย'}</span>
             </div>
             <div className="hero-pill-item">
-              <span className="pill-icon">🛡️</span>
+              <span className="pill-icon"></span>
               <span>{t.heroSecurity || 'คีย์การ์ด & CCTV 24 ชม.'}</span>
             </div>
             <div className="hero-pill-item">
-              <span className="pill-icon">📶</span>
+              <span className="pill-icon"></span>
               <span>{t.heroWifi || 'ฟรี Wi-Fi'}</span>
             </div>
           </div>
@@ -138,7 +138,7 @@ export const Hero: React.FC<HeroProps> = ({
                 className={`booking-tab ${activeTab === 'monthly' ? 'active' : ''}`}
                 onClick={() => setActiveTab('monthly')}
               >
-                🏢 {t.monthlyTab}
+                {t.monthlyTab}
               </div>
             </div>
 
@@ -146,7 +146,7 @@ export const Hero: React.FC<HeroProps> = ({
               {activeTab === 'daily' ? (
                 <>
                   <div className="booking-info-item">
-                    <span className="info-label">📍 {t.heroLocationLabel || 'ทำเลที่ตั้ง (Location)'}</span>
+                    <span className="info-label">{t.heroLocationLabel || 'ทำเลที่ตั้ง (Location)'}</span>
                     <span className="info-val">{t.heroLocationVal || 'ใจกลางมหาชัย (ตรงข้าม Big C)'}</span>
                   </div>
                   <div className="booking-info-item">
@@ -154,18 +154,18 @@ export const Hero: React.FC<HeroProps> = ({
                     <span className="info-val">{t.heroCheckInOutVal || 'เช็คอิน 14:00 | เช็คเอ้าท์ 12:00'}</span>
                   </div>
                   <div className="booking-info-item">
-                    <span className="info-label">🔒 {t.heroDepositLabel || 'เงินมัดจำประกันห้อง'}</span>
+                    <span className="info-label">{t.heroDepositLabel || 'เงินมัดจำประกันห้อง'}</span>
                     <span className="info-val" style={{ color: '#2b6cb0' }}>{t.heroDepositVal || '500 บาท/ห้อง (คืนเต็มจำนวน)'}</span>
                   </div>
                   <div className="booking-info-item">
-                    <span className="info-label">📞 {t.heroContactBooking || 'ติดต่อจองห้องพัก'}</span>
+                    <span className="info-label">{t.heroContactBooking || 'ติดต่อจองห้องพัก'}</span>
                     <span className="info-val phone">{siteData?.phoneVal || '099-095-4541'}</span>
                   </div>
                 </>
               ) : (
                 <>
                   <div className="booking-info-item">
-                    <span className="info-label">📍 {t.heroLocationLabel || 'ทำเลที่ตั้ง (Location)'}</span>
+                    <span className="info-label">{t.heroLocationLabel || 'ทำเลที่ตั้ง (Location)'}</span>
                     <span className="info-val">{t.heroLocationVal || 'ใจกลางมหาชัย (ตรงข้าม Big C)'}</span>
                   </div>
                   <div className="booking-info-item">
@@ -173,11 +173,11 @@ export const Hero: React.FC<HeroProps> = ({
                     <span className="info-val">{t.heroContractTerm || 'สัญญาระยะยาว 1 ปีขึ้นไป'}</span>
                   </div>
                   <div className="booking-info-item">
-                    <span className="info-label">💡 {language === 'en' ? 'Short-term Note' : language === 'cn' ? '短租备注' : language === 'mm' ? 'ကာလတိုမှတ်ချက်' : 'หมายเหตุสัญญาสั้น'}</span>
+                    <span className="info-label">{language === 'en' ? 'Short-term Note' : language === 'cn' ? '短租备注' : language === 'mm' ? 'ကာလတိုမှတ်ချက်' : 'หมายเหตุสัญญาสั้น'}</span>
                     <span className="info-val" style={{ color: '#c53030' }}>{t.heroShortTermNote || 'สั้นกว่า 1 ปี +1,000 บ./เดือน'}</span>
                   </div>
                   <div className="booking-info-item">
-                    <span className="info-label">📞 {t.heroContactBooking || 'ติดต่อจองห้องพัก'}</span>
+                    <span className="info-label">{t.heroContactBooking || 'ติดต่อจองห้องพัก'}</span>
                     <span className="info-val phone">{siteData?.phoneVal || '099-095-4541'}</span>
                   </div>
                 </>
@@ -207,10 +207,10 @@ export const Hero: React.FC<HeroProps> = ({
 
               <div className="booking-actions">
                 <button className="btn-hotel-primary" onClick={() => handleScrollToRooms(activeTab)}>
-                  {activeTab === 'daily' ? (t.heroSelectDaily || '🏨 เลือกดูห้องพักรายวัน') : (t.heroSelectMonthly || '🏢 เลือกดูห้องพักรายเดือน')}
+                  {activeTab === 'daily' ? (t.heroSelectDaily || '🏨 เลือกดูห้องพักรายวัน') : (t.heroSelectMonthly || 'เลือกดูห้องพักรายเดือน')}
                 </button>
                 <a href="tel:0990954541" className="btn-hotel-secondary">
-                  📞 {t.heroCallQuick || 'โทรจองด่วน'}
+                  {t.heroCallQuick || 'โทรจองด่วน'}
                 </a>
               </div>
             </div>

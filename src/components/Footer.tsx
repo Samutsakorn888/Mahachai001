@@ -30,7 +30,7 @@ export const Footer: React.FC<FooterProps> = ({
           {isAdmin && (
             <div style={{ marginBottom: '12px' }}>
               <button className="admin-quick-edit-btn" onClick={onEditSettings}>
-                ✏️ แก้ไขข้อมูลติดต่อ & การเงิน
+                แก้ไขข้อมูลติดต่อ & การเงิน
               </button>
             </div>
           )}

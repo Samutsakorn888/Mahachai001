@@ -221,7 +221,7 @@ function App() {
       {/* Toast Notification */}
       {toastMessage && (
         <div className="admin-toast-notification">
-          <span>✨ {toastMessage}</span>
+          <span>{toastMessage}</span>
         </div>
       )}
 

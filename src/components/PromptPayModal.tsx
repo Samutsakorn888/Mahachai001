@@ -32,14 +32,14 @@ export const PromptPayModal: React.FC<PromptPayModalProps> = ({ isOpen, onClose,
           ← ย้อนกลับ
         </button>
         <div className="modal-header">
-          <h3 style={{ marginLeft: '100px' }}>💳 {t.promptPayTitle || 'ช่องทางการชำระเงิน & เงินมัดจำประกันห้อง'}</h3>
+          <h3 style={{ marginLeft: '100px' }}>{t.promptPayTitle || 'ช่องทางการชำระเงิน & เงินมัดจำประกันห้อง'}</h3>
           <button className="modal-close-btn" onClick={onClose}>✕</button>
         </div>
 
         <div className="modal-body promptpay-modal-body">
           <div className="bank-card-container">
             <div className="bank-logo-header">
-              <span className="bank-icon">🏦</span>
+              <span className="bank-icon"></span>
               <div>
                 <h4 className="bank-name">{t.bankName || 'ธนาคารกรุงเทพ (Bangkok Bank)'}</h4>
                 <p className="bank-note">{t.bankNote || 'บริการชำระเงินโอนผ่านบัญชีธนาคาร (ไม่รับเงินสด)'}</p>
@@ -51,14 +51,14 @@ export const PromptPayModal: React.FC<PromptPayModalProps> = ({ isOpen, onClose,
               <div className="acc-num-row">
                 <strong className="acc-num">{bankAccount}</strong>
                 <button className="btn btn-copy-acc" onClick={handleCopyAccount}>
-                  {copied ? (t.bankCopiedBtn || '✅ คัดลอกแล้ว!') : (t.bankCopyBtn || '📋 คัดลอกเลขบัญชี')}
+                  {copied ? (t.bankCopiedBtn || '✅ คัดลอกแล้ว!') : (t.bankCopyBtn || 'คัดลอกเลขบัญชี')}
                 </button>
               </div>
               <p className="acc-name">{t.bankAccNameLabel || 'ชื่อบัญชี:'} <strong>{t.bankAccNameVal || 'อรอนงค์ เตชะเกษมสุข'}</strong></p>
             </div>
 
             <div className="deposit-info-banner">
-              <div className="info-icon">💡</div>
+              <div className="info-icon"></div>
               <div className="info-text">
                 <strong>{t.bankDailyNoticeTitle || 'การชำระเงินห้องพักรายวัน:'}</strong>
                 <p>{t.bankDailyNoticeDesc || 'ค่าห้องพัก + ค่ามัดจำประกันห้อง 500 บาท/ห้อง (ได้รับเงินคืนเต็มจำนวนทางโอนเงินหลังย้ายออกไม่เกิน 12:00 น.)'}</p>

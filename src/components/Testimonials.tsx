@@ -181,7 +181,7 @@ export const Testimonials: React.FC<TestimonialsProps> = ({ t }) => {
                   borderRadius: '12px',
                   border: '1px solid #bee3f8'
                 }}>
-                  ✨ รีวิวจากผู้เข้าพักจริง
+                  รีวิวจากผู้เข้าพักจริง
                 </span>
               )}
 
@@ -226,7 +226,7 @@ export const Testimonials: React.FC<TestimonialsProps> = ({ t }) => {
               
               <div className="booking-modal-header">
                 <div className="modal-header-brand">
-                  <span className="hotel-badge-pill">✨ @Samutsakorn Mahachai</span>
+                  <span className="hotel-badge-pill">@Samutsakorn Mahachai</span>
                   <h3>เขียนรีวิวความประทับใจ</h3>
                 </div>
                 <button className="modal-close-circle" onClick={() => setIsModalOpen(false)}>✕</button>
@@ -259,7 +259,7 @@ export const Testimonials: React.FC<TestimonialsProps> = ({ t }) => {
 
                 {/* Display Name Input */}
                 <div className="booking-input-group full-width" style={{ marginBottom: '16px' }}>
-                  <label style={{ fontSize: '0.9rem', fontWeight: '700' }}>👤 ชื่อที่ต้องการใช้แสดงในรีวิว</label>
+                  <label style={{ fontSize: '0.9rem', fontWeight: '700' }}>ชื่อที่ต้องการใช้แสดงในรีวิว</label>
                   <input
                     type="text"
                     required
@@ -279,7 +279,7 @@ export const Testimonials: React.FC<TestimonialsProps> = ({ t }) => {
 
                 {/* Guest Type Selector */}
                 <div className="booking-input-group full-width" style={{ marginBottom: '16px' }}>
-                  <label style={{ fontSize: '0.9rem', fontWeight: '700' }}>🏢 ประเภทผู้เข้าพัก</label>
+                  <label style={{ fontSize: '0.9rem', fontWeight: '700' }}>ประเภทผู้เข้าพัก</label>
                   <select
                     value={role}
                     onChange={e => setRole(e.target.value)}
@@ -294,7 +294,7 @@ export const Testimonials: React.FC<TestimonialsProps> = ({ t }) => {
                     }}
                   >
                     <option value="ผู้เข้าพักรายวัน">🏨 ผู้เข้าพักรายวัน (Daily Guest)</option>
-                    <option value="ผู้เช่ารายเดือน">🏢 ผู้เช่ารายเดือน (Monthly Tenant)</option>
+                    <option value="ผู้เช่ารายเดือน">ผู้เช่ารายเดือน (Monthly Tenant)</option>
                   </select>
                 </div>
 
@@ -325,7 +325,7 @@ export const Testimonials: React.FC<TestimonialsProps> = ({ t }) => {
 
                 {/* Review Textarea */}
                 <div className="booking-input-group full-width" style={{ marginBottom: '20px' }}>
-                  <label style={{ fontSize: '0.9rem', fontWeight: '700' }}>💬 ข้อความรีวิวประสบการณ์ของคุณ</label>
+                  <label style={{ fontSize: '0.9rem', fontWeight: '700' }}>ข้อความรีวิวประสบการณ์ของคุณ</label>
                   <textarea
                     required
                     rows={4}
@@ -359,7 +359,7 @@ export const Testimonials: React.FC<TestimonialsProps> = ({ t }) => {
                     className="btn-hotel-primary"
                     style={{ padding: '10px 24px', fontSize: '0.95rem' }}
                   >
-                    ✨ ส่งรีวิวของคุณ
+                    ส่งรีวิวของคุณ
                   </button>
                 </div>
 
