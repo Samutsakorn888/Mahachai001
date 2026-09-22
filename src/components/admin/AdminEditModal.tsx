@@ -306,8 +306,13 @@ export const AdminEditModal: React.FC<AdminEditModalProps> = ({
       <div className="admin-modal-container" onClick={e => e.stopPropagation()}>
         {/* Header Tabs */}
         <div className="admin-modal-header">
-          <div className="admin-modal-title">
-            <h3>⚙️ แก้ไขข้อมูลเว็บไซต์ (Admin Quick Edit)</h3>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <button className="modal-back-btn" onClick={onClose} title="ย้อนกลับ">
+              ← ย้อนกลับ
+            </button>
+            <div className="admin-modal-title">
+              <h3 style={{ margin: 0 }}>⚙️ แก้ไขข้อมูลเว็บไซต์ (Admin Quick Edit)</h3>
+            </div>
           </div>
           <button className="admin-modal-close" onClick={onClose}>✕</button>
         </div>

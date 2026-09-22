@@ -26,9 +26,12 @@ export const RoomComparisonModal: React.FC<RoomComparisonModalProps> = ({
 
   return (
     <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content comparison-modal-content" onClick={(e) => e.stopPropagation()}>
+      <div className="modal-content comparison-modal-content" onClick={(e) => e.stopPropagation()} style={{ position: 'relative' }}>
+        <button className="modal-back-btn" onClick={onClose} title="ย้อนกลับ" style={{ color: '#004088', position: 'absolute', top: '16px', left: '16px', zIndex: 11 }}>
+          ← ย้อนกลับ
+        </button>
         <div className="modal-header">
-          <h3>📊 {t.compareModalTitle || 'ตารางเปรียบเทียบคุณสมบัติห้องพักรายเดือน 7 รูปแบบ'}</h3>
+          <h3 style={{ marginLeft: '100px' }}>📊 {t.compareModalTitle || 'ตารางเปรียบเทียบคุณสมบัติห้องพักรายเดือน 7 รูปแบบ'}</h3>
           <button className="modal-close-btn" onClick={onClose}>✕</button>
         </div>
 

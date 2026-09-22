@@ -18,9 +18,14 @@ export const LeaseModal: React.FC<LeaseModalProps> = ({ isOpen, onClose }) => {
       >
         {/* Header Bar */}
         <div className="booking-modal-header no-print">
-          <div className="modal-header-brand">
-            <span className="hotel-badge-pill">📄 @SAMUTSAKORN MAHACHAI BRANCH</span>
-            <h3>สัญญาและกฎข้อระเบียบข้อบังคับในการเช่าหอพัก</h3>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <button className="modal-back-btn" onClick={onClose} title="ย้อนกลับ">
+              ← ย้อนกลับ
+            </button>
+            <div className="modal-header-brand">
+              <span className="hotel-badge-pill">📄 @SAMUTSAKORN MAHACHAI BRANCH</span>
+              <h3>สัญญาและกฎข้อระเบียบข้อบังคับในการเช่าหอพัก</h3>
+            </div>
           </div>
           <button className="modal-close-circle" onClick={onClose} title="ปิดหน้าต่าง">
             ✕

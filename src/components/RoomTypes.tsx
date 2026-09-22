@@ -59,6 +59,19 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
   const [dbMonthlyRooms, setDbMonthlyRooms] = useState<any[]>([]);
   const [isLoadingRooms, setIsLoadingRooms] = useState(true);
 
+  // Prevent background scrolling on mobile when modals are open
+  useEffect(() => {
+    const isAnyModalOpen = selectedDetailsRoom || selectedBookingRoom || isLeaseModalOpen || isComparisonModalOpen || isPromptPayModalOpen || expandedImage;
+    if (isAnyModalOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [selectedDetailsRoom, selectedBookingRoom, isLeaseModalOpen, isComparisonModalOpen, isPromptPayModalOpen, expandedImage]);
+
   useEffect(() => {
     const fetchRooms = async () => {
       setIsLoadingRooms(true);
@@ -1155,9 +1168,14 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
               
               {/* Modal Header */}
               <div className="booking-modal-header no-print">
-                <div className="modal-header-brand">
-                  <span className="hotel-badge-pill">✨ @Samutsakorn Mahachai</span>
-                  <h3>สรุปรายการจองห้องพัก</h3>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <button className="modal-back-btn" onClick={() => setSelectedBookingRoom(null)} title="ย้อนกลับ">
+                    ← ย้อนกลับ
+                  </button>
+                  <div className="modal-header-brand">
+                    <span className="hotel-badge-pill">✨ @Samutsakorn Mahachai</span>
+                    <h3>สรุปรายการจองห้องพัก</h3>
+                  </div>
                 </div>
                 <button className="modal-close-circle" onClick={() => setSelectedBookingRoom(null)} title="ปิดหน้าต่าง">
                   ✕
@@ -1237,7 +1255,7 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
                   const totalRoomsCount = selectedBookingItems.reduce((acc, item) => acc + (item.count || 1), 0);
 
                   const totalRoomRental = selectedBookingItems.reduce((acc, item) => {
-                    const basePriceNum = parseInt((item.roomData?.price || '0').replace(/,/g, ''));
+                    const basePriceNum = parseInt(String(item.roomData?.price || '0').replace(/,/g, ''));
                     const dur = item.duration !== undefined ? item.duration : defaultDuration;
                     const isShortTerm = isMonthly && dur < 12;
                     const effectivePrice = isShortTerm ? (basePriceNum + 1000) : basePriceNum;
@@ -1271,7 +1289,7 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
                           <div className="selected-rooms-list">
                             {selectedBookingItems.map((item, idx) => {
                               const itemDur = item.duration !== undefined ? item.duration : defaultDuration;
-                              const basePriceNum = parseInt((item.roomData?.price || '0').replace(/,/g, ''));
+                              const basePriceNum = parseInt(String(item.roomData?.price || '0').replace(/,/g, ''));
                               const isShortTerm = isMonthly && itemDur < 12;
                               const effectivePriceNum = isShortTerm ? (basePriceNum + 1000) : basePriceNum;
                               return (
@@ -1567,7 +1585,7 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
                             {selectedBookingItems.map((item, index) => {
                               const itemDur = item.duration !== undefined ? item.duration : defaultDuration;
                               const itemCheckOutDate = calculateCheckOutDate(checkInDate, itemDur, isMonthly);
-                              const basePriceNum = parseInt((item.roomData?.price || '0').replace(/,/g, ''));
+                              const basePriceNum = parseInt(String(item.roomData?.price || '0').replace(/,/g, ''));
                               const isShortTerm = isMonthly && itemDur < 12;
                               const effectivePriceNum = isShortTerm ? (basePriceNum + 1000) : basePriceNum;
                               const itemRoomTotal = effectivePriceNum * (item.count || 1) * itemDur;
@@ -1748,7 +1766,7 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
                     const totalRoomsCount = selectedBookingItems.reduce((acc, item) => acc + (item.count || 1), 0);
 
                     const totalRoomRental = selectedBookingItems.reduce((acc, item) => {
-                      const priceNum = parseInt((item.roomData?.price || '0').replace(/,/g, ''));
+                      const priceNum = parseInt(String(item.roomData?.price || '0').replace(/,/g, ''));
                       const dur = item.duration !== undefined ? item.duration : defaultDuration;
                       return acc + (priceNum * (item.count || 1) * dur);
                     }, 0);

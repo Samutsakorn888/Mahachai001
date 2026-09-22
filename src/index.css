@@ -2547,6 +2547,27 @@ button {
   transform: rotate(90deg);
 }
 
+.modal-back-btn {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  border: none;
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.2s ease, transform 0.2s ease;
+  margin-right: 12px;
+}
+
+.modal-back-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateX(-3px);
+}
+
 .booking-modal-body {
   padding: 18px 20px;
   background-color: #ffffff;

@@ -27,9 +27,12 @@ export const PromptPayModal: React.FC<PromptPayModalProps> = ({ isOpen, onClose,
 
   return (
     <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content promptpay-modal-content" onClick={(e) => e.stopPropagation()}>
+      <div className="modal-content promptpay-modal-content" onClick={(e) => e.stopPropagation()} style={{ position: 'relative' }}>
+        <button className="modal-back-btn" onClick={onClose} title="ย้อนกลับ" style={{ color: '#004088', position: 'absolute', top: '24px', left: '24px' }}>
+          ← ย้อนกลับ
+        </button>
         <div className="modal-header">
-          <h3>💳 {t.promptPayTitle || 'ช่องทางการชำระเงิน & เงินมัดจำประกันห้อง'}</h3>
+          <h3 style={{ marginLeft: '100px' }}>💳 {t.promptPayTitle || 'ช่องทางการชำระเงิน & เงินมัดจำประกันห้อง'}</h3>
           <button className="modal-close-btn" onClick={onClose}>✕</button>
         </div>
 

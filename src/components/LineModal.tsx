@@ -27,7 +27,10 @@ export const LineModal: React.FC<LineModalProps> = ({ isOpen, onClose, t }) => {
   return (
     <>
       <div className="modal-overlay" onClick={onClose}>
-        <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+        <div className="modal-content" onClick={(e) => e.stopPropagation()} style={{ position: 'relative' }}>
+          <button className="modal-back-btn" onClick={onClose} title="ย้อนกลับ" style={{ color: '#004088', position: 'absolute', top: '24px', left: '24px' }}>
+            ← ย้อนกลับ
+          </button>
           <button className="modal-close-btn" onClick={onClose} aria-label="Close">
             ✕
           </button>
