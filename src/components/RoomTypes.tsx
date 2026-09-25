@@ -286,12 +286,20 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
       });
       
       const image = canvas.toDataURL(`image/${format}`, 1.0);
-      const link = document.createElement('a');
-      link.href = image;
-      link.download = `booking-summary.${format === 'jpeg' ? 'jpg' : 'png'}`;
-      link.click();
+      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+      
+      if (isMobile) {
+        setExpandedImage(image);
+        alert('ระบบได้สร้างรูปภาพแล้ว\nกรุณา "แตะค้างที่รูปภาพ" เพื่อบันทึกลงเครื่องครับ');
+      } else {
+        const link = document.createElement('a');
+        link.href = image;
+        link.download = `booking-summary.${format === 'jpeg' ? 'jpg' : 'png'}`;
+        link.click();
+      }
     } catch (err) {
       console.error('Error generating image:', err);
+      alert('เกิดข้อผิดพลาดในการสร้างรูปภาพ');
     } finally {
       if (printHeader) printHeader.style.display = 'none';
     }
@@ -1750,7 +1758,14 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
                   <button className="btn-modal-outline" onClick={() => handleDownload('png')}>
                     บันทึกรูปภาพ (PNG)
                   </button>
-                  <button className="btn-modal-outline" onClick={() => window.print()}>
+                  <button className="btn-modal-outline" onClick={() => {
+                    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+                    if (isMobile) {
+                      handleDownload('png');
+                    } else {
+                      window.print();
+                    }
+                  }}>
                     พิมพ์เอกสาร / PDF
                   </button>
                   {(() => {
@@ -1816,9 +1831,12 @@ ${roomItemsText}
 
         {/* Lightbox for expanded images */}
         {expandedImage && (
-          <div className="lightbox-overlay no-print" onClick={() => setExpandedImage(null)}>
+          <div className="lightbox-overlay no-print" onClick={() => setExpandedImage(null)} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             <button className="modal-close" style={{ position: 'absolute', top: '20px', right: '30px', color: 'white', fontSize: '2.5rem' }} onClick={() => setExpandedImage(null)}>×</button>
             <img src={expandedImage} alt="Expanded view" className="lightbox-content" onClick={e => e.stopPropagation()} />
+            <div style={{ color: 'white', background: 'rgba(0,0,0,0.6)', padding: '8px 16px', borderRadius: '20px', fontSize: '0.9rem', textAlign: 'center' }} onClick={e => e.stopPropagation()}>
+              แตะค้างที่รูปภาพเพื่อบันทึกลงเครื่อง
+            </div>
           </div>
         )}
 
