@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { supabase } from '../services/supabaseClient';
+import html2canvas from 'html2canvas';
 
 import type { Language, Translations } from '../i18n/translations';
 
@@ -272,6 +273,39 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
     }
   };
 
+  const handlePrintOrDownload = async () => {
+    const ua = navigator.userAgent || navigator.vendor || (window as any).opera;
+    const isLineOrMessenger = /Line|FBAV|FBAN|Messenger/i.test(ua);
+    
+    if (isLineOrMessenger) {
+      if (!summaryRef.current) return;
+      const printHeader = summaryRef.current.querySelector('.print-only') as HTMLElement;
+      if (printHeader) printHeader.style.display = 'block';
+      const originalStyle = summaryRef.current.getAttribute('style') || '';
+      summaryRef.current.style.width = '800px';
+      summaryRef.current.style.maxWidth = '800px';
+      summaryRef.current.style.padding = '20px';
+      
+      try {
+        const canvas = await html2canvas(summaryRef.current, {
+          scale: 2,
+          backgroundColor: '#ffffff',
+          windowWidth: 800,
+        });
+        const image = canvas.toDataURL('image/png', 1.0);
+        setExpandedImage(image);
+        alert('เนื่องจากเปิดผ่านแอพ (Line/Messenger)\nระบบได้สร้างเป็นรูปภาพให้แทนครับ\n\nกรุณา "แตะค้างที่รูปภาพ" เพื่อบันทึกเก็บไว้ครับ');
+      } catch (err) {
+        console.error(err);
+        alert('เกิดข้อผิดพลาดในการสร้างเอกสาร');
+      } finally {
+        summaryRef.current.setAttribute('style', originalStyle);
+        if (printHeader) printHeader.style.display = 'none';
+      }
+    } else {
+      window.print();
+    }
+  };
 
 
 
@@ -1724,8 +1758,8 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
                   ปิดหน้าต่าง
                 </button>
                 <div className="modal-btn-group">
-                  <button className="btn-modal-outline" onClick={() => window.print()}>
-                    พิมพ์เอกสาร / PDF
+                  <button className="btn-modal-outline" onClick={handlePrintOrDownload}>
+                    บันทึกเอกสาร / PDF
                   </button>
                   {(() => {
                     const isMonthly = selectedBookingRoom.isMonthly || false;
