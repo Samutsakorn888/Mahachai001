@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import { supabase } from '../services/supabaseClient';
 import html2canvas from 'html2canvas';
 import { jsPDF } from 'jspdf';
-import type { Language, Translations } from '../i18n/translations';
+
 import { LeaseModal } from './LeaseModal';
 import { RoomComparisonModal } from './RoomComparisonModal';
 import { PromptPayModal } from './PromptPayModal';
