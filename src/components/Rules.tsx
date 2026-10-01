@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import type { Language, Translations } from '../i18n/translations';
-import { LeaseModal } from './LeaseModal';
 import type { CustomSiteData } from '../services/adminStore';
 
 interface RulesProps {
@@ -12,7 +11,6 @@ interface RulesProps {
 }
 
 export const Rules: React.FC<RulesProps> = ({ t, language = 'th', siteData, isAdmin, onEditRules }) => {
-  const [isLeaseModalOpen, setIsLeaseModalOpen] = useState(false);
 
   const getRuleIcon = (text: string) => {
     if (text.includes('บุหรี่') || text.toLowerCase().includes('smoking')) return '🚭';
@@ -75,38 +73,8 @@ export const Rules: React.FC<RulesProps> = ({ t, language = 'th', siteData, isAd
             </div>
           </div>
 
-          {/* Button to view full official contract document */}
-          <div className="rules-action-center" style={{ textAlign: 'center' }}>
-            <button
-              onClick={() => setIsLeaseModalOpen(true)}
-              className="btn-hotel-secondary"
-              style={{
-                padding: '14px 32px',
-                fontSize: '1.05rem',
-                fontWeight: 'bold',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                cursor: 'pointer',
-                boxShadow: '0 4px 12px rgba(37, 211, 102, 0.25)',
-                border: 'none',
-                borderRadius: '10px',
-                backgroundColor: '#0056b3', // Deep blue makes it look more professional
-                color: '#ffffff'
-              }}
-            >
-              <span style={{ fontSize: '1.2rem' }}>📄</span>
-              <span>{t.leaseAgreementBtn || 'ดูฉบับเต็ม: สัญญาและกฎข้อระเบียบการเช่าหอพัก (Official Lease Agreement)'}</span>
-            </button>
-          </div>
         </div>
       </div>
-
-      {/* Official Lease Agreement Modal */}
-      <LeaseModal
-        isOpen={isLeaseModalOpen}
-        onClose={() => setIsLeaseModalOpen(false)}
-      />
     </section>
   );
 };
