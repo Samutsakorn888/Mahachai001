@@ -534,6 +534,18 @@ export const AdminEditModal: React.FC<AdminEditModalProps> = ({
                         </div>
                       </div>
                     </div>
+                    
+                    {/* Gallery Images (Multiple) */}
+                    <div className="form-group">
+                      <label>รูปภาพแกลเลอรี่ในหน้าต่างรายละเอียด (บรรทัดละ 1 URL):</label>
+                      <textarea
+                        className="admin-textarea"
+                        rows={3}
+                        placeholder="/images/twin_beds.jpg&#10;/images/twin_overview.jpg"
+                        value={(editRoom.images || []).join('\n')}
+                        onChange={e => setEditRoom({ ...editRoom, images: e.target.value.split('\n').filter(url => url.trim() !== '') })}
+                      />
+                    </div>
 
                     {/* Features Toggle */}
                     <div className="form-group">
