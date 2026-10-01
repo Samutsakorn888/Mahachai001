@@ -3282,11 +3282,20 @@ button {
     text-align: left;
     width: 100%;
   }
+  .room-item-row-card {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  .room-item-actions {
+    justify-content: space-between;
+    width: 100%;
+  }
   .booking-modal-card {
-    width: calc(100% - 16px);
+    width: calc(100% - 12px);
     max-width: 100%;
-    margin: 8px;
-    max-height: calc(100dvh - 16px);
+    margin: 6px;
+    max-height: calc(100dvh - 12px);
   }
   .booking-modal-header {
     padding: 10px 12px;
