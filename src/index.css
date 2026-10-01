@@ -3283,10 +3283,30 @@ button {
     width: 100%;
   }
   .booking-modal-card {
-    width: 95%;
+    width: calc(100% - 16px);
     max-width: 100%;
-    margin: 10px;
-    max-height: calc(100dvh - 40px);
+    margin: 8px;
+    max-height: calc(100dvh - 16px);
+  }
+  .booking-modal-header {
+    padding: 12px 14px;
+  }
+  .modal-header-brand h3 {
+    font-size: 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 180px;
+  }
+  .modal-back-btn {
+    padding: 6px 10px;
+    font-size: 0.85rem;
+    margin-right: 8px;
+  }
+  .modal-close-circle {
+    width: 28px;
+    height: 28px;
+    font-size: 0.95rem;
   }
   .booking-modal-body {
     padding: 12px;
@@ -3298,18 +3318,25 @@ button {
   
   /* Mobile Table Adjustments */
   .formal-table {
-    font-size: 0.72rem;
+    font-size: 0.7rem;
   }
   .formal-table th, .formal-table td {
     padding: 6px 4px;
+    word-break: break-word;
   }
   .table-sub-detail {
     font-size: 0.65rem;
   }
+  .formal-table-container {
+    margin-left: -4px;
+    margin-right: -4px;
+    padding-bottom: 4px;
+  }
+  /* Remove white-space: nowrap to allow wrapping and prevent horizontal overflow */
   .formal-table th:nth-child(3), .formal-table td:nth-child(3),
   .formal-table th:nth-child(4), .formal-table td:nth-child(4),
   .formal-table th:nth-child(5), .formal-table td:nth-child(5) {
-    white-space: nowrap;
+    white-space: normal;
   }
   
   .booking-modal-footer {
