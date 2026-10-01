@@ -14,12 +14,12 @@ export const Rules: React.FC<RulesProps> = ({ t, language = 'th', siteData, isAd
 
   const getRuleIcon = (text: string) => {
     if (text.includes('บุหรี่') || text.toLowerCase().includes('smoking')) return '🚭';
-    if (text.includes('สุรา') || text.includes('เหล้า') || text.toLowerCase().includes('alcohol')) return '🚫🍺';
+    if (text.includes('สุรา') || text.includes('เหล้า') || text.toLowerCase().includes('alcohol')) return '🍺';
     if (text.includes('ทะเลาะ') || text.includes('วิวาท') || text.toLowerCase().includes('quarrel')) return '💢';
     if (text.includes('เสียงดัง') || text.includes('รบกวน') || text.toLowerCase().includes('noise')) return '🔇';
     if (text.includes('รองเท้า') || text.toLowerCase().includes('shoes')) return '👟';
     if (text.includes('แก๊ส') || text.toLowerCase().includes('gas')) return '🔥';
-    if (text.includes('สัตว์') || text.toLowerCase().includes('pet')) return '🚫🐈';
+    if (text.includes('สัตว์') || text.toLowerCase().includes('pet')) return '🐾';
     if (text.includes('ชักโครก') || text.includes('ท่อ') || text.toLowerCase().includes('toilet')) return '🚽';
     if (text.includes('เจาะ') || text.includes('สติกเกอร์') || text.includes('ผนัง')) return '🔨';
     if (text.includes('ประตู') || text.toLowerCase().includes('door')) return '🚪';
