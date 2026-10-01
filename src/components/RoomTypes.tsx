@@ -287,6 +287,11 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
       summaryRef.current.style.maxWidth = '800px';
       summaryRef.current.style.padding = '20px';
       
+      const noPrintElements = summaryRef.current.querySelectorAll('.no-print');
+      noPrintElements.forEach(el => {
+        (el as HTMLElement).style.display = 'none';
+      });
+      
       try {
         const canvas = await html2canvas(summaryRef.current, {
           scale: 2,
@@ -295,13 +300,16 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
         });
         const image = canvas.toDataURL('image/png', 1.0);
         setExpandedImage(image);
-        alert('เนื่องจากเปิดผ่านแอพ (Line/Messenger)\nระบบได้สร้างเป็นรูปภาพให้แทนครับ\n\nกรุณา "แตะค้างที่รูปภาพ" เพื่อบันทึกเก็บไว้ครับ');
+        // Removed the alert since they will see the lightbox now
       } catch (err) {
         console.error(err);
         alert('เกิดข้อผิดพลาดในการสร้างเอกสาร');
       } finally {
         summaryRef.current.setAttribute('style', originalStyle);
         if (printHeader) printHeader.style.display = 'none';
+        noPrintElements.forEach(el => {
+          (el as HTMLElement).style.display = '';
+        });
       }
     } else {
       window.print();
@@ -322,7 +330,39 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
       const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
       
       pdf.addImage(expandedImage, 'PNG', 0, 0, pdfWidth, pdfHeight);
-      pdf.save(`Booking_Summary_AT_${Date.now()}.pdf`);
+      
+      const filename = `Booking_Summary_AT_${Date.now()}.pdf`;
+      const blob = pdf.output('blob');
+      
+      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+      let shared = false;
+      
+      if (isMobile && navigator.share && navigator.canShare) {
+        try {
+          const file = new File([blob], filename, { type: 'application/pdf' });
+          if (navigator.canShare({ files: [file] })) {
+             await navigator.share({
+               files: [file],
+               title: 'ใบสรุปการจอง / ใบเสนอราคา',
+               text: 'รายละเอียดการจองห้องพัก'
+             });
+             shared = true;
+          }
+        } catch (shareError) {
+          console.warn('Share API failed, falling back to download:', shareError);
+        }
+      }
+      
+      if (!shared) {
+         try {
+            pdf.save(filename);
+         } catch (e) {
+            // Ultimate fallback for strict in-app browsers
+            const blobUrl = URL.createObjectURL(blob);
+            window.location.href = blobUrl;
+         }
+      }
+      
     } catch (error) {
       console.error('Error generating PDF', error);
       alert('เกิดข้อผิดพลาดในการสร้าง PDF');
