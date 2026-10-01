@@ -1119,37 +1119,9 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
               </div>
               <div className="modal-body">
                 {(() => {
-                  const isTwinRoom = (selectedDetailsRoom.key === 'twin') || 
-                    (selectedDetailsRoom.data?.name || '').toLowerCase().includes('คู่') || 
-                    (selectedDetailsRoom.data?.name || '').toLowerCase().includes('twin') ||
-                    (selectedDetailsRoom.image || '').includes('twin');
-
-                  const isSingleRoom = (selectedDetailsRoom.key === 'single') ||
-                    (selectedDetailsRoom.data?.name || '').toLowerCase().includes('เดี่ยว') ||
-                    (selectedDetailsRoom.data?.name || '').toLowerCase().includes('single') ||
-                    (selectedDetailsRoom.image || '').includes('single');
-
                   const roomImages = selectedDetailsRoom.images && selectedDetailsRoom.images.length > 0
                     ? selectedDetailsRoom.images
-                    : isTwinRoom
-                      ? [
-                          '/images/twin_beds.jpg',
-                          '/images/twin_overview.jpg',
-                          '/images/twin_desk.jpg',
-                          '/images/twin_bathroom.jpg'
-                        ]
-                      : isSingleRoom
-                        ? [
-                            '/images/single_main.jpg',
-                            '/images/single_wide_view.jpg',
-                            '/images/single_bed_close.jpg',
-                            '/images/single_desk.jpg'
-                          ]
-                        : [
-                            selectedDetailsRoom.image || '/images/single.png',
-                            '/images/building_bg1.jpg',
-                            '/images/building_bg2.jpg'
-                          ];
+                    : [selectedDetailsRoom.image || '/images/single.png'];
                   const safeIndex = activeImgIndex < roomImages.length ? activeImgIndex : 0;
 
                   return (
