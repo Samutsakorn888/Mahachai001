@@ -49,7 +49,7 @@ function App() {
   useEffect(() => {
     const ua = navigator.userAgent || navigator.vendor || (window as any).opera;
     const isLine = /Line/i.test(ua);
-    const isMessenger = /FBAV|FBAN|Messenger/i.test(ua);
+    // Messenger handling is currently omitted due to compatibility issues, relying on in-app save instead.
     
     // For LINE app, we can use openExternalBrowser=1
     if (isLine && !window.location.search.includes('openExternalBrowser=1')) {
