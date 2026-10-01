@@ -181,7 +181,7 @@ export const AdminEditModal: React.FC<AdminEditModalProps> = ({
         description: editRoom.desc,
         price: editRoom.price,
         deposit: editRoom.deposit,
-        image_url: editRoom.image,
+        image_url: JSON.stringify({ main: editRoom.image, gallery: editRoom.images || [] }),
         room_type: isDaily ? 'daily' : 'monthly',
         features: editRoom.features || [],
         ...(isDaily ? {

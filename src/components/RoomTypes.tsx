@@ -82,10 +82,20 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
         if (error) throw error;
         if (data) {
           const parseArray = (val: any) => Array.isArray(val) ? val : (typeof val === 'string' ? (val.startsWith('[') ? JSON.parse(val) : val.split(',')) : []);
+          const parseImageUrl = (val: any) => {
+            if (typeof val === 'string' && val.startsWith('{')) {
+              try {
+                const parsed = JSON.parse(val);
+                return { image: parsed.main || '', images: parsed.gallery || [] };
+              } catch(e) {}
+            }
+            return { image: val || '', images: [] };
+          };
 
           const daily = data.filter(r => r.room_type === 'daily').map(r => {
             const features = parseArray(r.features);
             const translated = getLocalizedDailyRoomInfo({ name: r.name, desc: r.description, features: features });
+            const imgData = parseImageUrl(r.image_url);
             return {
               key: r.id,
               data: {
@@ -98,7 +108,8 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
                 availableRooms: Math.max(0, (r.total_rooms || 0) - (r.occupied_rooms || 0)),
                 features: translated.features
               },
-              image: r.image_url
+              image: imgData.image,
+              images: imgData.images
             };
           }).sort((a, b) => parseInt((a.data.price || '0').toString().replace(/,/g, '')) - parseInt((b.data.price || '0').toString().replace(/,/g, '')));
           
@@ -110,6 +121,7 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
               if (matchedIdx >= 0) trans = t.monthlyRooms[matchedIdx];
             }
             const features = parseArray(r.features);
+            const imgData = parseImageUrl(r.image_url);
             return {
               id: r.id,
               name: trans ? trans.name : r.name,
@@ -118,7 +130,8 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
               deposit: r.deposit,
               availableRoomsList: parseArray(r.available_room_numbers),
               features: trans ? trans.features : features,
-              image: r.image_url
+              image: imgData.image,
+              images: imgData.images
             };
           }).sort((a, b) => parseInt((a.price || '0').toString().replace(/,/g, '')) - parseInt((b.price || '0').toString().replace(/,/g, '')));
 

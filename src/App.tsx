@@ -79,10 +79,20 @@ function App() {
         if (error) throw error;
         if (data) {
           const parseArray = (val: any) => Array.isArray(val) ? val : (typeof val === 'string' ? (val.startsWith('[') ? JSON.parse(val) : val.split(',')) : []);
+          const parseImageUrl = (val: any) => {
+            if (typeof val === 'string' && val.startsWith('{')) {
+              try {
+                const parsed = JSON.parse(val);
+                return { image: parsed.main || '', images: parsed.gallery || [], isNewFormat: true };
+              } catch(e) {}
+            }
+            return { image: val || '', images: [], isNewFormat: false };
+          };
 
           setSiteData(prev => {
             const daily = data.filter(r => r.room_type === 'daily').map(r => {
               const existingLocal = prev.dailyRooms?.find((dr: any) => dr.key === r.id);
+              const imgData = parseImageUrl(r.image_url);
               return {
                 key: r.id,
                 name: r.name,
@@ -92,13 +102,14 @@ function App() {
                 totalRooms: r.total_rooms || 0,
                 occupiedRooms: r.occupied_rooms || 0,
                 features: parseArray(r.features),
-                image: r.image_url,
-                images: parseArray(r.gallery_images).length > 0 ? parseArray(r.gallery_images) : (existingLocal?.images || [])
+                image: imgData.image,
+                images: imgData.isNewFormat ? imgData.images : (existingLocal?.images || [])
               };
             }).sort((a, b) => parseInt((a.price || '0').toString().replace(/,/g, '')) - parseInt((b.price || '0').toString().replace(/,/g, '')));
             
             const monthly = data.filter(r => r.room_type === 'monthly').map(r => {
               const existingLocal = prev.monthlyRooms?.find((mr: any) => mr.id === r.id);
+              const imgData = parseImageUrl(r.image_url);
               return {
                 id: r.id,
                 name: r.name,
@@ -107,8 +118,8 @@ function App() {
                 deposit: r.deposit,
                 availableRoomsList: parseArray(r.available_room_numbers),
                 features: parseArray(r.features),
-                image: r.image_url,
-                images: parseArray(r.gallery_images).length > 0 ? parseArray(r.gallery_images) : (existingLocal?.images || [])
+                image: imgData.image,
+                images: imgData.isNewFormat ? imgData.images : (existingLocal?.images || [])
               };
             }).sort((a, b) => parseInt((a.price || '0').toString().replace(/,/g, '')) - parseInt((b.price || '0').toString().replace(/,/g, '')));
 
