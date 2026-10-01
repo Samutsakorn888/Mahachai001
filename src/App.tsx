@@ -16,6 +16,14 @@ import { loadSiteData, saveSiteData, resetSiteData, type CustomSiteData } from '
 import { type Language, translations } from './i18n/translations';
 import { supabase } from './services/supabaseClient';
 
+// Force clear stale cache from older versions to ensure images are removed
+if (typeof window !== 'undefined' && !localStorage.getItem('cache_cleared_images_v4')) {
+  try {
+    localStorage.removeItem('ATS_ADMIN_SITE_DATA');
+    localStorage.setItem('cache_cleared_images_v4', 'true');
+  } catch (e) {}
+}
+
 function App() {
   const [language, setLanguage] = useState<Language>('th');
   const [activeSection, setActiveSection] = useState<string>('home');
