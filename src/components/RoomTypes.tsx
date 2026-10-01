@@ -279,14 +279,23 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
     const printHeader = summaryRef.current.querySelector('.print-only') as HTMLElement;
     if (printHeader) printHeader.style.display = 'block';
     
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    const originalStyle = summaryRef.current.getAttribute('style') || '';
+    
+    if (isMobile) {
+      summaryRef.current.style.width = '800px';
+      summaryRef.current.style.maxWidth = '800px';
+      summaryRef.current.style.padding = '20px';
+    }
+    
     try {
       const canvas = await html2canvas(summaryRef.current, {
         scale: 2,
         backgroundColor: '#ffffff',
+        windowWidth: isMobile ? 800 : undefined,
       });
       
       const image = canvas.toDataURL(`image/${format}`, 1.0);
-      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
       
       if (isMobile) {
         setExpandedImage(image);
@@ -301,6 +310,9 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
       console.error('Error generating image:', err);
       alert('เกิดข้อผิดพลาดในการสร้างรูปภาพ');
     } finally {
+      if (isMobile) {
+        summaryRef.current.setAttribute('style', originalStyle);
+      }
       if (printHeader) printHeader.style.display = 'none';
     }
   };
@@ -1205,7 +1217,7 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
                     </div>
                     <div className="formal-hotel-address">
                       <p><strong>ที่อยู่โครงการ:</strong> 1/9 ถนนกิโลเมตร 28 ต.มหาชัย อ.เมืองสมุทรสาคร จ.สมุทรสาคร 74000 (ตรงข้าม Big C มหาชัย ถนนเศรษฐกิจ 1)</p>
-                      <p><strong>โทรติดต่อ:</strong> 099-095-4541, 064-138-0777 &nbsp;|&nbsp; <strong>Line ID:</strong> 0990954541</p>
+                      <p><strong>โทรติดต่อ:</strong> 099-095-4541, 065-464-7459 &nbsp;|&nbsp; <strong>Line ID:</strong> 0990954541</p>
                     </div>
                   </div>
 
