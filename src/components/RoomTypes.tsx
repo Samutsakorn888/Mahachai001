@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { supabase } from '../services/supabaseClient';
-import html2canvas from 'html2canvas';
+
 import type { Language, Translations } from '../i18n/translations';
 
 import { LeaseModal } from './LeaseModal';
@@ -272,50 +272,7 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
     }
   };
 
-  const handleDownload = async (format: 'png' | 'jpeg') => {
-    if (!summaryRef.current) return;
-    
-    // Temporarily show the print header
-    const printHeader = summaryRef.current.querySelector('.print-only') as HTMLElement;
-    if (printHeader) printHeader.style.display = 'block';
-    
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-    const originalStyle = summaryRef.current.getAttribute('style') || '';
-    
-    if (isMobile) {
-      summaryRef.current.style.width = '800px';
-      summaryRef.current.style.maxWidth = '800px';
-      summaryRef.current.style.padding = '20px';
-    }
-    
-    try {
-      const canvas = await html2canvas(summaryRef.current, {
-        scale: 2,
-        backgroundColor: '#ffffff',
-        windowWidth: isMobile ? 800 : undefined,
-      });
-      
-      const image = canvas.toDataURL(`image/${format}`, 1.0);
-      
-      if (isMobile) {
-        setExpandedImage(image);
-        alert('ระบบได้สร้างรูปภาพแล้ว\nกรุณา "แตะค้างที่รูปภาพ" เพื่อบันทึกลงเครื่องครับ');
-      } else {
-        const link = document.createElement('a');
-        link.href = image;
-        link.download = `booking-summary.${format === 'jpeg' ? 'jpg' : 'png'}`;
-        link.click();
-      }
-    } catch (err) {
-      console.error('Error generating image:', err);
-      alert('เกิดข้อผิดพลาดในการสร้างรูปภาพ');
-    } finally {
-      if (isMobile) {
-        summaryRef.current.setAttribute('style', originalStyle);
-      }
-      if (printHeader) printHeader.style.display = 'none';
-    }
-  };
+
 
 
 
