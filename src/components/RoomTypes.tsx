@@ -1767,17 +1767,7 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
                   ปิดหน้าต่าง
                 </button>
                 <div className="modal-btn-group">
-                  <button className="btn-modal-outline" onClick={() => handleDownload('png')}>
-                    บันทึกรูปภาพ (PNG)
-                  </button>
-                  <button className="btn-modal-outline" onClick={() => {
-                    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-                    if (isMobile) {
-                      handleDownload('png');
-                    } else {
-                      window.print();
-                    }
-                  }}>
+                  <button className="btn-modal-outline" onClick={() => window.print()}>
                     พิมพ์เอกสาร / PDF
                   </button>
                   {(() => {
