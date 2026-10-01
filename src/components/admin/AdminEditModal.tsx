@@ -155,6 +155,7 @@ export const AdminEditModal: React.FC<AdminEditModalProps> = ({
         image_url: editRoom.image,
         room_type: isDaily ? 'daily' : 'monthly',
         features: editRoom.features || [],
+        gallery_images: editRoom.images || [],
         ...(isDaily ? {
           total_rooms: editRoom.totalRooms || 0,
           occupied_rooms: editRoom.occupiedRooms || 0
@@ -558,18 +559,46 @@ export const AdminEditModal: React.FC<AdminEditModalProps> = ({
                     
                     {/* Gallery Images (Multiple) */}
                     <div className="form-group">
-                      <label>รูปภาพแกลเลอรี่ในหน้าต่างรายละเอียด (บรรทัดละ 1 URL):</label>
-                      <textarea
-                        className="admin-textarea"
-                        rows={3}
-                        placeholder="/images/twin_beds.jpg&#10;/images/twin_overview.jpg"
-                        value={(editRoom.images || []).join('\n')}
-                        onChange={e => setEditRoom({ ...editRoom, images: e.target.value.split('\n').filter(url => url.trim() !== '') })}
-                      />
-                      <label className="btn btn-outline file-upload-label" style={{ marginTop: '8px', display: 'inline-block' }}>
-                        📁 เลือกรูปจากอุปกรณ์ (เลือกได้หลายรูป)
-                        <input type="file" accept="image/*" multiple onChange={handleGalleryUpload} style={{ display: 'none' }} />
-                      </label>
+                      <label>รูปภาพแกลเลอรี่ในหน้าต่างรายละเอียด:</label>
+                      <div className="image-edit-container" style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginTop: '8px' }}>
+                        {(editRoom.images || []).map((imgUrl: string, idx: number) => (
+                          <div key={idx} style={{ position: 'relative', width: '80px', height: '80px' }}>
+                            <img src={imgUrl} alt={`gallery-${idx}`} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '8px', border: '1px solid #cbd5e1' }} />
+                            <button
+                              type="button"
+                              onClick={() => {
+                                const newArr = [...editRoom.images];
+                                newArr.splice(idx, 1);
+                                setEditRoom({ ...editRoom, images: newArr });
+                              }}
+                              style={{ position: 'absolute', top: '-6px', right: '-6px', background: '#e11d48', color: 'white', border: 'none', borderRadius: '50%', width: '22px', height: '22px', fontSize: '12px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 0 }}
+                            >×</button>
+                          </div>
+                        ))}
+                      </div>
+                      
+                      <div className="image-input-group" style={{ marginTop: '12px' }}>
+                        <input
+                          type="text"
+                          className="admin-input"
+                          placeholder="วาง URL รูปภาพที่นี่ แล้วกดเพิ่ม"
+                          onKeyDown={e => {
+                            if (e.key === 'Enter') {
+                              e.preventDefault();
+                              const val = e.currentTarget.value.trim();
+                              if (val) {
+                                setEditRoom({ ...editRoom, images: [...(editRoom.images || []), val] });
+                                e.currentTarget.value = '';
+                              }
+                            }
+                          }}
+                        />
+                        <label className="btn btn-outline file-upload-label" style={{ whiteSpace: 'nowrap' }}>
+                          📁 อัปโหลดรูปภาพ
+                          <input type="file" accept="image/*" multiple onChange={handleGalleryUpload} style={{ display: 'none' }} />
+                        </label>
+                      </div>
+                      <span style={{ fontSize: '0.8rem', color: '#64748b' }}>* ใส่ลิงก์รูปภาพแล้วกด Enter หรือกดอัปโหลดรูปภาพจากเครื่อง</span>
                     </div>
 
                     {/* Features Toggle */}

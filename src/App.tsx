@@ -89,7 +89,8 @@ function App() {
             totalRooms: r.total_rooms || 0,
             occupiedRooms: r.occupied_rooms || 0,
             features: parseArray(r.features),
-            image: r.image_url
+            image: r.image_url,
+            images: parseArray(r.gallery_images)
           })).sort((a, b) => parseInt((a.price || '0').toString().replace(/,/g, '')) - parseInt((b.price || '0').toString().replace(/,/g, '')));
           
           const monthly = data.filter(r => r.room_type === 'monthly').map(r => ({
@@ -100,7 +101,8 @@ function App() {
             deposit: r.deposit,
             availableRoomsList: parseArray(r.available_room_numbers),
             features: parseArray(r.features),
-            image: r.image_url
+            image: r.image_url,
+            images: parseArray(r.gallery_images)
           })).sort((a, b) => parseInt((a.price || '0').toString().replace(/,/g, '')) - parseInt((b.price || '0').toString().replace(/,/g, '')));
 
           setSiteData(prev => {
