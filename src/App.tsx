@@ -86,7 +86,7 @@ function App() {
                 return { image: parsed.main || '', images: parsed.gallery || [], isNewFormat: true };
               } catch(e) {}
             }
-            return { image: val || '', images: [], isNewFormat: false };
+            return { image: val || '', images: [], isNewFormat: val === '' || val === null };
           };
 
           setSiteData(prev => {
