@@ -1894,47 +1894,6 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
                     บันทึกเอกสาร / PDF
                   </button>
                   {(() => {
-                    const isMonthly = selectedBookingRoom.isMonthly || false;
-                    const defaultDuration = isMonthly ? ((bookingMonths as number) || 1) : ((bookingNights as number) || 1);
-
-                    const maxDuration = selectedBookingItems.reduce((max, item) => {
-                      const dur = item.duration !== undefined ? item.duration : defaultDuration;
-                      return dur > max ? dur : max;
-                    }, 1);
-
-                    const checkOutDateObj = calculateCheckOutDate(checkInDate, maxDuration, isMonthly);
-                    const totalRoomsCount = selectedBookingItems.reduce((acc, item) => acc + (item.count || 1), 0);
-
-                    const totalRoomRental = selectedBookingItems.reduce((acc, item) => {
-                      const priceNum = parseInt(String(item.roomData?.price || '0').replace(/,/g, ''));
-                      const dur = item.duration !== undefined ? item.duration : defaultDuration;
-                      return acc + (priceNum * (item.count || 1) * dur);
-                    }, 0);
-
-                    const totalDeposit = selectedBookingItems.reduce((acc, item) => {
-                      const depVal = item.roomData?.deposit
-                        ? parseInt(item.roomData.deposit.toString().replace(/,/g, ''))
-                        : ((item.roomData?.name || '').includes('สูท') ? 1000 : 500);
-                      return acc + (depVal * (item.count || 1));
-                    }, 0);
-
-                    const grandTotalCalc = totalRoomRental + (payDepositNow ? totalDeposit : 0);
-
-                    const roomItemsText = selectedBookingItems.map(item => {
-                      const dur = item.duration !== undefined ? item.duration : defaultDuration;
-                      const itemOutDate = formatThaiDateObj(calculateCheckOutDate(checkInDate, dur, isMonthly));
-                      return `- ${item.roomData.name}: ${item.count} ห้อง × ${dur} ${isMonthly ? 'เดือน' : 'คืน'} (ถึง ${itemOutDate}) (฿${item.roomData.price}/${isMonthly ? 'เดือน' : 'คืน'})`;
-                    }).join('\n');
-
-                    const lineText = `สวัสดีครับ/ค่ะ สนใจจองห้องพัก:
-${roomItemsText}
-(รวมทั้งสิ้น ${totalRoomsCount} ห้อง)
-วันที่เข้าพัก: ${formatThaiDate(checkInDate)}
-เช็คเอ้าท์ชุดสุดท้าย: ${formatThaiDateObj(checkOutDateObj)}
-ชื่อผู้เข้าพัก: ${guestName.trim() || 'ไม่ระบุ'}
-เบอร์โทรติดต่อ: ${guestPhone.trim() || 'ไม่ระบุ'}
-💰 ยอดรวมทั้งสิ้น: ฿${grandTotalCalc.toLocaleString()}`;
-
                     return (
                       <a
                         href="https://line.me/ti/p/~0990954541"
