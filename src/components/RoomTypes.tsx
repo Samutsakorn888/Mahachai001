@@ -1354,7 +1354,7 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
                         
                         {/* Multi-Room Item Selector */}
                         <div className="booking-input-group full-width">
-                          <label style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                          <label style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '4px' }}>
                             <span>รายการห้องพักที่ต้องการจอง (รวม {totalRoomsCount} ห้อง)</span>
                             <span style={{ fontSize: '0.8rem', color: '#64748b', fontWeight: 'normal' }}>สามารถเลือกเพิ่มประเภทห้องและปรับจำนวนคืน/เดือนแยกได้</span>
                           </label>

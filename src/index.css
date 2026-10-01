@@ -3289,24 +3289,34 @@ button {
     max-height: calc(100dvh - 16px);
   }
   .booking-modal-header {
-    padding: 12px 14px;
+    padding: 10px 12px;
+    gap: 8px;
+  }
+  .modal-header-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .hotel-badge-pill {
+    display: none; /* Hide badge on mobile to save space */
   }
   .modal-header-brand h3 {
     font-size: 1rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 180px;
+    line-height: 1.2;
+    white-space: normal;
+    max-width: none;
   }
   .modal-back-btn {
-    padding: 6px 10px;
+    padding: 6px 8px;
     font-size: 0.85rem;
-    margin-right: 8px;
+    margin-right: 0;
+    flex-shrink: 0;
   }
   .modal-close-circle {
     width: 28px;
     height: 28px;
     font-size: 0.95rem;
+    flex-shrink: 0;
   }
   .booking-modal-body {
     padding: 12px;
@@ -3317,20 +3327,23 @@ button {
   }
   
   /* Mobile Table Adjustments */
+  .formal-table-container {
+    margin-left: -12px;
+    margin-right: -12px;
+    padding: 0 12px 12px 12px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
   .formal-table {
-    font-size: 0.7rem;
+    font-size: 0.75rem;
+    min-width: 480px; /* Force scroll instead of squishing text */
   }
   .formal-table th, .formal-table td {
-    padding: 6px 4px;
-    word-break: break-word;
+    padding: 8px 6px;
+    word-break: normal;
   }
   .table-sub-detail {
-    font-size: 0.65rem;
-  }
-  .formal-table-container {
-    margin-left: -4px;
-    margin-right: -4px;
-    padding-bottom: 4px;
+    font-size: 0.7rem;
   }
   /* Remove white-space: nowrap to allow wrapping and prevent horizontal overflow */
   .formal-table th:nth-child(3), .formal-table td:nth-child(3),
