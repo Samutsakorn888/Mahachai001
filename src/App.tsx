@@ -80,35 +80,41 @@ function App() {
         if (data) {
           const parseArray = (val: any) => Array.isArray(val) ? val : (typeof val === 'string' ? (val.startsWith('[') ? JSON.parse(val) : val.split(',')) : []);
 
-          const daily = data.filter(r => r.room_type === 'daily').map(r => ({
-            key: r.id,
-            name: r.name,
-            desc: r.description,
-            price: r.price,
-            deposit: r.deposit,
-            totalRooms: r.total_rooms || 0,
-            occupiedRooms: r.occupied_rooms || 0,
-            features: parseArray(r.features),
-            image: r.image_url,
-            images: parseArray(r.gallery_images)
-          })).sort((a, b) => parseInt((a.price || '0').toString().replace(/,/g, '')) - parseInt((b.price || '0').toString().replace(/,/g, '')));
-          
-          const monthly = data.filter(r => r.room_type === 'monthly').map(r => ({
-            id: r.id,
-            name: r.name,
-            desc: r.description,
-            price: r.price,
-            deposit: r.deposit,
-            availableRoomsList: parseArray(r.available_room_numbers),
-            features: parseArray(r.features),
-            image: r.image_url,
-            images: parseArray(r.gallery_images)
-          })).sort((a, b) => parseInt((a.price || '0').toString().replace(/,/g, '')) - parseInt((b.price || '0').toString().replace(/,/g, '')));
-
           setSiteData(prev => {
+            const daily = data.filter(r => r.room_type === 'daily').map(r => {
+              const existingLocal = prev.dailyRooms?.find((dr: any) => dr.key === r.id);
+              return {
+                key: r.id,
+                name: r.name,
+                desc: r.description,
+                price: r.price,
+                deposit: r.deposit,
+                totalRooms: r.total_rooms || 0,
+                occupiedRooms: r.occupied_rooms || 0,
+                features: parseArray(r.features),
+                image: r.image_url,
+                images: parseArray(r.gallery_images).length > 0 ? parseArray(r.gallery_images) : (existingLocal?.images || [])
+              };
+            }).sort((a, b) => parseInt((a.price || '0').toString().replace(/,/g, '')) - parseInt((b.price || '0').toString().replace(/,/g, '')));
+            
+            const monthly = data.filter(r => r.room_type === 'monthly').map(r => {
+              const existingLocal = prev.monthlyRooms?.find((mr: any) => mr.id === r.id);
+              return {
+                id: r.id,
+                name: r.name,
+                desc: r.description,
+                price: r.price,
+                deposit: r.deposit,
+                availableRoomsList: parseArray(r.available_room_numbers),
+                features: parseArray(r.features),
+                image: r.image_url,
+                images: parseArray(r.gallery_images).length > 0 ? parseArray(r.gallery_images) : (existingLocal?.images || [])
+              };
+            }).sort((a, b) => parseInt((a.price || '0').toString().replace(/,/g, '')) - parseInt((b.price || '0').toString().replace(/,/g, '')));
+
             const newData = { ...prev, dailyRooms: daily, monthlyRooms: monthly };
-            // Optional: don't overwrite local storage just yet, just keep it in memory
-            // but we might want it in local storage so AdminDashboard gets it if used
+            // Save merged data back to localStorage to persist images reliably
+            try { localStorage.setItem('ATS_ADMIN_SITE_DATA', JSON.stringify(newData)); } catch(e){}
             return newData;
           });
         }
