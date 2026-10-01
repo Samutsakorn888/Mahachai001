@@ -10,21 +10,10 @@ import { LeaseModal } from './LeaseModal';
 import { RoomComparisonModal } from './RoomComparisonModal';
 import { PromptPayModal } from './PromptPayModal';
 import { UtilityCalculator } from './UtilityCalculator';
+import { parseArray, parseImageUrl, formatThaiDate, calculateCheckOutDate, formatThaiDateObj } from './RoomTypes/utils';
+import type { RoomTypesProps, BookingItem } from './RoomTypes/types';
 
 import type { CustomSiteData } from '../services/adminStore';
-
-interface RoomTypesProps {
-  t: Translations;
-  language?: Language;
-  activeTab?: 'daily' | 'monthly';
-  setActiveTab?: (tab: 'daily' | 'monthly') => void;
-  siteData?: CustomSiteData;
-  isAdmin?: boolean;
-  onEditRoom?: (index: number, tabType: 'daily' | 'monthly') => void;
-  onAddNewRoom?: () => void;
-  refreshTrigger?: number;
-  onRefreshData?: () => void;
-}
 
 export const RoomTypes: React.FC<RoomTypesProps> = ({
   t,
@@ -81,17 +70,6 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
         const { data, error } = await supabase.from('rooms').select('*');
         if (error) throw error;
         if (data) {
-          const parseArray = (val: any) => Array.isArray(val) ? val : (typeof val === 'string' ? (val.startsWith('[') ? JSON.parse(val) : val.split(',')) : []);
-          const parseImageUrl = (val: any) => {
-            if (typeof val === 'string' && val.startsWith('{')) {
-              try {
-                const parsed = JSON.parse(val);
-                return { image: parsed.main || '', images: parsed.gallery || [] };
-              } catch(e) {}
-            }
-            return { image: val || '', images: [] };
-          };
-
           const daily = data.filter(r => r.room_type === 'daily').map(r => {
             const features = parseArray(r.features);
             const translated = getLocalizedDailyRoomInfo({ name: r.name, desc: r.description, features: features });
@@ -235,47 +213,7 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
     setSelectedBookingItems(prev => prev.filter((_, idx) => idx !== index));
   };
 
-  const formatThaiDate = (dateStr: string) => {
-    if (!dateStr) return 'ยังไม่ระบุ';
-    try {
-      const [y, m, d] = dateStr.split('-').map(Number);
-      if (!y || !m || !d) return dateStr;
-      const date = new Date(y, m - 1, d);
-      return date.toLocaleDateString('th-TH', {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric'
-      });
-    } catch {
-      return dateStr;
-    }
-  };
 
-  const calculateCheckOutDate = (checkInStr: string, duration: number, isMonthly: boolean) => {
-    if (!checkInStr) return null;
-    try {
-      const [y, m, d] = checkInStr.split('-').map(Number);
-      if (!y || !m || !d || isNaN(y) || isNaN(m) || isNaN(d)) return null;
-      const date = new Date(y, m - 1, d);
-      if (isMonthly) {
-        date.setMonth(date.getMonth() + (duration || 1));
-      } else {
-        date.setDate(date.getDate() + (duration || 1));
-      }
-      return date;
-    } catch {
-      return null;
-    }
-  };
-
-  const formatThaiDateObj = (date: Date | null) => {
-    if (!date) return 'ยังไม่ระบุ';
-    return date.toLocaleDateString('th-TH', {
-      day: 'numeric',
-      month: 'short',
-      year: 'numeric'
-    });
-  };
 
   const handleCopyText = async (text: string, label: string) => {
     try {
