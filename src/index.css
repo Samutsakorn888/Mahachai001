@@ -3294,6 +3294,23 @@ button {
   .deposit-toggle-group {
     grid-template-columns: 1fr;
   }
+  
+  /* Mobile Table Adjustments */
+  .formal-table {
+    font-size: 0.72rem;
+  }
+  .formal-table th, .formal-table td {
+    padding: 6px 4px;
+  }
+  .table-sub-detail {
+    font-size: 0.65rem;
+  }
+  .formal-table th:nth-child(3), .formal-table td:nth-child(3),
+  .formal-table th:nth-child(4), .formal-table td:nth-child(4),
+  .formal-table th:nth-child(5), .formal-table td:nth-child(5) {
+    white-space: nowrap;
+  }
+  
   .booking-modal-footer {
     flex-direction: column;
     align-items: stretch;
