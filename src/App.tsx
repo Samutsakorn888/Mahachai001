@@ -49,7 +49,8 @@ function App() {
   useEffect(() => {
     const ua = navigator.userAgent || navigator.vendor || (window as any).opera;
     const isLine = /Line/i.test(ua);
-    // Messenger handling is currently omitted due to compatibility issues, relying on in-app save instead.
+    const isMessenger = /FBAV|FBAN|Messenger/i.test(ua);
+    const isAndroid = /android/i.test(ua);
     
     // For LINE app, we can use openExternalBrowser=1
     if (isLine && !window.location.search.includes('openExternalBrowser=1')) {
@@ -58,9 +59,16 @@ function App() {
       window.location.href = newUrl.toString();
     }
     
-    // For Facebook Messenger, it's harder, but sometimes adding intent:// works for Android
-    // However, since we don't know the exact platform easily without more checks,
-    // we'll primarily rely on the openExternalBrowser flag for LINE which is very common in Thailand.
+    // For Facebook Messenger on Android, we can force open Chrome using intent
+    if (isMessenger && isAndroid && !window.location.search.includes('intent_redirect=1')) {
+      // Add a parameter so we don't infinitely loop if it fails
+      const currentUrl = new URL(window.location.href);
+      currentUrl.searchParams.append('intent_redirect', '1');
+      
+      const urlWithoutScheme = currentUrl.toString().replace(/^https?:\/\//, '');
+      const intentUrl = `intent://${urlWithoutScheme}#Intent;scheme=https;package=com.android.chrome;end;`;
+      window.location.href = intentUrl;
+    }
   }, []);
 
   // Sync rooms from Supabase into siteData to keep AdminEditModal updated
