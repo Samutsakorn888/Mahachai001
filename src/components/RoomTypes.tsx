@@ -879,7 +879,18 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
               {monthlyRoomsData.map((room, idx) => {
                 const hasAvailable = room.availableRoomsList && room.availableRoomsList.length > 0;
                 return (
-                  <div key={idx} className="room-card">
+                  <div key={idx} className="room-card" style={{ position: 'relative' }}>
+                    {isAdmin && onEditRoom && (
+                      <div style={{ padding: '8px 12px 0 12px' }}>
+                        <button
+                          className="admin-quick-edit-btn"
+                          style={{ width: '100%', fontSize: '0.8rem', padding: '4px 10px' }}
+                          onClick={() => onEditRoom(idx, 'monthly')}
+                        >
+                          แก้ไขข้อมูล/ราคาห้องนี้
+                        </button>
+                      </div>
+                    )}
                     {room.image ? (
                       <div className="room-image-wrapper">
                         <img
@@ -1121,7 +1132,10 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
                 {(() => {
                   const roomImages = selectedDetailsRoom.images && selectedDetailsRoom.images.length > 0
                     ? selectedDetailsRoom.images
-                    : [selectedDetailsRoom.image || '/images/single.png'];
+                    : (selectedDetailsRoom.image ? [selectedDetailsRoom.image] : []);
+                  
+                  if (roomImages.length === 0) return null;
+
                   const safeIndex = activeImgIndex < roomImages.length ? activeImgIndex : 0;
 
                   return (
