@@ -8,6 +8,7 @@ import { LeaseModal } from './LeaseModal';
 import { RoomComparisonModal } from './RoomComparisonModal';
 import { PromptPayModal } from './PromptPayModal';
 import { UtilityCalculator } from './UtilityCalculator';
+import { RoomDetailsModal } from './RoomTypes/RoomDetailsModal';
 import { parseArray, parseImageUrl, formatThaiDate, calculateCheckOutDate, formatThaiDateObj } from './RoomTypes/utils';
 import type { RoomTypesProps } from './RoomTypes/types';
 
@@ -25,7 +26,6 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
   const [internalTab, setInternalTab] = useState<'daily' | 'monthly'>('daily');
   const activeTab = propActiveTab !== undefined ? propActiveTab : internalTab;
   const setActiveTab = propSetActiveTab !== undefined ? propSetActiveTab : setInternalTab;
-  const [activeImgIndex, setActiveImgIndex] = useState<number>(0);
   const [selectedDetailsRoom, setSelectedDetailsRoom] = useState<any | null>(null);
   const [selectedBookingRoom, setSelectedBookingRoom] = useState<any | null>(null);
   const [selectedBookingItems, setSelectedBookingItems] = useState<Array<{ roomData: any; count: number; duration?: number }>>([]);
@@ -1112,118 +1112,11 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
         />
 
         {/* Modals */}
-        {selectedDetailsRoom && (
-          <div className="modal-overlay" onClick={() => { setSelectedDetailsRoom(null); setActiveImgIndex(0); }}>
-            <div className="modal-content" onClick={e => e.stopPropagation()}>
-              <div className="modal-header">
-                <h3>{selectedDetailsRoom.data?.name}</h3>
-                <button className="modal-close" onClick={() => { setSelectedDetailsRoom(null); setActiveImgIndex(0); }}>×</button>
-              </div>
-              <div className="modal-body">
-                {(() => {
-                  const roomImages = selectedDetailsRoom.images && selectedDetailsRoom.images.length > 0
-                    ? selectedDetailsRoom.images
-                    : (selectedDetailsRoom.image ? [selectedDetailsRoom.image] : []);
-                  
-                  if (roomImages.length === 0) return null;
-
-                  const safeIndex = activeImgIndex < roomImages.length ? activeImgIndex : 0;
-
-                  return (
-                    <>
-                      {/* Featured Main Image with Side Arrow Controls */}
-                      <div className="slider-wrapper" style={{ position: 'relative', marginBottom: '14px' }}>
-                        {/* Left Arrow Button */}
-                        <button
-                          type="button"
-                          className="slider-arrow slider-arrow-left"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setActiveImgIndex(prev => (prev === 0 ? roomImages.length - 1 : prev - 1));
-                          }}
-                          title="รูปก่อนหน้า"
-                        >
-                          ‹
-                        </button>
-
-                        {/* Featured Image */}
-                        <img
-                          src={roomImages[safeIndex]}
-                          alt={selectedDetailsRoom.data?.name}
-                          className="slider-featured-img"
-                          onClick={() => setExpandedImage(roomImages[safeIndex])}
-                          style={{
-                            width: '100%',
-                            height: '300px',
-                            objectFit: 'cover',
-                            borderRadius: '12px',
-                            cursor: 'pointer',
-                            boxShadow: '0 4px 14px rgba(0, 0, 0, 0.1)',
-                            display: 'block'
-                          }}
-                        />
-
-                        {/* Right Arrow Button */}
-                        <button
-                          type="button"
-                          className="slider-arrow slider-arrow-right"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setActiveImgIndex(prev => (prev === roomImages.length - 1 ? 0 : prev + 1));
-                          }}
-                          title="รูปถัดไป"
-                        >
-                          ›
-                        </button>
-
-                        {/* Image Counter Badge */}
-                        <div className="slider-counter-badge">
-                          📷 {safeIndex + 1} / {roomImages.length}
-                        </div>
-                      </div>
-
-                      {/* Thumbnail Previews Bar */}
-                      <div className="slider-thumbnails-bar" style={{ display: 'flex', gap: '10px', justifyContent: 'center', marginBottom: '20px' }}>
-                        {roomImages.map((img: string, idx: number) => (
-                          <div
-                            key={idx}
-                            className={`slider-thumb-item ${safeIndex === idx ? 'active' : ''}`}
-                            onClick={() => setActiveImgIndex(idx)}
-                            style={{
-                              width: '70px',
-                              height: '50px',
-                              borderRadius: '8px',
-                              overflow: 'hidden',
-                              cursor: 'pointer',
-                              border: safeIndex === idx ? '2.5px solid #004088' : '2px solid #e2e8f0',
-                              opacity: safeIndex === idx ? 1 : 0.65,
-                              transition: 'all 0.2s ease'
-                            }}
-                          >
-                            <img src={img} alt={`Thumb ${idx + 1}`} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                          </div>
-                        ))}
-                      </div>
-                    </>
-                  );
-                })()}
-
-                <p style={{ fontSize: '1.1rem', marginBottom: '16px' }}><strong>รายละเอียด:</strong> {selectedDetailsRoom.data?.desc}</p>
-                <p style={{ fontSize: '1.1rem', marginBottom: '8px', color: 'var(--primary-color)', fontWeight: 'bold' }}>
-                  <strong>ราคา:</strong> ฿{selectedDetailsRoom.data?.price} {selectedDetailsRoom.isMonthly ? '/ เดือน' : '/ คืน'}
-                </p>
-                <p style={{ fontSize: '1.05rem', marginBottom: '16px', color: '#e63946', fontWeight: 'bold' }}>
-                  ต้องจ่ายค่ามัดจำห้องละ {selectedDetailsRoom.data?.deposit ? `฿${selectedDetailsRoom.data.deposit}` : '฿500'} บาท
-                </p>
-                <div className="room-features">
-                  {selectedDetailsRoom.data?.features?.map((f: string, i: number) => (
-                    <span key={i} className="room-feature-badge">{f}</span>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
+        <RoomDetailsModal
+          room={selectedDetailsRoom}
+          onClose={() => setSelectedDetailsRoom(null)}
+          onImageClick={setExpandedImage}
+        />
 
         {selectedBookingRoom && createPortal(
           <div className="modal-overlay" onClick={() => setSelectedBookingRoom(null)}>
