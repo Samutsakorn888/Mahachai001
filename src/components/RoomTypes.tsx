@@ -3,17 +3,13 @@ import { createPortal } from 'react-dom';
 import { supabase } from '../services/supabaseClient';
 import html2canvas from 'html2canvas';
 import { jsPDF } from 'jspdf';
-
 import type { Language, Translations } from '../i18n/translations';
-
 import { LeaseModal } from './LeaseModal';
 import { RoomComparisonModal } from './RoomComparisonModal';
 import { PromptPayModal } from './PromptPayModal';
 import { UtilityCalculator } from './UtilityCalculator';
 import { parseArray, parseImageUrl, formatThaiDate, calculateCheckOutDate, formatThaiDateObj } from './RoomTypes/utils';
-import type { RoomTypesProps, BookingItem } from './RoomTypes/types';
-
-import type { CustomSiteData } from '../services/adminStore';
+import type { RoomTypesProps } from './RoomTypes/types';
 
 export const RoomTypes: React.FC<RoomTypesProps> = ({
   t,
