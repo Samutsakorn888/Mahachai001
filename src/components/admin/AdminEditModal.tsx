@@ -110,6 +110,27 @@ export const AdminEditModal: React.FC<AdminEditModalProps> = ({
     }
   };
 
+  const handleGalleryUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (files && files.length > 0 && editRoom) {
+      const newImages = Array.from(files);
+      let currentImages = [...(editRoom.images || [])];
+      
+      let loadedCount = 0;
+      newImages.forEach(file => {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          currentImages.push(reader.result as string);
+          loadedCount++;
+          if (loadedCount === newImages.length) {
+            setEditRoom({ ...editRoom, images: currentImages });
+          }
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+  };
+
   const handleToggleFeature = (feature: string) => {
     if (!editRoom) return;
     const currentFeatures: string[] = editRoom.features || [];
@@ -545,6 +566,10 @@ export const AdminEditModal: React.FC<AdminEditModalProps> = ({
                         value={(editRoom.images || []).join('\n')}
                         onChange={e => setEditRoom({ ...editRoom, images: e.target.value.split('\n').filter(url => url.trim() !== '') })}
                       />
+                      <label className="btn btn-outline file-upload-label" style={{ marginTop: '8px', display: 'inline-block' }}>
+                        📁 เลือกรูปจากอุปกรณ์ (เลือกได้หลายรูป)
+                        <input type="file" accept="image/*" multiple onChange={handleGalleryUpload} style={{ display: 'none' }} />
+                      </label>
                     </div>
 
                     {/* Features Toggle */}
