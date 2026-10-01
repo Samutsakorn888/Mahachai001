@@ -45,6 +45,24 @@ function App() {
     document.title = `${t.brand} | ${t.subheading}`;
   }, [language, t]);
 
+  // Attempt to redirect out of in-app browsers (LINE/Messenger)
+  useEffect(() => {
+    const ua = navigator.userAgent || navigator.vendor || (window as any).opera;
+    const isLine = /Line/i.test(ua);
+    const isMessenger = /FBAV|FBAN|Messenger/i.test(ua);
+    
+    // For LINE app, we can use openExternalBrowser=1
+    if (isLine && !window.location.search.includes('openExternalBrowser=1')) {
+      const newUrl = new URL(window.location.href);
+      newUrl.searchParams.append('openExternalBrowser', '1');
+      window.location.href = newUrl.toString();
+    }
+    
+    // For Facebook Messenger, it's harder, but sometimes adding intent:// works for Android
+    // However, since we don't know the exact platform easily without more checks,
+    // we'll primarily rely on the openExternalBrowser flag for LINE which is very common in Thailand.
+  }, []);
+
   // Sync rooms from Supabase into siteData to keep AdminEditModal updated
   useEffect(() => {
     const fetchRooms = async () => {

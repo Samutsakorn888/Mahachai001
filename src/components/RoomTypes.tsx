@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { supabase } from '../services/supabaseClient';
 import html2canvas from 'html2canvas';
+import { jsPDF } from 'jspdf';
 
 import type { Language, Translations } from '../i18n/translations';
 
@@ -304,6 +305,27 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
       }
     } else {
       window.print();
+    }
+  };
+
+  const handleDownloadPDF = async () => {
+    if (!expandedImage) return;
+    try {
+      const pdf = new jsPDF({
+        orientation: 'portrait',
+        unit: 'px',
+        format: 'a4'
+      });
+      
+      const imgProps = pdf.getImageProperties(expandedImage);
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+      
+      pdf.addImage(expandedImage, 'PNG', 0, 0, pdfWidth, pdfHeight);
+      pdf.save(`Booking_Summary_AT_${Date.now()}.pdf`);
+    } catch (error) {
+      console.error('Error generating PDF', error);
+      alert('เกิดข้อผิดพลาดในการสร้าง PDF');
     }
   };
 
@@ -1824,11 +1846,28 @@ ${roomItemsText}
 
         {/* Lightbox for expanded images */}
         {expandedImage && (
-          <div className="lightbox-overlay no-print" onClick={() => setExpandedImage(null)} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <div className="lightbox-overlay no-print" onClick={() => setExpandedImage(null)} style={{ display: 'flex', flexDirection: 'column', gap: '16px', alignItems: 'center' }}>
             <button className="modal-close" style={{ position: 'absolute', top: '20px', right: '30px', color: 'white', fontSize: '2.5rem' }} onClick={() => setExpandedImage(null)}>×</button>
-            <img src={expandedImage} alt="Expanded view" className="lightbox-content" onClick={e => e.stopPropagation()} />
-            <div style={{ color: 'white', background: 'rgba(0,0,0,0.6)', padding: '8px 16px', borderRadius: '20px', fontSize: '0.9rem', textAlign: 'center' }} onClick={e => e.stopPropagation()}>
-              แตะค้างที่รูปภาพเพื่อบันทึกลงเครื่อง
+            <img src={expandedImage} alt="Expanded view" className="lightbox-content" onClick={e => e.stopPropagation()} style={{ maxHeight: '75vh', objectFit: 'contain' }} />
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', width: '100%', maxWidth: '300px' }} onClick={e => e.stopPropagation()}>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleDownloadPDF();
+                }}
+                className="btn-primary"
+                style={{
+                  display: 'flex', justifyContent: 'center', alignItems: 'center',
+                  padding: '12px 24px', borderRadius: '25px', backgroundColor: '#3182ce',
+                  color: '#fff', textDecoration: 'none', fontWeight: 'bold', fontSize: '1rem',
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.2)', cursor: 'pointer', border: 'none'
+                }}
+              >
+                📄 ดาวน์โหลดเป็น PDF (Save PDF)
+              </button>
+              <div style={{ color: 'white', background: 'rgba(0,0,0,0.6)', padding: '8px 16px', borderRadius: '20px', fontSize: '0.9rem', textAlign: 'center' }}>
+                หรือ แตะค้างที่รูปภาพเพื่อบันทึก
+              </div>
             </div>
           </div>
         )}
