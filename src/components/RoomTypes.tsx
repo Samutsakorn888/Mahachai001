@@ -1936,22 +1936,14 @@ ${roomItemsText}
 💰 ยอดรวมทั้งสิ้น: ฿${grandTotalCalc.toLocaleString()}`;
 
                     return (
-                      <button
-                        onClick={async (e) => {
-                          e.preventDefault();
-                          try {
-                            await navigator.clipboard.writeText(lineText);
-                            alert('คัดลอกข้อความใบจองเรียบร้อยแล้ว!\nกรุณากด "วาง" (Paste) ในหน้าแชท LINE เพื่อส่งข้อมูล');
-                          } catch (err) {
-                            console.error('Failed to copy', err);
-                          }
-                          window.open('https://line.me/ti/p/~0990954541', '_blank');
-                        }}
+                      <a
+                        href="https://line.me/ti/p/~0990954541"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="btn-modal-line-booking"
-                        style={{ border: 'none', cursor: 'pointer', width: '100%', fontFamily: 'inherit' }}
                       >
                         ช่องทางส่งใบจองLine
-                      </button>
+                      </a>
                     );
                   })()}
                 </div>
