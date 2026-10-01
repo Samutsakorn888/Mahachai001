@@ -1085,6 +1085,63 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
                 ))}
               </div>
 
+              {/* Highlight of Important Monthly Rules */}
+              <div style={{
+                backgroundColor: '#fff5f5',
+                border: '1px solid #feb2b2',
+                borderRadius: '12px',
+                padding: '24px',
+                marginTop: '32px',
+                marginBottom: '24px',
+                boxShadow: '0 4px 12px rgba(229, 62, 62, 0.08)'
+              }}>
+                <h4 style={{ 
+                  color: '#c53030', 
+                  fontSize: '1.15rem', 
+                  fontWeight: 'bold', 
+                  marginBottom: '16px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px'
+                }}>
+                  <span style={{ fontSize: '1.4rem' }}>⚠️</span> 
+                  {language === 'en' ? 'Important Lease Agreement Details' : language === 'cn' ? '重要租赁协议详情' : language === 'mm' ? 'အရေးကြီးသော အိမ်ငှားစာချုပ်အချက်အလက်များ' : 'ข้อกำหนดและเงื่อนไขสำคัญของสัญญาเช่า'}
+                </h4>
+                
+                <ul style={{ 
+                  listStyle: 'none', 
+                  padding: 0, 
+                  margin: 0, 
+                  display: 'flex', 
+                  flexDirection: 'column', 
+                  gap: '12px',
+                  color: '#2d3748',
+                  fontSize: '0.95rem',
+                  lineHeight: '1.5'
+                }}>
+                  <li style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
+                    <span style={{ fontSize: '1.1rem', flexShrink: 0 }}>📅</span>
+                    <div><strong>ระยะเวลาสัญญา:</strong> ขั้นต่ำ 1 ปี (หากอยู่ไม่ครบตามสัญญา จะไม่ได้รับเงินประกันคืน)</div>
+                  </li>
+                  <li style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
+                    <span style={{ fontSize: '1.1rem', flexShrink: 0 }}>💰</span>
+                    <div><strong>การชำระค่าเช่า:</strong> ชำระภายในวันที่ 25-30 ของทุกเดือน (หากเกินวันที่ 3 ของเดือนถัดไป มีค่าปรับวันละ 50 บาท)</div>
+                  </li>
+                  <li style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
+                    <span style={{ fontSize: '1.1rem', flexShrink: 0 }}>📦</span>
+                    <div><strong>การแจ้งย้ายออก:</strong> ต้องแจ้งล่วงหน้าไม่น้อยกว่า 30 วัน และขนย้ายได้เฉพาะเวลา 08:00 - 15:00 น.</div>
+                  </li>
+                  <li style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
+                    <span style={{ fontSize: '1.1rem', flexShrink: 0 }}>🚫</span>
+                    <div><strong>ข้อห้ามสำคัญ:</strong> ห้ามใช้เตาแก๊ส (ใช้ได้เฉพาะเตาไฟฟ้า), ห้ามเลี้ยงสัตว์ทุกชนิด, และ ห้ามสูบบุหรี่ในอาคาร (ฝ่าฝืนปรับ 2,000 บาท)</div>
+                  </li>
+                  <li style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
+                    <span style={{ fontSize: '1.1rem', flexShrink: 0 }}>👥</span>
+                    <div><strong>ผู้พักอาศัย:</strong> อนุญาตให้พักอาศัยได้สูงสุดไม่เกิน 2 ท่านต่อห้อง</div>
+                  </li>
+                </ul>
+              </div>
+
               {/* Official Lease Agreement Modal Button */}
               <div style={{ marginTop: '24px', textAlign: 'center' }}>
                 <button
