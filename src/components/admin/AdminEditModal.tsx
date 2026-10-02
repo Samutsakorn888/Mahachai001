@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import type { CustomSiteData, DailyIncomeLog, MonthlyTenantLog } from '../../services/adminStore';
+import type { CustomSiteData } from '../../services/adminStore';
 import { supabase } from '../../services/supabaseClient';
 
 interface AdminEditModalProps {
