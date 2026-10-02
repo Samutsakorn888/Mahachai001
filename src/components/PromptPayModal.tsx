@@ -9,19 +9,19 @@ interface PromptPayModalProps {
 }
 
 export const PromptPayModal: React.FC<PromptPayModalProps> = ({ isOpen, onClose, t }) => {
-  const [copied, setCopied] = useState(false);
+  const [copiedType, setCopiedType] = useState<'acc' | 'pp' | null>(null);
 
   if (!isOpen) return null;
 
   const bankAccount = '245-0-14238-1';
 
-  const handleCopyAccount = async () => {
+  const handleCopyAccount = async (text: string, type: 'acc' | 'pp') => {
     try {
-      await navigator.clipboard.writeText(bankAccount);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2500);
+      await navigator.clipboard.writeText(text);
+      setCopiedType(type);
+      setTimeout(() => setCopiedType(null), 2500);
     } catch (err) {
-      console.error('Failed to copy account number:', err);
+      console.error('Failed to copy text:', err);
     }
   };
 
@@ -50,11 +50,20 @@ export const PromptPayModal: React.FC<PromptPayModalProps> = ({ isOpen, onClose,
               <span className="acc-label">{t.bankAccLabel || 'เลขที่บัญชี:'}</span>
               <div className="acc-num-row">
                 <strong className="acc-num">{bankAccount}</strong>
-                <button className="btn btn-copy-acc" onClick={handleCopyAccount}>
-                  {copied ? (t.bankCopiedBtn || '✅ คัดลอกแล้ว!') : (t.bankCopyBtn || 'คัดลอกเลขบัญชี')}
+                <button className="btn btn-copy-acc" onClick={() => handleCopyAccount(bankAccount, 'acc')}>
+                  {copiedType === 'acc' ? (t.bankCopiedBtn || '✅ คัดลอกแล้ว!') : (t.bankCopyBtn || 'คัดลอกเลขบัญชี')}
                 </button>
               </div>
-              <p className="acc-name">{t.bankAccNameLabel || 'ชื่อบัญชี:'} <strong>{t.bankAccNameVal || 'อรอนงค์ เตชะเกษมสุข'}</strong></p>
+
+              <span className="acc-label" style={{ marginTop: '12px', display: 'block' }}>พร้อมเพย์ (PromptPay):</span>
+              <div className="acc-num-row">
+                <strong className="acc-num">066-149-6282</strong>
+                <button className="btn btn-copy-acc" onClick={() => handleCopyAccount('0661496282', 'pp')}>
+                  {copiedType === 'pp' ? (t.bankCopiedBtn || '✅ คัดลอกแล้ว!') : 'คัดลอกเบอร์'}
+                </button>
+              </div>
+
+              <p className="acc-name" style={{ marginTop: '12px' }}>{t.bankAccNameLabel || 'ชื่อบัญชี:'} <strong>นาง อรอนงค์ เตชะเกษมสุข<br/><span style={{fontSize: '0.9em', fontWeight: 'normal'}}>ONANONG TECHAKASEMSUK</span></strong></p>
             </div>
 
             <div className="deposit-info-banner">
@@ -70,7 +79,7 @@ export const PromptPayModal: React.FC<PromptPayModalProps> = ({ isOpen, onClose,
               <ol className="steps-ol">
                 <li>{t.bankStep1 || 'ถ่ายรูป/เซฟสลิปโอนเงิน'}</li>
                 <li>{t.bankStep2 || 'ถ่ายภาพบัตรประชาชนและแจ้งเลขห้องพัก'}</li>
-                <li>{t.bankStep3 || 'ส่งสลิปแจ้งยืนยันทาง LINE ID: 0990954541'}</li>
+                <li>ส่งสลิปโอนเงิน ทางไลน์ (LINE ID: 099-095-4541)</li>
               </ol>
             </div>
           </div>

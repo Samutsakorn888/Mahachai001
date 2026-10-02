@@ -89,7 +89,7 @@ ${t.calcTotalMonthly || 'ยอดรวมประมาณการราย�
 🔐 ${t.calcMoveInDeposit || 'เงินประกันมัดจำแรกเข้า'}: ${roomDeposit.toLocaleString()} ${thb}
 💵 ${t.calcTotalMoveIn || 'รวมงบแรกเข้าพักสุทธิ'}: ${initialMoveIn.toLocaleString()} ${thb}
 ------------------------------------------------
-LINE ID: 0990954541`;
+LINE ID: 099-095-4541`;
 
     try {
       await navigator.clipboard.writeText(summaryText);
