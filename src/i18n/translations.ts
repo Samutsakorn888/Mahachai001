@@ -390,7 +390,7 @@ export const translations: Record<Language, Translations> = {
       { icon: "🛡️", title: "ระบบรักษาความปลอดภัย 24 ชม.", desc: "เข้า-ออกด้วยระบบคีย์การ์ด พร้อมกล้อง CCTV ทุกชั้น" },
       { icon: "🅿️", title: "ที่จอดรถเป็นสัดส่วน", desc: "มีพื้นที่จอดรถยนต์และรถมอเตอร์ไซค์สะดวก ปลอดภัย" },
       { icon: "❄️", title: "เครื่องปรับอากาศ & เฟอร์นิเจอร์ครบ", desc: "พร้อมเข้าอยู่อาศัยทันที ของใช้อย่างดี" },
-      { icon: "🧺", title: "จุดบริการเครื่องซักผ้า", desc: "มีตู้น้ำดื่มหยอดเหรียญและเครื่องซักผ้าบริการใกล้เคียง" },
+      { icon: "🧺", title: "จุดบริการเครื่องซักผ้า", desc: "มีตู้น้ำดื่มและเครื่องซักผ้าหยอดเหรียญให้บริการ" },
       { icon: "📍", title: "ทำเลใจกลางเมืองมหาชัย", desc: "ตรงข้าม Big C มหาชัย ถนนเศรษฐกิจ การเดินทางสะดวกสบาย" }
     ],
     nearbyTitle: "สถานที่สำคัญใกล้เคียง",
@@ -741,7 +741,7 @@ export const translations: Record<Language, Translations> = {
       { icon: "🛡️", title: "24/7 Security System", desc: "Keycard access control with CCTV on all floors" },
       { icon: "🅿️", title: "Dedicated Parking", desc: "Spacious car and motorcycle parking spaces" },
       { icon: "❄️", title: "Air Con & Full Furniture", desc: "Move-in ready with premium amenities" },
-      { icon: "🧺", title: "Laundry Service Area", desc: "Coin washing machines and drinking water stations nearby" },
+      { icon: "🧺", title: "Laundry Service Area", desc: "Coin washing machines and drinking water stations available on-site" },
       { icon: "📍", title: "Prime Location in Mahachai", desc: "Opposite Big C Mahachai, Sethakit Road, easy transportation" }
     ],
     nearbyTitle: "Nearby Key Locations",
@@ -1063,7 +1063,7 @@ export const translations: Record<Language, Translations> = {
       { icon: "🛡️", title: "24小时安保系统", desc: "门禁卡进出系统及全楼层 CCTV 监控" },
       { icon: "🅿️", title: "专用停车场", desc: "提供宽敞的汽车及摩托车停车位" },
       { icon: "❄️", title: "空调与全套家具", desc: "优质设施，拎包即可入住" },
-      { icon: "🧺", title: "自助洗衣点", desc: "周边配有自助投币洗衣机与饮用水加水站" },
+      { icon: "🧺", title: "自助洗衣点", desc: "提供自助投币洗衣机与饮用水加水站" },
       { icon: "📍", title: "玛哈猜市中心优越位置", desc: "Big C 玛哈猜正对面，瑟塔吉路，交通便捷" }
     ],
     nearbyTitle: "周边重要地标",
@@ -1385,7 +1385,7 @@ export const translations: Record<Language, Translations> = {
       { icon: "🛡️", title: "၂၄ နာရီ လုံခြုံရေးစနစ်", desc: "ကီးကဒ်စနစ်နှင့် အထပ်တိုင်းတွင် CCTV ကင်မရာများ တပ်ဆင်ထားသည်" },
       { icon: "🅿️", title: "ကျယ်ဝန်းသော ကားပါကင်", desc: "ကားနှင့် ဆိုင်ကယ်များအတွက် သီးသန့် ပါကင်နေရာများ ရှိသည်" },
       { icon: "❄️", title: "အဲကွန်းနှင့် ပရိဘောဂအပြည့်အစုံ", desc: "အသင့်နေထိုင်နိုင်ရန် အရည်အသွေးမြင့် ပစ္စည်းများ ပါဝင်သည်" },
-      { icon: "🧺", title: "အဝတ်လျှော်စက် ဝန်ဆောင်မှု", desc: "အနီးအနားတွင် အကြွေစေ့သုံး အဝတ်လျှော်စက်နှင့် ရေသန့်စက်များ ရှိသည်" },
+      { icon: "🧺", title: "အဝတ်လျှော်စက် ဝန်ဆောင်မှု", desc: "အကြွေစေ့သုံး အဝတ်လျှော်စက်နှင့် ရေသန့်စက်များ ရှိသည်" },
       { icon: "📍", title: "မဟာချိုင်မြို့လယ်ခေါင် နေရာကောင်း", desc: "Big C မဟာချိုင် မျက်စောင်းထိုး၊ သွားလာရ လွယ်ကူသည်" }
     ],
     nearbyTitle: "အနီးအနားရှိ အရေးကြီးသောနေရာများ",
@@ -1675,7 +1675,7 @@ export const translations: Record<Language, Translations> = {
       { icon: "🛡️", title: "24時間セキュリティ", desc: "キーカード認証と全階監視カメラ (CCTV) 完備" },
       { icon: "🅿️", title: "専用駐車場", desc: "お車およびバイク用の安全な駐車スペース" },
       { icon: "❄️", title: "エアコン＆フル家具完備", desc: "高品質な家具付きで即日ご入居可能" },
-      { icon: "🧺", title: "コインランドリーコーナー", desc: "近隣にコインランドリーおよび給水ステーションあり" },
+      { icon: "🧺", title: "コインランドリーコーナー", desc: "コインランドリーおよび給水ステーションあり" },
       { icon: "📍", title: "マハーチャイの中心地", desc: "Big C マハーチャイ向かい、セータキット通りでアクセス抜群" }
     ],
     nearbyTitle: "周辺の主要施設",
@@ -1860,7 +1860,7 @@ export const translations: Record<Language, Translations> = {
       { icon: "🛡️", title: "Безопасность 24/7", desc: "Доступ по ключ-картам и видеонаблюдение CCTV" },
       { icon: "🅿️", title: "Собственная парковка", desc: "Просторные места для авто и мотоциклов" },
       { icon: "❄️", title: "Кондиционер и мебель", desc: "Готово к заселению с качественной мебелью" },
-      { icon: "🧺", title: "Прачечная зона", desc: "Стиральные автоматы и питьевая вода рядом" },
+      { icon: "🧺", title: "Прачечная зона", desc: "Доступны стиральные автоматы и питьевая вода" },
       { icon: "📍", title: "Центр Махачаи", desc: "Напротив Big C Махачаи, дорога Сетхакит, удобный транспорт" }
     ],
     nearbyTitle: "Рядом расположены",
