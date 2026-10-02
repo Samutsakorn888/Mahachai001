@@ -99,38 +99,7 @@ export const AdminEditModal: React.FC<AdminEditModalProps> = ({
     onClose();
   };
 
-  // Image Compression Helper
-  const compressImage = (file: File, callback: (base64: string) => void) => {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const img = new Image();
-      img.onload = () => {
-        const canvas = document.createElement('canvas');
-        let width = img.width;
-        let height = img.height;
-        const max_size = 800;
 
-        if (width > height) {
-          if (width > max_size) {
-            height *= max_size / width;
-            width = max_size;
-          }
-        } else {
-          if (height > max_size) {
-            width *= max_size / height;
-            height = max_size;
-          }
-        }
-        canvas.width = width;
-        canvas.height = height;
-        const ctx = canvas.getContext('2d');
-        ctx?.drawImage(img, 0, 0, width, height);
-        callback(canvas.toDataURL('image/jpeg', 0.6));
-      };
-      img.src = e.target?.result as string;
-    };
-    reader.readAsDataURL(file);
-  };
 
   // Image Upload handler for Room
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {

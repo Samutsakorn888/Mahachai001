@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { loadSiteData, saveSiteData, resetSiteData, type CustomSiteData, type DailyIncomeLog, type MonthlyTenantLog } from '../../services/adminStore';
+import { supabase } from '../../services/supabaseClient';
 
 interface AdminDashboardProps {
   onLogout: () => void;
