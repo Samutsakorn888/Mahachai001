@@ -53,13 +53,6 @@ export const AdminBar: React.FC<AdminBarProps> = ({
             📞 ติดต่อ / การเงิน
           </button>
 
-          <button
-            className="admin-bar-btn logs-btn"
-            onClick={() => onEditSection('logs')}
-            title="บันทึกรายได้รายวัน และ ข้อมูลผู้เช่ารายเดือน"
-          >
-            📊 บันทึกรายได้ & ผู้เช่า
-          </button>
 
           <button
             className="admin-bar-btn reset-btn"
