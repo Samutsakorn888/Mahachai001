@@ -30,41 +30,7 @@ export const AdminEditModal: React.FC<AdminEditModalProps> = ({
   const [editRoom, setEditRoom] = useState<any>(null);
   const [isUploading, setIsUploading] = useState<boolean>(false);
 
-  // Daily Log state
-  const [newDailyLog, setNewDailyLog] = useState<{
-    date: string;
-    roomName: string;
-    pricePerNight: number;
-    occupiedCount: number;
-    note: string;
-  }>({
-    date: new Date().toISOString().split('T')[0],
-    roomName: 'ห้องพักเตียงเดี่ยว (Single Bed)',
-    pricePerNight: 799,
-    occupiedCount: 1,
-    note: ''
-  });
 
-  // Monthly Log state
-  const [newMonthlyLog, setNewMonthlyLog] = useState<{
-    date: string;
-    monthYear: string;
-    type: 'in' | 'out';
-    roomNumber: string;
-    roomType: string;
-    tenantName: string;
-    depositAmount: number;
-    note: string;
-  }>({
-    date: new Date().toISOString().split('T')[0],
-    monthYear: new Date().toISOString().slice(0, 7),
-    type: 'in',
-    roomNumber: '',
-    roomType: 'ห้องเปล่า ไม่มีแอร์',
-    tenantName: '',
-    depositAmount: 8000,
-    note: ''
-  });
 
   useEffect(() => {
     setActiveTab(activeSection);
@@ -298,64 +264,7 @@ export const AdminEditModal: React.FC<AdminEditModalProps> = ({
     }
   };
 
-  // Add Daily Revenue Log
-  const handleAddDailyLog = (e: React.FormEvent) => {
-    e.preventDefault();
-    const totalIncome = newDailyLog.pricePerNight * newDailyLog.occupiedCount;
-    const newLogItem: DailyIncomeLog = {
-      id: `inc-${Date.now()}`,
-      date: newDailyLog.date,
-      roomName: newDailyLog.roomName,
-      pricePerNight: newDailyLog.pricePerNight,
-      occupiedCount: newDailyLog.occupiedCount,
-      totalIncome,
-      note: newDailyLog.note
-    };
 
-    const updatedLogs = [newLogItem, ...(localData.dailyIncomeLogs || [])];
-    const updated = { ...localData, dailyIncomeLogs: updatedLogs };
-    setLocalData(updated);
-    onSaveSiteData(updated, `เพิ่มบันทึกรายได้ ฿${totalIncome.toLocaleString()} สำเร็จ!`);
-    setNewDailyLog({ ...newDailyLog, note: '' });
-  };
-
-  const handleDeleteDailyLog = (id: string) => {
-    if (!window.confirm('ต้องการลบบันทึกรายได้รายการนี้?')) return;
-    const updatedLogs = (localData.dailyIncomeLogs || []).filter(l => l.id !== id);
-    const updated = { ...localData, dailyIncomeLogs: updatedLogs };
-    setLocalData(updated);
-    onSaveSiteData(updated, 'ลบบันทึกรายได้สำเร็จแล้ว');
-  };
-
-  // Add Monthly Tenant Log
-  const handleAddMonthlyLog = (e: React.FormEvent) => {
-    e.preventDefault();
-    const newLogItem: MonthlyTenantLog = {
-      id: `log-${Date.now()}`,
-      date: newMonthlyLog.date,
-      monthYear: newMonthlyLog.monthYear,
-      type: newMonthlyLog.type,
-      roomNumber: newMonthlyLog.roomNumber,
-      roomType: newMonthlyLog.roomType,
-      tenantName: newMonthlyLog.tenantName,
-      depositAmount: newMonthlyLog.depositAmount,
-      note: newMonthlyLog.note
-    };
-
-    const updatedLogs = [newLogItem, ...(localData.monthlyTenantLogs || [])];
-    const updated = { ...localData, monthlyTenantLogs: updatedLogs };
-    setLocalData(updated);
-    onSaveSiteData(updated, `เพิ่มบันทึกผู้เช่า ${newMonthlyLog.tenantName} สำเร็จ!`);
-    setNewMonthlyLog({ ...newMonthlyLog, roomNumber: '', tenantName: '', note: '' });
-  };
-
-  const handleDeleteMonthlyLog = (id: string) => {
-    if (!window.confirm('ต้องการลบบันทึกรายการนี้?')) return;
-    const updatedLogs = (localData.monthlyTenantLogs || []).filter(l => l.id !== id);
-    const updated = { ...localData, monthlyTenantLogs: updatedLogs };
-    setLocalData(updated);
-    onSaveSiteData(updated, 'ลบบันทึกผู้เช่าสำเร็จแล้ว');
-  };
 
   return (
     <div className="admin-modal-overlay" onClick={onClose}>
