@@ -151,13 +151,13 @@ export const BookingModal: React.FC<BookingModalProps> = ({
     }
   };
         return createPortal(
-          <div className="modal-overlay" onClick={() => setSelectedBookingRoom(null)}>
+          <div className="modal-overlay" onClick={onClose}>
             <div className="booking-modal-card" onClick={e => e.stopPropagation()}>
               
               {/* Modal Header */}
               <div className="booking-modal-header no-print">
                 <div style={{ display: 'flex', alignItems: 'center' }}>
-                  <button className="modal-back-btn" onClick={() => setSelectedBookingRoom(null)} title="ย้อนกลับ">
+                  <button className="modal-back-btn" onClick={onClose} title="ย้อนกลับ">
                     ← ย้อนกลับ
                   </button>
                   <div className="modal-header-brand">
@@ -165,7 +165,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                     <h3>สรุปรายการจองห้องพัก</h3>
                   </div>
                 </div>
-                <button className="modal-close-circle" onClick={() => setSelectedBookingRoom(null)} title="ปิดหน้าต่าง">
+                <button className="modal-close-circle" onClick={onClose} title="ปิดหน้าต่าง">
                   ✕
                 </button>
               </div>
@@ -745,7 +745,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
 
               {/* Modal Footer Buttons */}
               <div className="booking-modal-footer no-print">
-                <button className="btn-modal-close" onClick={() => setSelectedBookingRoom(null)}>
+                <button className="btn-modal-close" onClick={onClose}>
                   ปิดหน้าต่าง
                 </button>
                 <div className="modal-btn-group">
