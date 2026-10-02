@@ -76,14 +76,29 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout, onGoTo
   };
 
   // Image File Uploader with Live Preview
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file && editRoom) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setEditRoom({ ...editRoom, image: reader.result as string });
-      };
-      reader.readAsDataURL(file);
+      try {
+        const fileExt = file.name.split('.').pop();
+        const fileName = `${Date.now()}_${Math.random().toString(36).substring(7)}.${fileExt}`;
+        const filePath = `${fileName}`;
+
+        const { error: uploadError } = await supabase.storage
+          .from('room-images')
+          .upload(filePath, file);
+
+        if (uploadError) throw uploadError;
+
+        const { data: { publicUrl } } = supabase.storage
+          .from('room-images')
+          .getPublicUrl(filePath);
+
+        setEditRoom({ ...editRoom, image: publicUrl });
+      } catch (error) {
+        console.error('Error uploading image: ', error);
+        alert('เกิดข้อผิดพลาดในการอัปโหลดรูปภาพไปยัง Supabase');
+      }
     }
   };
 

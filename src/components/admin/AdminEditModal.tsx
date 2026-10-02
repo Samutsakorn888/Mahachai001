@@ -28,6 +28,7 @@ export const AdminEditModal: React.FC<AdminEditModalProps> = ({
   const [selectedRoomTab, setSelectedRoomTab] = useState<'daily' | 'monthly'>(targetRoomType);
   const [selectedRoomIdx, setSelectedRoomIdx] = useState<number>(targetRoomIndex !== null ? targetRoomIndex : 0);
   const [editRoom, setEditRoom] = useState<any>(null);
+  const [isUploading, setIsUploading] = useState<boolean>(false);
 
   // Daily Log state
   const [newDailyLog, setNewDailyLog] = useState<{
@@ -132,31 +133,67 @@ export const AdminEditModal: React.FC<AdminEditModalProps> = ({
   };
 
   // Image Upload handler for Room
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file && editRoom) {
-      compressImage(file, (base64) => {
-        setEditRoom({ ...editRoom, image: base64 });
-      });
+      setIsUploading(true);
+      try {
+        const fileExt = file.name.split('.').pop();
+        const fileName = `${Date.now()}_${Math.random().toString(36).substring(7)}.${fileExt}`;
+        const filePath = `${fileName}`;
+
+        const { error: uploadError } = await supabase.storage
+          .from('room-images')
+          .upload(filePath, file);
+
+        if (uploadError) throw uploadError;
+
+        const { data: { publicUrl } } = supabase.storage
+          .from('room-images')
+          .getPublicUrl(filePath);
+
+        setEditRoom({ ...editRoom, image: publicUrl });
+      } catch (error) {
+        console.error('Error uploading image: ', error);
+        alert('เกิดข้อผิดพลาดในการอัปโหลดรูปภาพไปยัง Supabase');
+      } finally {
+        setIsUploading(false);
+      }
     }
   };
 
-  const handleGalleryUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleGalleryUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (files && files.length > 0 && editRoom) {
-      const newImages = Array.from(files);
-      let currentImages = [...(editRoom.images || [])];
-      
-      let loadedCount = 0;
-      newImages.forEach(file => {
-        compressImage(file, (base64) => {
-          currentImages.push(base64);
-          loadedCount++;
-          if (loadedCount === newImages.length) {
-            setEditRoom({ ...editRoom, images: currentImages });
-          }
-        });
-      });
+      setIsUploading(true);
+      try {
+        const newImages = Array.from(files);
+        let currentImages = [...(editRoom.images || [])];
+        
+        for (const file of newImages) {
+          const fileExt = file.name.split('.').pop();
+          const fileName = `${Date.now()}_${Math.random().toString(36).substring(7)}.${fileExt}`;
+          const filePath = `${fileName}`;
+
+          const { error: uploadError } = await supabase.storage
+            .from('room-images')
+            .upload(filePath, file);
+
+          if (uploadError) throw uploadError;
+
+          const { data: { publicUrl } } = supabase.storage
+            .from('room-images')
+            .getPublicUrl(filePath);
+
+          currentImages.push(publicUrl);
+        }
+        setEditRoom({ ...editRoom, images: currentImages });
+      } catch (error) {
+        console.error('Error uploading gallery images: ', error);
+        alert('เกิดข้อผิดพลาดในการอัปโหลดรูปภาพแกลเลอรี่ไปยัง Supabase');
+      } finally {
+        setIsUploading(false);
+      }
     }
   };
 
@@ -578,8 +615,8 @@ export const AdminEditModal: React.FC<AdminEditModalProps> = ({
                             onChange={e => setEditRoom({ ...editRoom, image: e.target.value })}
                           />
                           <label className="btn btn-outline file-upload-label">
-                            📁 อัปโหลดรูปภาพ
-                            <input type="file" accept="image/*" onChange={handleImageUpload} style={{ display: 'none' }} />
+                            {isUploading ? '⏳ กำลังอัปโหลด...' : '📁 อัปโหลดรูปภาพ'}
+                            <input type="file" accept="image/*" onChange={handleImageUpload} style={{ display: 'none' }} disabled={isUploading} />
                           </label>
                         </div>
                       </div>
@@ -622,8 +659,8 @@ export const AdminEditModal: React.FC<AdminEditModalProps> = ({
                           }}
                         />
                         <label className="btn btn-outline file-upload-label" style={{ whiteSpace: 'nowrap' }}>
-                          📁 อัปโหลดรูปภาพ
-                          <input type="file" accept="image/*" multiple onChange={handleGalleryUpload} style={{ display: 'none' }} />
+                          {isUploading ? '⏳ กำลังอัปโหลด...' : '📁 อัปโหลดรูปภาพ'}
+                          <input type="file" accept="image/*" multiple onChange={handleGalleryUpload} style={{ display: 'none' }} disabled={isUploading} />
                         </label>
                       </div>
                       <span style={{ fontSize: '0.8rem', color: '#64748b' }}>* ใส่ลิงก์รูปภาพแล้วกด Enter หรือกดอัปโหลดรูปภาพจากเครื่อง</span>
