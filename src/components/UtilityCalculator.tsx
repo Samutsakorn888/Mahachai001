@@ -18,6 +18,7 @@ export const UtilityCalculator: React.FC<UtilityCalculatorProps> = ({ t, languag
   const [waterUnits, setWaterUnits] = useState<number>(5);
   const [hasCar, setHasCar] = useState<boolean>(false);
   const [hasMoto, setHasMoto] = useState<boolean>(false);
+  const [isShortTerm, setIsShortTerm] = useState<boolean>(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   const selectedRoom = monthlyRooms[selectedRoomIndex] || monthlyRooms[0];
@@ -48,8 +49,9 @@ export const UtilityCalculator: React.FC<UtilityCalculatorProps> = ({ t, languag
     return parseInt(matches[0], 10);
   };
 
-  const roomPrice = parsePrice(selectedRoom.price);
+  const baseRoomPrice = parsePrice(selectedRoom.price);
   const roomDeposit = parseDeposit(selectedRoom.deposit);
+  const shortTermFee = isShortTerm ? 1000 : 0;
 
   // Electricity calculation: 9 THB per unit
   const elecCost = elecUnits * 9;
@@ -65,7 +67,7 @@ export const UtilityCalculator: React.FC<UtilityCalculatorProps> = ({ t, languag
   const motoCost = hasMoto ? 100 : 0;
 
   // Total monthly estimated expense
-  const totalMonthlyCost = roomPrice + elecCost + waterCost + maintenanceCost + carCost + motoCost;
+  const totalMonthlyCost = baseRoomPrice + shortTermFee + elecCost + waterCost + maintenanceCost + carCost + motoCost;
   const initialMoveIn = totalMonthlyCost + roomDeposit;
 
   const unitLabel = t.calcUnitsBadge || 'หน่วย';
@@ -76,8 +78,8 @@ export const UtilityCalculator: React.FC<UtilityCalculatorProps> = ({ t, languag
     const summaryText = `[${t.calculatorTitle || 'สรุปประมาณการค่าใช้จ่ายรายเดือน @สมุทรสาคร มหาชัย'}]
 ------------------------------------------------
 ${t.calcRoomTypeLabel || 'ประเภทห้อง'}: ${currentRoomName}
-💰 ${t.calcRentBreakdown || 'ค่าเช่าห้องพัก'}: ${roomPrice.toLocaleString()} ${pm}
-${t.calcElecBreakdown || 'ค่าไฟฟ้าประมาณ'}: (${elecUnits} ${unitLabel} @ 9 ${thb}) = ${elecCost.toLocaleString()} ${thb}
+${isShortTerm ? `📝 ระยะเวลาสัญญา: น้อยกว่า 12 เดือน\n` : `📝 ระยะเวลาสัญญา: 12 เดือนขึ้นไป\n`}💰 ${t.calcRentBreakdown || 'ค่าเช่าห้องพัก'}: ${baseRoomPrice.toLocaleString()} ${pm}
+${isShortTerm ? `➕ ค่าบริการสัญญาระยะสั้น: 1,000 ${pm}\n` : ''}${t.calcElecBreakdown || 'ค่าไฟฟ้าประมาณ'}: (${elecUnits} ${unitLabel} @ 9 ${thb}) = ${elecCost.toLocaleString()} ${thb}
 ${t.calcWaterBreakdown || 'ค่าน้ำประปาประมาณ'}: (${waterUnits} ${unitLabel}) = ${waterCost.toLocaleString()} ${thb}
 ${t.calcCommonFeeBreakdown || 'ค่าส่วนกลาง'}: ${maintenanceCost.toLocaleString()} ${thb}
 ${t.calcCarBreakdown || 'ค่าจอดรถยนต์'}: ${carCost > 0 ? '1,000' : '0'} ${thb}
@@ -129,6 +131,28 @@ LINE ID: 0990954541`;
                     </option>
                   ))}
                 </select>
+              </div>
+
+              <div className="calc-group">
+                <label className="calc-label">ระยะเวลาสัญญา (Contract Duration)</label>
+                <div className="calc-checkbox-grid">
+                  <label className={`calc-checkbox-card ${!isShortTerm ? 'active' : ''}`}>
+                    <input
+                      type="radio"
+                      checked={!isShortTerm}
+                      onChange={() => setIsShortTerm(false)}
+                    />
+                    <span>12 เดือนขึ้นไป (ราคาปกติ)</span>
+                  </label>
+                  <label className={`calc-checkbox-card ${isShortTerm ? 'active' : ''}`}>
+                    <input
+                      type="radio"
+                      checked={isShortTerm}
+                      onChange={() => setIsShortTerm(true)}
+                    />
+                    <span>น้อยกว่า 12 เดือน (+1,000 บาท/เดือน)</span>
+                  </label>
+                </div>
               </div>
 
               <div className="calc-group">
@@ -208,8 +232,14 @@ LINE ID: 0990954541`;
               <div className="results-breakdown">
                 <div className="breakdown-item">
                   <span>{t.calcRentBreakdown || 'ค่าเช่าห้องพัก'} ({currentRoomName})</span>
-                  <span>{roomPrice.toLocaleString()} {thb}</span>
+                  <span>{baseRoomPrice.toLocaleString()} {thb}</span>
                 </div>
+                {isShortTerm && (
+                  <div className="breakdown-item">
+                    <span style={{ color: '#dc2626' }}>ค่าบริการสัญญาระยะสั้น (&lt; 12 เดือน)</span>
+                    <span style={{ color: '#dc2626' }}>1,000 {thb}</span>
+                  </div>
+                )}
                 <div className="breakdown-item">
                   <span>{t.calcElecBreakdown || 'ค่าไฟฟ้าประมาณการ'} ({elecUnits} {unitLabel})</span>
                   <span>{elecCost.toLocaleString()} {thb}</span>
