@@ -34,6 +34,7 @@ export const calculateCheckOutDate = (checkInStr: string, duration: number, isMo
     const date = new Date(y, m - 1, d);
     if (isMonthly) {
       date.setMonth(date.getMonth() + (duration || 1));
+      date.setMonth(date.getMonth() + 1, 0); // Set to the last day of the month
     } else {
       date.setDate(date.getDate() + (duration || 1));
     }
