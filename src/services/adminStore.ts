@@ -1,4 +1,5 @@
 import { translations } from '../i18n/translations';
+import { supabase } from './supabaseClient';
 
 const STORAGE_KEY = 'atsamutsakorn_admin_data_v1';
 
@@ -263,32 +264,7 @@ export const loadSiteData = (): CustomSiteData => {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved) {
       const parsed = JSON.parse(saved);
-      const dailyRooms = (parsed.dailyRooms || defaultData.dailyRooms).map((r: any) => ({
-        ...r,
-        totalRooms: r.totalRooms !== undefined ? Number(r.totalRooms) : getDefaultRoomTotal(r.key, r.name),
-        occupiedRooms: r.occupiedRooms !== undefined ? Number(r.occupiedRooms) : 0,
-        image: (r.key === 'single' || (r.image && r.image.includes('single'))) ? '/images/single.jpg?v=2' : r.image
-      }));
-      const defaultMonthly = defaultData.monthlyRooms || [];
-      const monthlyRooms = (parsed.monthlyRooms || defaultMonthly).map((r: any) => {
-        const matchDef = defaultMonthly.find((m: any) => m.name === r.name);
-        return {
-          ...r,
-          price: (matchDef && matchDef.price) ? matchDef.price : r.price,
-          deposit: (matchDef && matchDef.deposit) ? matchDef.deposit : r.deposit,
-          availableRoomsList: r.availableRoomsList !== undefined
-            ? r.availableRoomsList
-            : (matchDef ? matchDef.availableRoomsList : [])
-        };
-      });
-      const dailyIncomeLogs = parsed.dailyIncomeLogs && parsed.dailyIncomeLogs.length > 0
-        ? parsed.dailyIncomeLogs
-        : defaultData.dailyIncomeLogs;
-      const monthlyTenantLogs = parsed.monthlyTenantLogs && parsed.monthlyTenantLogs.length > 0
-        ? parsed.monthlyTenantLogs
-        : defaultData.monthlyTenantLogs;
-
-      return { ...defaultData, ...parsed, dailyRooms, monthlyRooms, dailyIncomeLogs, monthlyTenantLogs };
+      return mergeDataWithDefault(parsed, defaultData);
     }
   } catch (e) {
     console.error('Error loading admin site data from localStorage:', e);
@@ -296,11 +272,74 @@ export const loadSiteData = (): CustomSiteData => {
   return defaultData;
 };
 
+// Helper function to merge parsed data with default data structures
+const mergeDataWithDefault = (parsed: any, defaultData: CustomSiteData): CustomSiteData => {
+  const dailyRooms = (parsed.dailyRooms || defaultData.dailyRooms).map((r: any) => ({
+    ...r,
+    totalRooms: r.totalRooms !== undefined ? Number(r.totalRooms) : getDefaultRoomTotal(r.key, r.name),
+    occupiedRooms: r.occupiedRooms !== undefined ? Number(r.occupiedRooms) : 0,
+    image: (r.key === 'single' || (r.image && r.image.includes('single'))) ? '/images/single.jpg?v=2' : r.image
+  }));
+  const defaultMonthly = defaultData.monthlyRooms || [];
+  const monthlyRooms = (parsed.monthlyRooms || defaultMonthly).map((r: any) => {
+    const matchDef = defaultMonthly.find((m: any) => m.name === r.name);
+    return {
+      ...r,
+      price: (matchDef && matchDef.price) ? matchDef.price : r.price,
+      deposit: (matchDef && matchDef.deposit) ? matchDef.deposit : r.deposit,
+      availableRoomsList: r.availableRoomsList !== undefined
+        ? r.availableRoomsList
+        : (matchDef ? matchDef.availableRoomsList : [])
+    };
+  });
+  const dailyIncomeLogs = parsed.dailyIncomeLogs && parsed.dailyIncomeLogs.length > 0
+    ? parsed.dailyIncomeLogs
+    : defaultData.dailyIncomeLogs;
+  const monthlyTenantLogs = parsed.monthlyTenantLogs && parsed.monthlyTenantLogs.length > 0
+    ? parsed.monthlyTenantLogs
+    : defaultData.monthlyTenantLogs;
+
+  return { ...defaultData, ...parsed, dailyRooms, monthlyRooms, dailyIncomeLogs, monthlyTenantLogs };
+};
+
+// Async function to load site data from Supabase Storage
+export const loadSiteDataFromCloud = async (): Promise<CustomSiteData> => {
+  const defaultData = getDefaultSiteData();
+  try {
+    const { data: { publicUrl } } = supabase.storage
+      .from('room-images')
+      .getPublicUrl('siteData.json');
+      
+    // Fetch with cache-busting timestamp
+    const res = await fetch(`${publicUrl}?t=${Date.now()}`);
+    if (res.ok) {
+      const parsed = await res.json();
+      const merged = mergeDataWithDefault(parsed, defaultData);
+      // Also update local storage for fallback
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(merged));
+      return merged;
+    }
+  } catch (e) {
+    console.error('Error loading admin site data from Supabase:', e);
+  }
+  
+  // Fallback to local storage if cloud fetch fails
+  return loadSiteData();
+};
+
 export const saveSiteData = (data: CustomSiteData): void => {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    
+    // Also upload to Supabase asynchronously without blocking the UI
+    const file = new Blob([JSON.stringify(data)], { type: 'application/json' });
+    supabase.storage
+      .from('room-images')
+      .upload('siteData.json', file, { upsert: true, contentType: 'application/json' })
+      .catch(e => console.error('Error syncing to Supabase:', e));
+      
   } catch (e) {
-    console.error('Error saving admin site data to localStorage:', e);
+    console.error('Error saving admin site data:', e);
   }
 };
 

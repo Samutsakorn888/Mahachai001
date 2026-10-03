@@ -12,7 +12,7 @@ import { Footer } from './components/Footer';
 import { AdminLogin } from './components/admin/AdminLogin';
 import { AdminBar } from './components/admin/AdminBar';
 import { AdminEditModal } from './components/admin/AdminEditModal';
-import { loadSiteData, saveSiteData, resetSiteData, type CustomSiteData } from './services/adminStore';
+import { loadSiteData, loadSiteDataFromCloud, saveSiteData, resetSiteData, type CustomSiteData } from './services/adminStore';
 import { type Language, translations } from './i18n/translations';
 import { supabase } from './services/supabaseClient';
 
@@ -33,6 +33,12 @@ function App() {
 
   // Dynamic admin site data state
   const [siteData, setSiteData] = useState<CustomSiteData>(() => loadSiteData());
+
+  useEffect(() => {
+    loadSiteDataFromCloud().then(cloudData => {
+      setSiteData(cloudData);
+    });
+  }, []);
 
   // Quick edit modal state
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
