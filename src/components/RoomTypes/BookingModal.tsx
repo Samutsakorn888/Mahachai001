@@ -107,6 +107,11 @@ export const BookingModal: React.FC<BookingModalProps> = ({
   };
 
   const handlePrintOrDownload = async () => {
+    if (!guestName.trim() || !guestPhone.trim()) {
+      alert('กรุณากรอกชื่อผู้เข้าพัก และ เบอร์โทรติดต่อ ให้ครบถ้วนก่อนทำการบันทึกหรือพิมพ์ใบจอง');
+      return;
+    }
+    
     if (!summaryRef.current) return;
     const printHeader = summaryRef.current.querySelector('.print-only') as HTMLElement;
     if (printHeader) printHeader.style.display = 'block';
@@ -477,7 +482,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                         </div>
 
                         <div className="booking-input-group">
-                          <label>ชื่อผู้เข้าพัก (Guest Name)</label>
+                          <label>ชื่อผู้เข้าพัก (Guest Name) <span style={{color: 'red'}}>*</span></label>
                           <input
                             type="text"
                             className="booking-text-input"
@@ -488,7 +493,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                         </div>
 
                         <div className="booking-input-group">
-                          <label>เบอร์โทรติดต่อ (Phone Number)</label>
+                          <label>เบอร์โทรติดต่อ (Phone Number) <span style={{color: 'red'}}>*</span></label>
                           <input
                             type="tel"
                             className="booking-text-input"
