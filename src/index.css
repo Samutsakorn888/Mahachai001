@@ -3291,13 +3291,19 @@ button {
     justify-content: space-between;
     width: 100%;
   }
+  .modal-overlay {
+    padding: 0;
+  }
   .booking-modal-card {
-    width: calc(100% - 12px);
+    width: 100%;
     max-width: 100%;
-    margin: 6px;
-    max-height: calc(100dvh - 12px);
+    margin: 0;
+    max-height: 100dvh;
+    height: 100dvh;
+    border-radius: 0;
   }
   .booking-modal-header {
+    border-radius: 0;
     padding: 10px 12px;
     gap: 8px;
   }
