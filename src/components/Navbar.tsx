@@ -19,11 +19,11 @@ export const Navbar: React.FC<NavbarProps> = ({
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const languages: { code: Language; label: string; flag: string }[] = [
-    { code: 'th', label: 'ไทย', flag: '🇹🇭' },
-    { code: 'en', label: 'English', flag: '🇬🇧' },
-    { code: 'cn', label: '中文', flag: '🇨🇳' },
-    { code: 'mm', label: 'မြန်မာ', flag: '🇲🇲' }
+  const languages: { code: Language; label: string; flagImg: string }[] = [
+    { code: 'th', label: 'ไทย', flagImg: 'https://flagcdn.com/w20/th.png' },
+    { code: 'en', label: 'English', flagImg: 'https://flagcdn.com/w20/gb.png' },
+    { code: 'cn', label: '中文', flagImg: 'https://flagcdn.com/w20/cn.png' },
+    { code: 'mm', label: 'မြန်မာ', flagImg: 'https://flagcdn.com/w20/mm.png' }
   ];
 
   // Close dropdown when clicking outside
@@ -127,7 +127,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         {/* 3. Right: Language Switcher */}
         <div className="lang-switcher" ref={dropdownRef}>
           <button className="lang-btn" onClick={() => setDropdownOpen(!dropdownOpen)}>
-            <span>{currentLang.flag}</span>
+            <img src={currentLang.flagImg} width="20" alt={currentLang.code} style={{ borderRadius: '2px' }} />
             <span>{currentLang.label}</span>
             <span style={{ fontSize: '0.8rem', transform: dropdownOpen ? 'rotate(180deg)' : 'rotate(0)' }}>▼</span>
           </button>
@@ -143,7 +143,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                     setDropdownOpen(false);
                   }}
                 >
-                  <span>{lang.flag}</span>
+                  <img src={lang.flagImg} width="20" alt={lang.code} style={{ borderRadius: '2px' }} />
                   <span>{lang.label}</span>
                 </button>
               ))}
