@@ -707,12 +707,12 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                     <div className="booking-room-banner">
                       <div className="room-banner-info">
                         <span className="room-type-pill">
-                          {isMonthly ? '{loc.roomUnit}พักรายเดือน (Monthly)' : '{loc.dailyPill}'}
+                          {isMonthly ? loc.roomUnit + 'พักรายเดือน (Monthly)' : loc.dailyPill}
                         </span>
                         <h4 className="room-banner-title">
                           {selectedBookingItems.length === 1 
                             ? selectedBookingItems[0]?.roomData?.name 
-                            : `สรุปรายการจอง{loc.roomUnit}พัก (รวม ${totalRoomsCount} {loc.roomUnit})`}
+                            : `สรุปรายการจอง${loc.roomUnit}พัก (รวม ${totalRoomsCount} ${loc.roomUnit})`}
                         </h4>
                         <div className="room-banner-meta">
                           <span>👥 รวมทั้งสิ้น: {totalRoomsCount} {loc.roomUnit}</span>
@@ -833,7 +833,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                                         type="button"
                                         className="btn-remove-room"
                                         onClick={() => handleRemoveRoomItem(idx)}
-                                        title="ลบประเภท{loc.roomUnit}พักนี้"
+                                        title={`ลบประเภท${loc.roomUnit}พักนี้`}
                                       >
                                         🗑️
                                       </button>
@@ -907,7 +907,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                             </div>
                             <span style={{ fontSize: '0.78rem', color: ((bookingMonths as number) || 12) < 12 ? '#dc2626' : '#0284c7', fontWeight: 'bold', marginTop: '4px', display: 'block' }}>
                               {((bookingMonths as number) || 12) < 12
-                                ? 'สัญญาน้อยกว่า 12 เดือน: คิดอัตราค่า{loc.roomUnit}เพิ่ม +1,000 บาท/เดือน'
+                                ? `สัญญาน้อยกว่า 12 เดือน: คิดอัตราค่า${loc.roomUnit}เพิ่ม +1,000 บาท/เดือน`
                                 : 'สัญญาเช่ารายเดือนขั้นต่ำ 12 เดือน (1 ปี)'}
                             </span>
                           </div>
@@ -1121,7 +1121,11 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                                       </div>
                                     )}
                                     <div className="table-sub-detail">
-                                      {loc.descGuest} {guestName.trim() || 'ยังไม่ระบุ'} ({guestPhone.trim() || 'ยังไม่ระบุ'})
+                                      <span>{loc.descGuest} </span>
+                                      <span translate="no" className="notranslate">{guestName.trim() || 'ยังไม่ระบุ'}</span>
+                                      <span> (</span>
+                                      <span translate="no" className="notranslate">{guestPhone.trim() || 'ยังไม่ระบุ'}</span>
+                                      <span>)</span>
                                     </div>
                                   </td>
                                   <td style={{ textAlign: 'center' }}>
