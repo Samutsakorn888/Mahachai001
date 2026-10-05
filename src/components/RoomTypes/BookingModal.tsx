@@ -730,14 +730,9 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                             <strong>แอทสมุทรสาคร (มหาชัย)</strong>
                           </div>
                           <div className="sig-line-container" style={{ position: 'relative', minHeight: '52px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', alignItems: 'center' }}>
-                            <img
-                              src="/images/signature_thitaree.png"
-                              alt="ลายเซ็น นางสาวฐิตารีย์ ธวัชเลิศวงศ์"
-                              style={{ height: '48px', objectFit: 'contain', marginBottom: '-14px', zIndex: 2 }}
-                            />
                             <div className="sig-line" style={{ width: '100%', margin: 0 }}></div>
                           </div>
-                          <p style={{ margin: '6px 0 2px 0', fontSize: '0.85rem' }}><strong>(นางสาวฐิตารีย์ ธวัชเลิศวงศ์)</strong></p>
+                          <p style={{ margin: '6px 0 2px 0', fontSize: '0.85rem' }}><strong>(...................................................)</strong></p>
                           <p style={{ margin: 0 }}><strong>ผู้ออกใบเสนอราคา / ผู้รับเงิน</strong></p>
                           <p style={{ fontSize: '0.78rem', color: '#64748b', margin: 0 }}>สำนักงาน แอทสมุทรสาคร มหาชัย</p>
                         </div>
