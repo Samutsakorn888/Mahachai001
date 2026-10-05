@@ -33,17 +33,17 @@ export const UtilityCalculator: React.FC<UtilityCalculatorProps> = ({ t, languag
   const currentRoomName = getRoomName(selectedRoomIndex) || selectedRoom.name;
 
   // Helper to extract base price number from string like "3,100 - 3,400" or "3,900"
-  const parsePrice = (priceStr: string): number => {
-    if (!priceStr) return 3500;
-    const clean = priceStr.replace(/,/g, '');
+  const parsePrice = (priceStr: string | number): number => {
+    if (!priceStr && priceStr !== 0) return 3500;
+    const clean = String(priceStr).replace(/,/g, '');
     const matches = clean.match(/\d+/g);
     if (!matches || matches.length === 0) return 3500;
     return parseInt(matches[0], 10);
   };
 
-  const parseDeposit = (depositStr: string): number => {
-    if (!depositStr) return 8000;
-    const clean = depositStr.replace(/,/g, '');
+  const parseDeposit = (depositStr: string | number): number => {
+    if (!depositStr && depositStr !== 0) return 8000;
+    const clean = String(depositStr).replace(/,/g, '');
     const matches = clean.match(/\d+/g);
     if (!matches || matches.length === 0) return 8000;
     return parseInt(matches[0], 10);
