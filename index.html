@@ -157,18 +157,24 @@
       // Auto-set translation language based on browser language on first visit
       (function() {
         try {
-          if (document.cookie.indexOf('googtrans=') === -1) {
-            var lang = navigator.language || navigator.userLanguage;
-            if (lang) {
-              var shortLang = lang.split('-')[0].toLowerCase();
-              if (shortLang !== 'th') {
+          var saved = localStorage.getItem('ATS_LANGUAGE');
+          var lang = navigator.language || navigator.userLanguage;
+          var shortLang = lang ? lang.split('-')[0].toLowerCase() : 'th';
+          
+          var supported = ['th', 'en', 'zh', 'my']; // 4 main languages
+          
+          if (saved === 'auto' || (!saved && !supported.includes(shortLang))) {
+             // Unsupported language (e.g., fr, ko, ja, ru). Enable Google Translate!
+             if (document.cookie.indexOf('googtrans=') === -1) {
                 if (shortLang === 'my') shortLang = 'my';
                 if (shortLang === 'zh') shortLang = 'zh-CN';
-                // Set the cookie for google translate
                 document.cookie = 'googtrans=/th/' + shortLang + '; path=/';
                 document.cookie = 'googtrans=/th/' + shortLang + '; domain=.' + location.hostname + '; path=/';
-              }
-            }
+             }
+          } else {
+             // User explicitly chose a supported language or is on a supported browser
+             document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+             document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; domain=.' + location.hostname + '; path=/;';
           }
         } catch(e) {}
       })();
