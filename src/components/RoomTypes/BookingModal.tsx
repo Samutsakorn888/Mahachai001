@@ -37,6 +37,8 @@ export const BookingModal: React.FC<BookingModalProps> = ({
   const [guestName, setGuestName] = useState<string>('');
   const [guestPhone, setGuestPhone] = useState<string>('');
   const [copiedToast, setCopiedToast] = useState<string | null>(null);
+  const [customDeposit, setCustomDeposit] = useState<number | ''>('');
+  const [keycardCount, setKeycardCount] = useState<number>(1);
   const summaryRef = useRef<HTMLDivElement>(null);
   const selectedBookingRoom = room;
   const handleAddRoomType = (roomData: any) => {
@@ -262,9 +264,10 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                     return acc + (depVal * (item.count || 1));
                   }, 0);
 
-                  const totalKeycardFee = isMonthly ? (100 * totalRoomsCount) : 0;
+                  const effectiveDepositToPay = customDeposit !== '' ? customDeposit : totalDeposit;
+                  const totalKeycardFee = isMonthly ? (100 * keycardCount) : 0;
 
-                  const grandTotalCalc = isMonthly ? (totalDeposit + totalKeycardFee) : (totalRoomRental + (payDepositNow ? totalDeposit : 0));
+                  const grandTotalCalc = isMonthly ? (effectiveDepositToPay + totalKeycardFee) : (totalRoomRental + (payDepositNow ? effectiveDepositToPay : 0));
 
                   const availableRoomsList = isMonthly ? monthlyRoomsData : dailyRooms;
 
@@ -518,15 +521,45 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                               flexDirection: 'column',
                               gap: '6px'
                             }}>
-                              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                                <span>เงินมัดจำประกันห้องพัก ({totalRoomsCount} ห้อง):</span>
-                                <span>฿{totalDeposit.toLocaleString()} บาท</span>
-                              </div>
-                              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                                <span>ค่าซื้อคีย์การ์ดเข้าอาคาร ({totalRoomsCount} ใบ):</span>
-                                <span>฿{totalKeycardFee.toLocaleString()} บาท</span>
-                              </div>
-                              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '6px', borderTop: '1px dashed #93c5fd', marginTop: '2px' }}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                  <span>ยอดเงินมัดจำเพื่อยืนยันการจอง (ขั้นต่ำ 2,000 บาท):</span>
+                                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                    <input 
+                                      type="number" 
+                                      min="2000" 
+                                      max={totalDeposit} 
+                                      value={customDeposit === '' ? totalDeposit : customDeposit}
+                                      onChange={e => {
+                                        const val = parseInt(e.target.value);
+                                        if (isNaN(val)) setCustomDeposit('');
+                                        else setCustomDeposit(val);
+                                      }}
+                                      onBlur={() => {
+                                        if (typeof customDeposit === 'number' && customDeposit < 2000) {
+                                          setCustomDeposit(2000);
+                                        }
+                                      }}
+                                      style={{ width: '100px', padding: '4px 8px', borderRadius: '4px', border: '1px solid #ccc', textAlign: 'right', fontSize: '0.9rem' }}
+                                    />
+                                    <span>บาท</span>
+                                  </div>
+                                </div>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '6px' }}>
+                                  <span>ค่าซื้อคีย์การ์ดเข้าอาคาร (ใบละ 100 บาท สูงสุด 3 ใบ):</span>
+                                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                    <select 
+                                      value={keycardCount}
+                                      onChange={e => setKeycardCount(Number(e.target.value))}
+                                      style={{ padding: '4px 8px', borderRadius: '4px', border: '1px solid #ccc', fontSize: '0.9rem' }}
+                                    >
+                                      <option value={0}>ไม่รับคีย์การ์ด (0 ใบ)</option>
+                                      <option value={1}>1 ใบ (฿100)</option>
+                                      <option value={2}>2 ใบ (฿200)</option>
+                                      <option value={3}>3 ใบ (฿300)</option>
+                                    </select>
+                                  </div>
+                                </div>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '6px', borderTop: '1px dashed #93c5fd', marginTop: '6px' }}>
                                 <span>💰 ยอดรวมที่ต้องชำระเพื่อล็อคสิทธิ์จอง:</span>
                                 <span style={{ fontSize: '1.25rem', color: '#004088', fontWeight: 800 }}>฿{grandTotalCalc.toLocaleString()} บาท</span>
                               </div>
@@ -626,20 +659,22 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                                   </td>
                                   <td style={{ textAlign: 'center' }}>{totalRoomsCount} ห้อง</td>
                                   <td style={{ textAlign: 'right' }}>฿{totalRoomsCount > 0 ? (totalDeposit / totalRoomsCount).toLocaleString() : '0'}</td>
-                                  <td style={{ textAlign: 'right', fontWeight: 700, color: '#004088', fontSize: '0.95rem' }}>฿{totalDeposit.toLocaleString()}</td>
+                                  <td style={{ textAlign: 'right', fontWeight: 700, color: '#004088', fontSize: '0.95rem' }}>฿{effectiveDepositToPay.toLocaleString()}</td>
                                 </tr>
-                                <tr>
-                                  <td style={{ textAlign: 'center' }}>{selectedBookingItems.length + 2}</td>
-                                  <td>
-                                    <strong>ค่าซื้อคีย์การ์ดเข้าอาคาร (Keycard Fee)</strong>
-                                    <div className="table-sub-detail" style={{ color: '#475569' }}>
-                                      ค่าคีย์การ์ดสำหรับเข้า-ออกอาคารและห้องพัก (100 บาท / ใบ)
-                                    </div>
-                                  </td>
-                                  <td style={{ textAlign: 'center' }}>{totalRoomsCount} ใบ</td>
-                                  <td style={{ textAlign: 'right' }}>฿100</td>
-                                  <td style={{ textAlign: 'right', fontWeight: 700, color: '#004088', fontSize: '0.95rem' }}>฿{totalKeycardFee.toLocaleString()}</td>
-                                </tr>
+                                {keycardCount > 0 && (
+                                  <tr>
+                                    <td style={{ textAlign: 'center' }}>{selectedBookingItems.length + 2}</td>
+                                    <td>
+                                      <strong>ค่าซื้อคีย์การ์ดเข้าอาคาร (Keycard Fee)</strong>
+                                      <div className="table-sub-detail" style={{ color: '#475569' }}>
+                                        ค่าคีย์การ์ดสำหรับเข้า-ออกอาคารและห้องพัก (100 บาท / ใบ)
+                                      </div>
+                                    </td>
+                                    <td style={{ textAlign: 'center' }}>{keycardCount} ใบ</td>
+                                    <td style={{ textAlign: 'right' }}>฿100</td>
+                                    <td style={{ textAlign: 'right', fontWeight: 700, color: '#004088', fontSize: '0.95rem' }}>฿{totalKeycardFee.toLocaleString()}</td>
+                                  </tr>
+                                )}
                               </>
                             ) : (
                               payDepositNow ? (
@@ -653,7 +688,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                                   </td>
                                   <td style={{ textAlign: 'center' }}>{totalRoomsCount} ห้อง</td>
                                   <td style={{ textAlign: 'right' }}>฿{totalRoomsCount > 0 ? (totalDeposit / totalRoomsCount).toLocaleString() : '0'}</td>
-                                  <td style={{ textAlign: 'right', fontWeight: 600 }}>฿{totalDeposit.toLocaleString()}</td>
+                                  <td style={{ textAlign: 'right', fontWeight: 600 }}>฿{effectiveDepositToPay.toLocaleString()}</td>
                                 </tr>
                               ) : (
                                 <tr>
@@ -692,6 +727,12 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                           </tfoot>
                         </table>
                       </div>
+
+                      {(typeof customDeposit === 'number' && customDeposit < totalDeposit) && (
+                        <div className="no-print" style={{ textAlign: 'right', color: '#b91c1c', fontSize: '0.9rem', marginTop: '4px', fontWeight: 'bold' }}>
+                          * ค้างชำระเงินมัดจำส่วนที่เหลืออีก ฿{(totalDeposit - customDeposit).toLocaleString()} บาท (ชำระในวันทำสัญญา/เข้าพัก)
+                        </div>
+                      )}
 
                       {/* Terms & Guidelines Box */}
                       <div className="formal-terms-box">
