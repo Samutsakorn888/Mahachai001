@@ -52,6 +52,18 @@ function App() {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       localStorage.setItem('ATS_LANGUAGE', languageState);
+      
+      // If switching to auto, ensure Google Translate cookie matches browser or is removed if already th
+      if (languageState === 'auto') {
+        const lang = navigator.language.split('-')[0].toLowerCase();
+        if (lang !== 'th' && lang !== 'zh' && lang !== 'my' && lang !== 'en') {
+           document.cookie = `googtrans=/th/${lang}; path=/`;
+        }
+      } else {
+        // Clear Google Translate cookie to stop translation for manual languages
+        document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+        document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; domain=.${location.hostname}; path=/;`;
+      }
     }
   }, [languageState]);
   const [activeSection, setActiveSection] = useState<string>('home');

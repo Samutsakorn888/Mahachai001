@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import type { Translations, Language } from '../i18n/translations';
+import React, { useState, useRef, useEffect } from 'react';
+import type { Language, Translations } from '../i18n/translations';
 
 interface NavbarProps {
   language: Language | 'auto';
@@ -16,7 +16,31 @@ export const Navbar: React.FC<NavbarProps> = ({
   activeSection,
   setActiveSection
 }) => {
-  const [langDropdownOpen, setLangDropdownOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  const languages: { code: Language | 'auto'; label: string; flagImg: string }[] = [
+    { code: 'th', label: 'ไทย', flagImg: 'https://flagcdn.com/w20/th.png' },
+    { code: 'en', label: 'English', flagImg: 'https://flagcdn.com/w20/gb.png' },
+    { code: 'cn', label: '中文', flagImg: 'https://flagcdn.com/w20/cn.png' },
+    { code: 'mm', label: 'မြန်မာ', flagImg: 'https://flagcdn.com/w20/mm.png' },
+    { code: 'auto', label: '🌐 อื่นๆ (Auto Translate)', flagImg: '' }
+  ];
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const currentLang = languages.find(l => l.code === language) || languages[0];
+
+
 
   const handleNavClick = (sectionId: string) => {
     setActiveSection(sectionId);
@@ -32,35 +56,6 @@ export const Navbar: React.FC<NavbarProps> = ({
         top: offsetPosition,
         behavior: 'smooth'
       });
-    }
-  };
-
-  const handleLanguageChange = (lang: Language | 'auto') => {
-    setLanguage(lang);
-    setLangDropdownOpen(false);
-    
-    // Manage googtrans cookie based on selection
-    if (lang === 'auto') {
-      // Don't auto-set here, let index.html or Google Translate widget handle it, but wait, if they select "auto", we should clear any manually set ATS_LANGUAGE ? No, ATS_LANGUAGE = 'auto'.
-      // If we want Google Translate widget to show up, we just let it be. But to force it, maybe we should reload.
-      window.location.reload();
-    } else {
-      // Clear google translate cookie
-      document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-      document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; domain=.' + window.location.hostname + '; path=/;';
-      window.location.reload();
-    }
-  };
-
-  // Flag map
-  const getFlag = (l: string) => {
-    switch (l) {
-      case 'th': return '🇹🇭';
-      case 'en': return '🇬🇧';
-      case 'cn': return '🇨🇳';
-      case 'mm': return '🇲🇲';
-      case 'auto': return '🌍';
-      default: return '🇹🇭';
     }
   };
 
@@ -132,44 +127,46 @@ export const Navbar: React.FC<NavbarProps> = ({
           </li>
         </ul>
 
-        {/* 3. Right: Language Switcher */}
-        <div className="lang-switcher">
-          <div className="lang-dropdown">
-            <button 
-              className="lang-btn-main"
-              onClick={() => setLangDropdownOpen(!langDropdownOpen)}
-            >
-              <span className="lang-flag">{getFlag(language)}</span>
-              <span className="lang-code">{language === 'auto' ? 'Auto' : language.toUpperCase()}</span>
-              <svg className={`chevron ${langDropdownOpen ? 'up' : 'down'}`} viewBox="0 0 24 24" width="16" height="16">
-                <path fill="currentColor" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
-              </svg>
-            </button>
-            
-            {langDropdownOpen && (
-              <div className="lang-dropdown-menu">
-                <button className={`lang-option ${language === 'th' ? 'active' : ''}`} onClick={() => handleLanguageChange('th')}>
-                  <span className="lang-flag">🇹🇭</span> Thai
-                </button>
-                <button className={`lang-option ${language === 'en' ? 'active' : ''}`} onClick={() => handleLanguageChange('en')}>
-                  <span className="lang-flag">🇬🇧</span> English
-                </button>
-                <button className={`lang-option ${language === 'cn' ? 'active' : ''}`} onClick={() => handleLanguageChange('cn')}>
-                  <span className="lang-flag">🇨🇳</span> 中文
-                </button>
-                <button className={`lang-option ${language === 'mm' ? 'active' : ''}`} onClick={() => handleLanguageChange('mm')}>
-                  <span className="lang-flag">🇲🇲</span> မြန်မာ
-                </button>
-                <div className="lang-divider" style={{height: '1px', backgroundColor: '#e2e8f0', margin: '4px 0'}}></div>
-                <button className={`lang-option ${language === 'auto' ? 'active' : ''}`} onClick={() => handleLanguageChange('auto')}>
-                  <span className="lang-flag">🌍</span> Google Translate
-                </button>
-              </div>
+        {/* 3. Right: Language Switcher (Hybrid) */}
+        <div className="lang-switcher" ref={dropdownRef} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <button className="lang-btn" onClick={() => setDropdownOpen(!dropdownOpen)}>
+            {currentLang.flagImg ? (
+              <img src={currentLang.flagImg} width="20" alt={currentLang.code} style={{ borderRadius: '2px' }} />
+            ) : (
+              <span style={{ fontSize: '1rem' }}>🌐</span>
             )}
-          </div>
+            <span>{currentLang.label.replace('🌐 ', '')}</span>
+            <span style={{ fontSize: '0.8rem', transform: dropdownOpen ? 'rotate(180deg)' : 'rotate(0)' }}>▼</span>
+          </button>
+
+          {dropdownOpen && (
+            <div className="lang-dropdown">
+              {languages.map((lang) => (
+                <button
+                  key={lang.code}
+                  className={`lang-option ${language === lang.code ? 'active' : ''}`}
+                  onClick={() => {
+                    setLanguage(lang.code);
+                    setDropdownOpen(false);
+                    if (lang.code !== 'auto') {
+                      setTimeout(() => window.location.reload(), 100);
+                    }
+                  }}
+                >
+                  {lang.flagImg ? (
+                    <img src={lang.flagImg} width="20" alt={lang.code} style={{ borderRadius: '2px' }} />
+                  ) : (
+                    <span style={{ fontSize: '1rem', width: '20px', textAlign: 'center' }}>🌐</span>
+                  )}
+                  <span>{lang.label.replace('🌐 ', '')}</span>
+                </button>
+              ))}
+            </div>
+          )}
           
-          {/* Always mount Google Translate so it can auto-translate if cookie is set */}
-          <div id="google_translate_element" style={{ display: language === 'auto' ? 'block' : 'none', marginTop: '10px', position: 'absolute', right: 0, top: '40px' }}></div>
+          <div style={{ display: language === 'auto' ? 'block' : 'none' }}>
+            <div id="google_translate_element" className="translate-widget"></div>
+          </div>
         </div>
 
       </div>
