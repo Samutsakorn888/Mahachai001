@@ -232,7 +232,7 @@ export const AdminEditModal: React.FC<AdminEditModalProps> = ({
 
     setLocalData(updated);
     setSelectedRoomIdx(targetList.length - 1);
-    onSaveSiteData(updated, 'เพิ่มประเภทห้องใหม่เรียบร้อยแล้ว');
+    // Removed onSaveSiteData here so we don't fetch from DB before the room is actually inserted via handleSaveRoom
   };
 
   const handleDeleteRoom = async () => {

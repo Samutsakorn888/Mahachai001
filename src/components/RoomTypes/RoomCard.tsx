@@ -116,7 +116,7 @@ interface MonthlyRoomCardProps {
 export const MonthlyRoomCard: React.FC<MonthlyRoomCardProps> = ({
   room, roomIdx, isAdmin, onEditRoom, t, language, onViewDetails, onBookNow
 }) => {
-  const hasAvailable = room.availableRoomsList && room.availableRoomsList.length > 0;
+
   return (
     <div className="room-card" style={{ position: 'relative' }}>
       {isAdmin && onEditRoom && (
@@ -194,14 +194,9 @@ export const MonthlyRoomCard: React.FC<MonthlyRoomCardProps> = ({
           <button
             className="btn btn-primary"
             onClick={() => onBookNow({ ...room, data: room, isMonthly: true })}
-            disabled={!hasAvailable}
-            style={{
-              flex: 1,
-              opacity: hasAvailable ? 1 : 0.6,
-              cursor: hasAvailable ? 'pointer' : 'not-allowed'
-            }}
+            style={{ flex: 1 }}
           >
-            {hasAvailable ? `${t.bookNow}` : (language === 'en' ? 'Full' : language === 'cn' ? '已满' : language === 'mm' ? 'ပြည့်ပြီး' : 'เต็มแล้ว')}
+            {t.bookNow}
           </button>
         </div>
       </div>

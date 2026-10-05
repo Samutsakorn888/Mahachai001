@@ -82,8 +82,8 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
             // Find index match for translations if needed, but for simplicity use db data
             let trans = null;
             if (language !== 'th') {
-              const matchedIdx = t.monthlyRooms.findIndex(tr => tr.name === r.name);
-              if (matchedIdx >= 0) trans = t.monthlyRooms[matchedIdx];
+              const matchedIdx = (t.monthlyRooms || []).findIndex(tr => tr.name === r.name);
+              if (matchedIdx >= 0) trans = (t.monthlyRooms || [])[matchedIdx];
             }
             const features = parseArray(r.features);
             const imgData = parseImageUrl(r.image_url);
@@ -238,7 +238,7 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
 
   const monthlyRoomsData = dbMonthlyRooms;
 
-  const totalMonthlyAvailableCount = monthlyRoomsData.reduce((acc, r) => acc + (r.availableRoomsList?.length || 0), 0);
+
 
   const utilityFees = [
     { label: t.electricityLabel, val: t.electricityVal, icon: '' },
@@ -549,9 +549,6 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
               <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', alignItems: 'center' }}>
                 <div style={{ backgroundColor: 'rgba(255,255,255,0.18)', padding: '6px 14px', borderRadius: '8px', fontSize: '0.88rem', fontWeight: 'bold' }}>
                   {language === 'en' ? 'Room Types:' : language === 'cn' ? '房型种类:' : language === 'mm' ? 'အခန်းပုံစံ:' : 'รูปแบบห้อง:'} <strong>{monthlyRoomsData.length}</strong> {language === 'en' ? 'types' : language === 'cn' ? '种' : language === 'mm' ? 'မျိုး' : 'แบบ'}
-                </div>
-                <div style={{ backgroundColor: 'rgba(34, 197, 94, 0.3)', padding: '6px 14px', borderRadius: '8px', fontSize: '0.88rem', fontWeight: 'bold' }}>
-                  {(t.monthlyAvailableBadge || 'มีห้องว่างทั้งหมด {count} ห้อง').replace('{count}', String(totalMonthlyAvailableCount))}
                 </div>
               </div>
             </div>
