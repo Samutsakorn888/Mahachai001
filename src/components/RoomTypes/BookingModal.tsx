@@ -535,8 +535,9 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                                         else setCustomDeposit(val);
                                       }}
                                       onBlur={() => {
-                                        if (typeof customDeposit === 'number' && customDeposit < 2000) {
-                                          setCustomDeposit(2000);
+                                        if (typeof customDeposit === 'number') {
+                                          if (customDeposit < 2000) setCustomDeposit(2000);
+                                          else if (customDeposit > totalDeposit) setCustomDeposit(totalDeposit);
                                         }
                                       }}
                                       style={{ width: '100px', padding: '4px 8px', borderRadius: '4px', border: '1px solid #ccc', textAlign: 'right', fontSize: '0.9rem' }}
@@ -552,7 +553,6 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                                       onChange={e => setKeycardCount(Number(e.target.value))}
                                       style={{ padding: '4px 8px', borderRadius: '4px', border: '1px solid #ccc', fontSize: '0.9rem' }}
                                     >
-                                      <option value={0}>ไม่รับคีย์การ์ด (0 ใบ)</option>
                                       <option value={1}>1 ใบ (฿100)</option>
                                       <option value={2}>2 ใบ (฿200)</option>
                                       <option value={3}>3 ใบ (฿300)</option>
