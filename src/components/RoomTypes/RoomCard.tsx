@@ -69,7 +69,7 @@ export const DailyRoomCard: React.FC<DailyRoomCardProps> = ({
 
         <div className="room-price-row">
           <div className="room-price-val">
-            ฿{room.data.price}
+            {room.data.price}
           </div>
           <div className="room-price-label">
             / {t.pricePerNight}
@@ -170,7 +170,7 @@ export const MonthlyRoomCard: React.FC<MonthlyRoomCardProps> = ({
 
         <div className="room-price-row">
           <div className="room-price-val">
-            ฿{room.price}
+            {room.price}
           </div>
           <div className="room-price-label">
             / {t.perMonth}
@@ -178,7 +178,7 @@ export const MonthlyRoomCard: React.FC<MonthlyRoomCardProps> = ({
         </div>
 
         <div style={{ marginTop: '10px', fontSize: '0.92rem', color: 'var(--text-muted)', fontWeight: '500' }}>
-          {t.depositLabel}: <strong>฿{room.deposit}</strong> {language === 'en' ? 'THB' : language === 'cn' ? '泰铢' : language === 'mm' ? 'ဘတ်' : 'บาท'}
+          {t.depositLabel}: <strong>{room.deposit}</strong> {language === 'en' ? 'THB' : language === 'cn' ? '泰铢' : language === 'mm' ? 'ဘတ်' : 'บาท'}
         </div>
 
 

@@ -784,7 +784,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                                 <div key={idx} className="room-item-row-card">
                                   <div className="room-item-info">
                                     <strong>{item.roomData.name}</strong>
-                                    <span className="room-item-price">฿{effectivePriceNum.toLocaleString()} / {isMonthly ? 'เดือน' : 'คืน'}</span>
+                                    <span className="room-item-price">{effectivePriceNum.toLocaleString()} บาท / {isMonthly ? 'เดือน' : 'คืน'}</span>
                                     {isShortTerm && (
                                       <span style={{ fontSize: '0.74rem', color: '#dc2626', fontWeight: 'bold', display: 'block', marginTop: '2px' }}>
                                         สัญญาน้อยกว่า 12 เดือน (+1,000 บ./เดือน)
@@ -864,7 +864,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                                 const roomObj = (r as any).data || r;
                                 return (
                                   <option key={i} value={roomObj.name}>
-                                    {roomObj.name} (฿{roomObj.price}/{isMonthly ? 'เดือน' : 'คืน'})
+                                    {roomObj.name} ({roomObj.price} บาท/{isMonthly ? 'เดือน' : 'คืน'})
                                   </option>
                                 );
                               })}
@@ -1045,21 +1045,21 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                                       onChange={e => setKeycardCount(Number(e.target.value))}
                                       style={{ padding: '4px 8px', borderRadius: '4px', border: '1px solid #ccc', fontSize: '0.9rem' }}
                                     >
-                                      <option value={1}>{loc.keycard1} (฿100)</option>
-                                      <option value={2}>{loc.keycard2} (฿200)</option>
-                                      <option value={3}>{loc.keycard3} (฿300)</option>
+                                      <option value={1}>{loc.keycard1} (100 บาท)</option>
+                                      <option value={2}>{loc.keycard2} (200 บาท)</option>
+                                      <option value={3}>{loc.keycard3} (300 บาท)</option>
                                     </select>
                                   </div>
                                 </div>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '6px', borderTop: '1px dashed #93c5fd', marginTop: '6px' }}>
                                 <span>💰 {loc.totalLock}</span>
-                                <span style={{ fontSize: '1.25rem', color: '#004088', fontWeight: 800 }}>฿{grandTotalCalc.toLocaleString()} บาท</span>
+                                <span style={{ fontSize: '1.25rem', color: '#004088', fontWeight: 800 }}>{grandTotalCalc.toLocaleString()} บาท</span>
                               </div>
                             </div>
                           </div>
                         ) : (
                           <div className="booking-input-group full-width">
-                            <label>การชำระค่ามัดจำประกัน{loc.roomUnit} (รวม ฿{totalDeposit.toLocaleString()} บาท / {totalRoomsCount} {loc.roomUnit})</label>
+                            <label>การชำระค่ามัดจำประกัน{loc.roomUnit} (รวม {totalDeposit.toLocaleString()} บาท / {totalRoomsCount} {loc.roomUnit})</label>
                             <div className="deposit-toggle-group">
                               <div
                                 className={`deposit-toggle-card ${!payDepositNow ? 'active' : ''}`}
@@ -1117,7 +1117,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                                     </div>
                                     {isShortTerm && (
                                       <div className="table-sub-detail" style={{ color: '#c53030', fontWeight: 'bold' }}>
-                                        {loc.descShortWarn} ฿{basePriceNum.toLocaleString()})
+                                        {loc.descShortWarn} {basePriceNum.toLocaleString()} บาท)
                                       </div>
                                     )}
                                     <div className="table-sub-detail">
@@ -1131,12 +1131,12 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                                   <td style={{ textAlign: 'center' }}>
                                     {item.count} {loc.roomUnit} ({itemDur} {isMonthly ? 'เดือน' : 'คืน'})
                                   </td>
-                                  <td style={{ textAlign: 'right' }}>฿{effectivePriceNum.toLocaleString()} / {isMonthly ? 'เดือน' : 'คืน'}</td>
+                                  <td style={{ textAlign: 'right' }}>{effectivePriceNum.toLocaleString()} บาท / {isMonthly ? 'เดือน' : 'คืน'}</td>
                                   <td style={{ textAlign: 'right', fontWeight: 600 }}>
                                     {isMonthly ? (
                                       <span style={{ color: '#475569', fontSize: '0.82rem' }}>{loc.descPayMonth}</span>
                                     ) : (
-                                      `฿${itemRoomTotal.toLocaleString()}`
+                                      `${itemRoomTotal.toLocaleString()} บาท`
                                     )}
                                   </td>
                                 </tr>
@@ -1154,8 +1154,8 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                                     </div>
                                   </td>
                                   <td style={{ textAlign: 'center' }}>{totalRoomsCount} {loc.roomUnit}</td>
-                                  <td style={{ textAlign: 'right' }}>฿{totalRoomsCount > 0 ? (totalDeposit / totalRoomsCount).toLocaleString() : '0'}</td>
-                                  <td style={{ textAlign: 'right', fontWeight: 700, color: '#004088', fontSize: '0.95rem' }}>฿{effectiveDepositToPay.toLocaleString()}</td>
+                                  <td style={{ textAlign: 'right' }}>{totalRoomsCount > 0 ? (totalDeposit / totalRoomsCount).toLocaleString() : '0'} บาท</td>
+                                  <td style={{ textAlign: 'right', fontWeight: 700, color: '#004088', fontSize: '0.95rem' }}>{effectiveDepositToPay.toLocaleString()} บาท</td>
                                 </tr>
                                 {keycardCount > 0 && (
                                   <tr>
@@ -1167,8 +1167,8 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                                       </div>
                                     </td>
                                     <td style={{ textAlign: 'center' }}>{keycardCount} ใบ</td>
-                                    <td style={{ textAlign: 'right' }}>฿100</td>
-                                    <td style={{ textAlign: 'right', fontWeight: 700, color: '#004088', fontSize: '0.95rem' }}>฿{totalKeycardFee.toLocaleString()}</td>
+                                    <td style={{ textAlign: 'right' }}>100 บาท</td>
+                                    <td style={{ textAlign: 'right', fontWeight: 700, color: '#004088', fontSize: '0.95rem' }}>{totalKeycardFee.toLocaleString()} บาท</td>
                                   </tr>
                                 )}
                               </>
@@ -1183,8 +1183,8 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                                     </div>
                                   </td>
                                   <td style={{ textAlign: 'center' }}>{totalRoomsCount} {loc.roomUnit}</td>
-                                  <td style={{ textAlign: 'right' }}>฿{totalRoomsCount > 0 ? (totalDeposit / totalRoomsCount).toLocaleString() : '0'}</td>
-                                  <td style={{ textAlign: 'right', fontWeight: 600 }}>฿{effectiveDepositToPay.toLocaleString()}</td>
+                                  <td style={{ textAlign: 'right' }}>{totalRoomsCount > 0 ? (totalDeposit / totalRoomsCount).toLocaleString() : '0'} บาท</td>
+                                  <td style={{ textAlign: 'right', fontWeight: 600 }}>{effectiveDepositToPay.toLocaleString()} บาท</td>
                                 </tr>
                               ) : (
                                 <tr>
@@ -1192,7 +1192,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                                   <td>
                                     <strong>ค่ามัดจำประกัน{loc.roomUnit}พัก (ชำระวันเข้าพัก รวม {totalRoomsCount} {loc.roomUnit})</strong>
                                     <div className="table-sub-detail" style={{ color: '#d97706', fontWeight: 600 }}>
-                                      ชำระ ฿{totalDeposit.toLocaleString()} หน้าเคาน์เตอร์วันเช็คอิน (คืนเงินมัดจำวันเช็คเอ้าท์)
+                                      ชำระ {totalDeposit.toLocaleString()} บาท หน้าเคาน์เตอร์วันเช็คอิน (คืนเงินมัดจำวันเช็คเอ้าท์)
                                     </div>
                                   </td>
                                   <td style={{ textAlign: 'center' }}>{totalRoomsCount} {loc.roomUnit}</td>
@@ -1212,12 +1212,12 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                                 </strong>
                                 <span className="total-subtext">
                                   {isMonthly
-                                    ? `(รวมเงินมัดจำประกัน{loc.roomUnit} ฿${totalDeposit.toLocaleString()} + ค่าคีย์การ์ด ฿${totalKeycardFee.toLocaleString()} | ค่าเช่า{loc.descPayMonth} ณ วันเข้าพัก)`
+                                    ? `(รวมเงินมัดจำประกัน{loc.roomUnit} ${totalDeposit.toLocaleString()} บาท + ค่าคีย์การ์ด ${totalKeycardFee.toLocaleString()} บาท | ค่าเช่า{loc.descPayMonth} ณ วันเข้าพัก)`
                                     : (payDepositNow ? '(รวมค่า{loc.roomUnit}และค่ามัดจำประกัน{loc.roomUnit}แล้ว)' : '(ยังไม่รวมค่ามัดจำประกัน{loc.roomUnit}ที่ชำระวันเช็คอิน)')}
                                 </span>
                               </td>
                               <td colSpan={2} className="total-amount-cell">
-                                ฿{grandTotalCalc.toLocaleString()}
+                                {grandTotalCalc.toLocaleString()} บาท
                               </td>
                             </tr>
                           </tfoot>
@@ -1226,7 +1226,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
 
                       {(typeof customDeposit === 'number' && customDeposit < totalDeposit) && (
                         <div className="no-print" style={{ textAlign: 'right', color: '#b91c1c', fontSize: '0.9rem', marginTop: '4px', fontWeight: 'bold' }}>
-                          {loc.remainDep} ฿{(totalDeposit - customDeposit).toLocaleString()} {loc.remainDepSub}
+                          {loc.remainDep} {(totalDeposit - customDeposit).toLocaleString()} บาท {loc.remainDepSub}
                         </div>
                       )}
 
