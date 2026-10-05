@@ -41,6 +41,102 @@ export const BookingModal: React.FC<BookingModalProps> = ({
   const [keycardCount, setKeycardCount] = useState<number>(1);
   const summaryRef = useRef<HTMLDivElement>(null);
   const selectedBookingRoom = room;
+
+  const isThai = language === 'th';
+  
+  const formatDateLocalized = (dateStr: string) => {
+    if (!dateStr) return isThai ? 'ยังไม่ระบุ' : 'Not specified';
+    try {
+      const [y, m, d] = dateStr.split('-').map(Number);
+      if (!y || !m || !d) return dateStr;
+      const date = new Date(y, m - 1, d);
+      return date.toLocaleDateString(isThai ? 'th-TH' : 'en-GB', { year: 'numeric', month: 'short', day: 'numeric' });
+    } catch { return dateStr; }
+  };
+
+  const formatDateObjLocalized = (date: Date | null) => {
+    if (!date) return isThai ? 'ยังไม่ระบุ' : 'Not specified';
+    return date.toLocaleDateString(isThai ? 'th-TH' : 'en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+  };
+
+  const loc = {
+    back: isThai ? '{loc.back}' : '← Back',
+    title: isThai ? 'สรุปรายการจอง{loc.roomUnit}พัก' : 'Booking Summary',
+    docTitle: isThai ? 'ใบสรุปการจอง / ใบเสนอราคา' : 'QUOTATION & BOOKING SUMMARY',
+    address: isThai ? '{loc.address}' : '1/9 Km.28 Rd, Mahachai, Mueang Samut Sakhon 74000 (Opposite Big C)',
+    contact: isThai ? 'โทรติดต่อ' : 'Tel',
+    ref: isThai ? 'เลขที่เอกสาร' : 'Ref No.',
+    date: isThai ? 'วันที่ออกเอกสาร' : 'Date',
+    monthlyPill: isThai ? '{loc.roomUnit}พักรายเดือน (Monthly)' : '🏨 Monthly Room',
+    dailyPill: isThai ? '{loc.roomUnit}พักรายวัน (Daily)' : '🏨 Daily Room',
+    summaryTotal: isThai ? 'สรุปรายการจอง{loc.roomUnit}พัก (รวม' : 'Booking Summary (Total',
+    roomCount: isThai ? '{loc.roomUnit})' : 'Rooms)',
+    allCount: isThai ? 'รวมทั้งสิ้น:' : 'Total:',
+    location: isThai ? 'ใจกลางมหาชัย (ตรงข้าม Big C)' : 'Heart of Mahachai (Opposite Big C)',
+    typeUnit: isThai ? 'ประเภท' : 'Types',
+    inList: isThai ? '{loc.roomUnit}ในรายการ' : 'Rooms Listed',
+    checkInDate: isThai ? '{loc.checkInDate}' : 'Check-in Date',
+    durationMonthly: isThai ? '{loc.durationMonthly}' : 'Contract Duration (Min 12 Months / 1 Year)',
+    durationDaily: isThai ? '{loc.durationDaily}' : 'Number of Nights',
+    min12Msg: isThai ? 'สัญญาเช่ารายเดือนขั้นต่ำ 12 เดือน (1 ปี)' : 'Minimum 12 Months Contract',
+    checkInPrefix: isThai ? 'เช็คอิน:' : 'Check-in:',
+    checkOutPrefix: isThai ? 'เช็คเอ้าท์ (ถึงวันที่):' : 'Check-out (Until):',
+    max12Msg: isThai ? '{loc.max12Msg}' : 'Max 12 Months',
+    guestName: isThai ? 'ชื่อผู้เข้าพัก (Guest Name) *' : 'Guest Name *',
+    guestNamePh: isThai ? 'ระบุชื่อ-นามสกุล' : 'Enter full name',
+    guestPhone: isThai ? 'เบอร์โทรติดต่อ (Phone Number) *' : 'Phone Number *',
+    guestPhonePh: isThai ? 'ระบุเบอร์โทรศัพท์' : 'Enter phone number',
+    listRoomsMsg: isThai ? '{loc.listRoomsMsg}' : 'Selected Rooms to Book',
+    canAddMore: isThai ? '{loc.canAddMore}' : 'You can add more room types and adjust duration separately',
+    shortTermWarn: isThai ? 'สัญญาน้อยกว่า 12 เดือน (+1,000 บ./เดือน)' : 'Contract < 12 Months (+1,000 THB/m)',
+    qty: isThai ? 'จำนวน:' : 'Qty:',
+    roomUnit: isThai ? '{loc.roomUnit}' : 'Room(s)',
+    durPrefix: isThai ? (isMonthly ? 'ระยะเวลา:' : 'จำนวนคืน:') : (isMonthly ? 'Duration:' : 'Nights:'),
+    durUnit: isThai ? (isMonthly ? 'เดือน' : 'คืน') : (isMonthly ? 'Month(s)' : 'Night(s)'),
+    delTitle: isThai ? 'ลบประเภท{loc.roomUnit}พักนี้' : 'Remove this room type',
+    addAnother: isThai ? 'เลือกเพิ่มประเภท{loc.roomUnit}พักอื่น...' : 'Select another room type to add...',
+    depTitle: isThai ? '{loc.depTitle}' : 'Deposit to confirm booking (Min 2,000 THB):',
+    keycardTitle: isThai ? '{loc.keycardTitle}' : 'Keycard Fee (100 THB each, Max 3):',
+    keycard0: isThai ? 'ไม่รับคีย์การ์ด (0 ใบ)' : 'No keycard (0)',
+    keycard1: isThai ? '1 ใบ' : '1 Card',
+    keycard2: isThai ? '2 ใบ' : '2 Cards',
+    keycard3: isThai ? '3 ใบ' : '3 Cards',
+    totalLock: isThai ? '{loc.totalLock}' : 'Total Amount to Confirm Booking:',
+    payDepositLabel: isThai ? 'การชำระค่ามัดจำประกัน{loc.roomUnit}' : 'Deposit Payment Method',
+    payOffice: isThai ? 'จ่ายหน้าออฟฟิศ' : 'Pay at Office',
+    payOfficeSub: isThai ? 'ชำระวันเข้าพักที่เคาน์เตอร์' : 'Pay upon check-in at counter',
+    payNow: isThai ? 'จ่ายพร้อมค่า{loc.roomUnit}' : 'Pay Now',
+    payNowSub: isThai ? 'รวมยอดมัดจำในสลิปโอนนี้' : 'Include deposit in this transfer',
+    thNo: isThai ? 'ลำดับ' : 'No.',
+    thDesc: isThai ? 'รายการรายละเอียด (Description)' : 'Description',
+    thQty: isThai ? 'จำนวน' : 'Qty',
+    thUnit: isThai ? 'ราคา/หน่วย' : 'Unit Price',
+    thAmt: isThai ? 'จำนวนเงิน' : 'Amount',
+    descRent: isThai ? 'ค่าเช่า{loc.roomUnit}พัก' : 'Room Rental:',
+    descCheckIn: isThai ? '{loc.descCheckIn}' : 'Check-in:',
+    descShortWarn: isThai ? '{loc.descShortWarn}' : 'Contract < 12 Months: Price adjusted +1,000 THB/month (from base rate',
+    descGuest: isThai ? '{loc.descGuest}' : 'Guest:',
+    descNotSpec: isThai ? 'ยังไม่ระบุ' : 'Not specified',
+    descPayMonth: isThai ? '{loc.descPayMonth}' : 'Pay Monthly',
+    descDepMonthly: isThai ? 'เงินมัดจำประกัน{loc.roomUnit}พักเพื่อการจอง/เข้าพัก' : 'Room Deposit for Booking/Stay',
+    descDepMonthlySub: isThai ? '✓ ได้รับเงินมัดจำคืนเต็มจำนวน ณ วันเช็คเอ้าท์เมื่ออยู่ครบสัญญาและตรวจสอบ{loc.roomUnit}พักเรียบร้อย' : '✓ Full deposit refundable upon check-out if contract completed and room undamaged',
+    descKeycard: isThai ? 'ค่าซื้อคีย์การ์ดเข้าอาคาร (Keycard Fee)' : 'Building Access Keycard Fee',
+    descKeycardSub: isThai ? 'ค่าคีย์การ์ดสำหรับเข้า-ออกอาคารและ{loc.roomUnit}พัก (100 บาท / ใบ)' : 'Keycard for building and room access (100 THB / card)',
+    descDepDaily: isThai ? 'ค่ามัดจำประกัน{loc.roomUnit}พัก' : 'Room Deposit',
+    descDepDailySub: isThai ? '✓ ได้รับเงินมัดจำคืนเต็มจำนวน ณ วันเช็คเอ้าท์เมื่อตรวจสอบ{loc.roomUnit}พักเรียบร้อย' : '✓ Full deposit refundable upon check-out if room undamaged',
+    totalToPay: isThai ? '{loc.totalToPay}' : 'Total Amount Due (To Confirm Booking)',
+    remainDep: isThai ? '{loc.remainDep}' : '* Remaining deposit to pay:',
+    remainDepSub: isThai ? '{loc.remainDepSub}' : 'THB (Pay on check-in day)',
+    termTitle: isThai ? '{loc.termTitle}' : 'Terms & Guidelines:',
+    termMon1: isThai ? 'สัญญาเช่ารายเดือน: สัญญาเช่าขั้นต่ำ 12 เดือน (1 ปี) | กรณีสัญญาน้อยกว่า 12 เดือน ค่าเช่า{loc.roomUnit}จะปรับเพิ่มขึ้น +1,000 บาท/เดือน ทุกประเภท{loc.roomUnit} (พักอาศัยครบตามสัญญา ได้รับคืนเงินมัดจำประกันครบถ้วน)' : 'Monthly Contract: Minimum 12 months. Contracts < 12 months incur a +1,000 THB/month surcharge. Full deposit refunded upon contract completion.',
+    termDaily1: isThai ? 'เวลาเช็คอิน: ตั้งแต่ 14:00 น. เป็นต้นไป | เวลาเช็คเอ้าท์: ไม่เกิน 12:00 น. (เที่ยงวัน)' : 'Check-in: From 14:00 onwards | Check-out: By 12:00 (Noon)',
+    termDaily2: isThai ? 'สงวนสิทธิ์ไม่คืนเงินมัดจำกรณีเกิดความเสียหายใน{loc.roomUnit}พัก สูบบุหรี่ หรือทำผิดกฎระเบียบที่พัก' : 'Deposit is strictly non-refundable in cases of room damage, smoking indoors, or rule violations.',
+    termGen1: isThai ? 'ห้ามเลี้ยงสัตว์เลี้ยงทุกชนิด และห้ามสูบบุหรี่ภายใน{loc.roomUnit}พักและตัวอาคาร' : 'No pets allowed. Smoking is strictly prohibited inside the room and building.',
+    btnBank: isThai ? '{loc.btnBank}' : '🏧 Payment / Bank Account',
+    btnPrint: isThai ? '{loc.btnPrint}' : '🖨️ Print / Save PDF',
+    validationErr: isThai ? 'กรุณากรอกชื่อผู้เข้าพัก และ เบอร์โทรติดต่อ ให้ครบถ้วนก่อนทำการบันทึกหรือพิมพ์ใบจอง' : 'Please fill in Guest Name and Phone Number before saving or printing.'
+  };
+
   const handleAddRoomType = (roomData: any) => {
     const currentDur = selectedBookingRoom?.isMonthly ? ((bookingMonths as number) || 1) : ((bookingNights as number) || 1);
     setSelectedBookingItems(prev => {
@@ -110,7 +206,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
 
   const handlePrintOrDownload = async () => {
     if (!guestName.trim() || !guestPhone.trim()) {
-      alert('กรุณากรอกชื่อผู้เข้าพัก และ เบอร์โทรติดต่อ ให้ครบถ้วนก่อนทำการบันทึกหรือพิมพ์ใบจอง');
+      alert(loc.validationErr);
       return;
     }
     
@@ -165,11 +261,11 @@ export const BookingModal: React.FC<BookingModalProps> = ({
               <div className="booking-modal-header no-print">
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                   <button className="modal-back-btn" onClick={onClose} title="ย้อนกลับ">
-                    ← ย้อนกลับ
+                    {loc.back}
                   </button>
                   <div className="modal-header-brand">
                     <span className="hotel-badge-pill">@Samutsakorn Mahachai</span>
-                    <h3>สรุปรายการจองห้องพัก</h3>
+                    <h3>สรุปรายการจอง{loc.roomUnit}พัก</h3>
                   </div>
                 </div>
                 <button className="modal-close-circle" onClick={onClose} title="ปิดหน้าต่าง">
@@ -192,7 +288,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                     </div>
                     <div className="formal-hotel-address">
                       <p><strong>ที่อยู่โครงการ:</strong> 1/9 ถนนกิโลเมตร 28 ต.มหาชัย อ.เมืองสมุทรสาคร จ.สมุทรสาคร 74000 (ตรงข้าม Big C มหาชัย ถนนเศรษฐกิจ 1)</p>
-                      <p><strong>โทรติดต่อ:</strong> 099-095-4541, 065-464-7459 &nbsp;|&nbsp; <strong>Line ID:</strong> 0990954541</p>
+                      <p><strong>{loc.contact}:</strong> 099-095-4541, 065-464-7459 &nbsp;|&nbsp; <strong>Line ID:</strong> 0990954541</p>
                     </div>
                   </div>
 
@@ -201,7 +297,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                     <div className="formal-doc-english">QUOTATION & BOOKING SUMMARY</div>
                     <div className="formal-doc-meta">
                       <div><strong>เลขที่เอกสาร (REF):</strong> <span className="ref-highlight">#AT-{(Date.now() % 10000).toString().padStart(4, '0')}</span></div>
-                      <div><strong>วันที่ออกเอกสาร:</strong> {formatThaiDate(new Date().toISOString().split('T')[0])}</div>
+                      <div><strong>{loc.date}:</strong> {formatDateLocalized(new Date().toISOString().split('T')[0])}</div>
                     </div>
                   </div>
                 </div>
@@ -215,21 +311,21 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                     <div className="booking-room-banner">
                       <div className="room-banner-info">
                         <span className="room-type-pill">
-                          {isMonthly ? 'ห้องพักรายเดือน (Monthly)' : '🏨 ห้องพักรายวัน (Daily)'}
+                          {isMonthly ? '{loc.roomUnit}พักรายเดือน (Monthly)' : '{loc.dailyPill}'}
                         </span>
                         <h4 className="room-banner-title">
                           {selectedBookingItems.length === 1 
                             ? selectedBookingItems[0]?.roomData?.name 
-                            : `สรุปรายการจองห้องพัก (รวม ${totalRoomsCount} ห้อง)`}
+                            : `สรุปรายการจอง{loc.roomUnit}พัก (รวม ${totalRoomsCount} {loc.roomUnit})`}
                         </h4>
                         <div className="room-banner-meta">
-                          <span>👥 รวมทั้งสิ้น: {totalRoomsCount} ห้อง</span>
+                          <span>👥 รวมทั้งสิ้น: {totalRoomsCount} {loc.roomUnit}</span>
                           <span>ใจกลางมหาชัย (ตรงข้าม Big C)</span>
                         </div>
                       </div>
                       <div className="room-banner-price-tag">
                         <span className="price-amount">{selectedBookingItems.length} ประเภท</span>
-                        <span className="price-unit">{totalRoomsCount} ห้องในรายการ</span>
+                        <span className="price-unit">{totalRoomsCount} {loc.roomUnit}ในรายการ</span>
                       </div>
                     </div>
                   );
@@ -278,8 +374,8 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                         {/* Multi-Room Item Selector */}
                         <div className="booking-input-group full-width">
                           <label style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '4px' }}>
-                            <span>รายการห้องพักที่ต้องการจอง (รวม {totalRoomsCount} ห้อง)</span>
-                            <span style={{ fontSize: '0.8rem', color: '#64748b', fontWeight: 'normal' }}>สามารถเลือกเพิ่มประเภทห้องและปรับจำนวนคืน/เดือนแยกได้</span>
+                            <span>{loc.listRoomsMsg} (รวม {totalRoomsCount} {loc.roomUnit})</span>
+                            <span style={{ fontSize: '0.8rem', color: '#64748b', fontWeight: 'normal' }}>{loc.canAddMore}</span>
                           </label>
                           
                           <div className="selected-rooms-list">
@@ -309,7 +405,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                                           className="counter-btn"
                                           onClick={() => handleUpdateRoomCount(idx, item.count - 1)}
                                         >-</button>
-                                        <span className="counter-val-display">{item.count} ห้อง</span>
+                                        <span className="counter-val-display">{item.count} {loc.roomUnit}</span>
                                         <button
                                           type="button"
                                           className="counter-btn"
@@ -341,7 +437,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                                         type="button"
                                         className="btn-remove-room"
                                         onClick={() => handleRemoveRoomItem(idx)}
-                                        title="ลบประเภทห้องพักนี้"
+                                        title="ลบประเภท{loc.roomUnit}พักนี้"
                                       >
                                         🗑️
                                       </button>
@@ -367,7 +463,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                               }}
                               style={{ flex: 1, fontSize: '0.9rem', padding: '8px 12px' }}
                             >
-                              <option value="">เลือกเพิ่มประเภทห้องพักอื่น...</option>
+                              <option value="">เลือกเพิ่มประเภท{loc.roomUnit}พักอื่น...</option>
                               {availableRoomsList.map((r: any, i: number) => {
                                 const roomObj = (r as any).data || r;
                                 return (
@@ -381,7 +477,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                         </div>
 
                         <div className="booking-input-group">
-                          <label>วันที่เริ่มเข้าพัก (Check-in Date)</label>
+                          <label>{loc.checkInDate}</label>
                           <input
                             type="date"
                             className="booking-text-input"
@@ -392,7 +488,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
 
                         {isMonthly ? (
                           <div className="booking-input-group">
-                            <label>ระยะเวลาเข้าพักตั้งต้น (สัญญาขั้นต่ำ 12 เดือน / 1 ปี)</label>
+                            <label>{loc.durationMonthly}</label>
                             <div className="counter-input-box">
                               <button
                                 type="button"
@@ -415,7 +511,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                             </div>
                             <span style={{ fontSize: '0.78rem', color: ((bookingMonths as number) || 12) < 12 ? '#dc2626' : '#0284c7', fontWeight: 'bold', marginTop: '4px', display: 'block' }}>
                               {((bookingMonths as number) || 12) < 12
-                                ? 'สัญญาน้อยกว่า 12 เดือน: คิดอัตราค่าห้องเพิ่ม +1,000 บาท/เดือน'
+                                ? 'สัญญาน้อยกว่า 12 เดือน: คิดอัตราค่า{loc.roomUnit}เพิ่ม +1,000 บาท/เดือน'
                                 : 'สัญญาเช่ารายเดือนขั้นต่ำ 12 เดือน (1 ปี)'}
                             </span>
                           </div>
@@ -463,12 +559,12 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                           }}>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                               <span style={{ fontSize: '1.2rem' }}></span>
-                              <span><strong>เช็คอิน:</strong> <span style={{ color: '#0284c7', fontWeight: 800, fontSize: '1.05rem' }}>{formatThaiDate(checkInDate)}</span></span>
+                              <span><strong>เช็คอิน:</strong> <span style={{ color: '#0284c7', fontWeight: 800, fontSize: '1.05rem' }}>{formatDateLocalized(checkInDate)}</span></span>
                             </div>
                             <div style={{ color: '#0284c7', fontWeight: 'bold', fontSize: '1.3rem' }}>➔</div>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                               <span style={{ fontSize: '1.2rem' }}></span>
-                              <span><strong>เช็คเอ้าท์ (ถึงวันที่):</strong> <span style={{ color: '#dc2626', fontWeight: 800, fontSize: '1.15rem' }}>{formatThaiDateObj(checkOutDateObj)}</span></span>
+                              <span><strong>เช็คเอ้าท์ (ถึงวันที่):</strong> <span style={{ color: '#dc2626', fontWeight: 800, fontSize: '1.15rem' }}>{formatDateObjLocalized(checkOutDateObj)}</span></span>
                             </div>
                             <div style={{
                               backgroundColor: '#0284c7',
@@ -489,7 +585,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                           <input
                             type="text"
                             className="booking-text-input"
-                            placeholder="ระบุชื่อ-นามสกุล"
+                            placeholder={loc.guestNamePh}
                             value={guestName}
                             onChange={e => setGuestName(e.target.value)}
                           />
@@ -508,7 +604,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
 
                         {isMonthly ? (
                           <div className="booking-input-group full-width">
-                            <label>ยอดเงินมัดจำประกันห้องและค่าคีย์การ์ดเพื่อยืนยันการจอง (รวม {totalRoomsCount} ห้อง)</label>
+                            <label>ยอดเงินมัดจำประกัน{loc.roomUnit}และค่าคีย์การ์ดเพื่อยืนยันการจอง (รวม {totalRoomsCount} {loc.roomUnit})</label>
                             <div style={{
                               backgroundColor: '#ebf8ff',
                               border: '1.5px solid #93c5fd',
@@ -522,7 +618,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                               gap: '6px'
                             }}>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                                  <span>ยอดเงินมัดจำเพื่อยืนยันการจอง (ขั้นต่ำ 2,000 บาท):</span>
+                                  <span>{loc.depTitle}</span>
                                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                                     <input 
                                       type="number" 
@@ -546,28 +642,28 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                                   </div>
                                 </div>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '6px' }}>
-                                  <span>ค่าซื้อคีย์การ์ดเข้าอาคาร (ใบละ 100 บาท สูงสุด 3 ใบ):</span>
+                                  <span>{loc.keycardTitle}</span>
                                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                                     <select 
                                       value={keycardCount}
                                       onChange={e => setKeycardCount(Number(e.target.value))}
                                       style={{ padding: '4px 8px', borderRadius: '4px', border: '1px solid #ccc', fontSize: '0.9rem' }}
                                     >
-                                      <option value={1}>1 ใบ (฿100)</option>
-                                      <option value={2}>2 ใบ (฿200)</option>
-                                      <option value={3}>3 ใบ (฿300)</option>
+                                      <option value={1}>{loc.keycard1} (฿100)</option>
+                                      <option value={2}>{loc.keycard2} (฿200)</option>
+                                      <option value={3}>{loc.keycard3} (฿300)</option>
                                     </select>
                                   </div>
                                 </div>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '6px', borderTop: '1px dashed #93c5fd', marginTop: '6px' }}>
-                                <span>💰 ยอดรวมที่ต้องชำระเพื่อล็อคสิทธิ์จอง:</span>
+                                <span>💰 {loc.totalLock}</span>
                                 <span style={{ fontSize: '1.25rem', color: '#004088', fontWeight: 800 }}>฿{grandTotalCalc.toLocaleString()} บาท</span>
                               </div>
                             </div>
                           </div>
                         ) : (
                           <div className="booking-input-group full-width">
-                            <label>การชำระค่ามัดจำประกันห้อง (รวม ฿{totalDeposit.toLocaleString()} บาท / {totalRoomsCount} ห้อง)</label>
+                            <label>การชำระค่ามัดจำประกัน{loc.roomUnit} (รวม ฿{totalDeposit.toLocaleString()} บาท / {totalRoomsCount} {loc.roomUnit})</label>
                             <div className="deposit-toggle-group">
                               <div
                                 className={`deposit-toggle-card ${!payDepositNow ? 'active' : ''}`}
@@ -575,8 +671,8 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                               >
                                 <div className="radio-dot"></div>
                                 <div className="toggle-info">
-                                  <strong>จ่ายหน้าออฟฟิศ</strong>
-                                  <span>ชำระวันเข้าพักที่เคาน์เตอร์</span>
+                                  <strong>{loc.payOffice}</strong>
+                                  <span>{loc.payOfficeSub}</span>
                                 </div>
                               </div>
 
@@ -586,8 +682,8 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                               >
                                 <div className="radio-dot"></div>
                                 <div className="toggle-info">
-                                  <strong>จ่ายพร้อมค่าห้อง</strong>
-                                  <span>รวมยอดมัดจำในสลิปโอนนี้</span>
+                                  <strong>จ่ายพร้อมค่า{loc.roomUnit}</strong>
+                                  <span>{loc.payNowSub}</span>
                                 </div>
                               </div>
                             </div>
@@ -600,11 +696,11 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                         <table className="formal-table">
                           <thead>
                             <tr>
-                              <th style={{ width: '8%', textAlign: 'center' }}>ลำดับ</th>
-                              <th style={{ width: '47%' }}>รายการรายละเอียด (Description)</th>
-                              <th style={{ width: '15%', textAlign: 'center' }}>จำนวน</th>
-                              <th style={{ width: '15%', textAlign: 'right' }}>ราคา/หน่วย</th>
-                              <th style={{ width: '15%', textAlign: 'right' }}>จำนวนเงิน</th>
+                              <th style={{ width: '8%', textAlign: 'center' }}>{loc.thNo}</th>
+                              <th style={{ width: '47%' }}>{loc.thDesc}</th>
+                              <th style={{ width: '15%', textAlign: 'center' }}>{loc.thQty}</th>
+                              <th style={{ width: '15%', textAlign: 'right' }}>{loc.thUnit}</th>
+                              <th style={{ width: '15%', textAlign: 'right' }}>{loc.thAmt}</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -619,26 +715,26 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                                 <tr key={index}>
                                   <td style={{ textAlign: 'center' }}>{index + 1}</td>
                                   <td>
-                                    <strong>ค่าเช่าห้องพัก {item.roomData?.name}</strong> ({isMonthly ? 'รายเดือน' : 'รายวัน'})
+                                    <strong>ค่าเช่า{loc.roomUnit}พัก {item.roomData?.name}</strong> ({isMonthly ? 'รายเดือน' : 'รายวัน'})
                                     <div className="table-sub-detail">
-                                      กำหนดเข้าพัก: {formatThaiDate(checkInDate)} ➔ {formatThaiDateObj(itemCheckOutDate)} ({itemDur} {isMonthly ? 'เดือน' : 'คืน'})
+                                      {loc.descCheckIn} {formatDateLocalized(checkInDate)} ➔ {formatDateObjLocalized(itemCheckOutDate)} ({itemDur} {isMonthly ? 'เดือน' : 'คืน'})
                                     </div>
                                     {isShortTerm && (
                                       <div className="table-sub-detail" style={{ color: '#c53030', fontWeight: 'bold' }}>
-                                        สัญญาน้อยกว่า 12 เดือน: ปรับราคาเพิ่ม +1,000 บ./เดือน (จากราคาปกติ ฿{basePriceNum.toLocaleString()})
+                                        {loc.descShortWarn} ฿{basePriceNum.toLocaleString()})
                                       </div>
                                     )}
                                     <div className="table-sub-detail">
-                                      ผู้เข้าพัก: {guestName.trim() || 'ยังไม่ระบุ'} ({guestPhone.trim() || 'ยังไม่ระบุ'})
+                                      {loc.descGuest} {guestName.trim() || 'ยังไม่ระบุ'} ({guestPhone.trim() || 'ยังไม่ระบุ'})
                                     </div>
                                   </td>
                                   <td style={{ textAlign: 'center' }}>
-                                    {item.count} ห้อง ({itemDur} {isMonthly ? 'เดือน' : 'คืน'})
+                                    {item.count} {loc.roomUnit} ({itemDur} {isMonthly ? 'เดือน' : 'คืน'})
                                   </td>
                                   <td style={{ textAlign: 'right' }}>฿{effectivePriceNum.toLocaleString()} / {isMonthly ? 'เดือน' : 'คืน'}</td>
                                   <td style={{ textAlign: 'right', fontWeight: 600 }}>
                                     {isMonthly ? (
-                                      <span style={{ color: '#475569', fontSize: '0.82rem' }}>ชำระรายเดือน</span>
+                                      <span style={{ color: '#475569', fontSize: '0.82rem' }}>{loc.descPayMonth}</span>
                                     ) : (
                                       `฿${itemRoomTotal.toLocaleString()}`
                                     )}
@@ -652,12 +748,12 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                                 <tr>
                                   <td style={{ textAlign: 'center' }}>{selectedBookingItems.length + 1}</td>
                                   <td>
-                                    <strong>เงินมัดจำประกันห้องพักเพื่อการจอง/เข้าพัก (รวม {totalRoomsCount} ห้อง)</strong>
+                                    <strong>เงินมัดจำประกัน{loc.roomUnit}พักเพื่อการจอง/เข้าพัก (รวม {totalRoomsCount} {loc.roomUnit})</strong>
                                     <div className="table-sub-detail" style={{ color: '#059669', fontWeight: 600 }}>
-                                      ✓ ได้รับเงินมัดจำคืนเต็มจำนวน ณ วันเช็คเอ้าท์เมื่ออยู่ครบสัญญาและตรวจสอบห้องพักเรียบร้อย
+                                      ✓ ได้รับเงินมัดจำคืนเต็มจำนวน ณ วันเช็คเอ้าท์เมื่ออยู่ครบสัญญาและตรวจสอบ{loc.roomUnit}พักเรียบร้อย
                                     </div>
                                   </td>
-                                  <td style={{ textAlign: 'center' }}>{totalRoomsCount} ห้อง</td>
+                                  <td style={{ textAlign: 'center' }}>{totalRoomsCount} {loc.roomUnit}</td>
                                   <td style={{ textAlign: 'right' }}>฿{totalRoomsCount > 0 ? (totalDeposit / totalRoomsCount).toLocaleString() : '0'}</td>
                                   <td style={{ textAlign: 'right', fontWeight: 700, color: '#004088', fontSize: '0.95rem' }}>฿{effectiveDepositToPay.toLocaleString()}</td>
                                 </tr>
@@ -665,9 +761,9 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                                   <tr>
                                     <td style={{ textAlign: 'center' }}>{selectedBookingItems.length + 2}</td>
                                     <td>
-                                      <strong>ค่าซื้อคีย์การ์ดเข้าอาคาร (Keycard Fee)</strong>
+                                      <strong>{loc.descKeycard}</strong>
                                       <div className="table-sub-detail" style={{ color: '#475569' }}>
-                                        ค่าคีย์การ์ดสำหรับเข้า-ออกอาคารและห้องพัก (100 บาท / ใบ)
+                                        ค่าคีย์การ์ดสำหรับเข้า-ออกอาคารและ{loc.roomUnit}พัก (100 บาท / ใบ)
                                       </div>
                                     </td>
                                     <td style={{ textAlign: 'center' }}>{keycardCount} ใบ</td>
@@ -681,12 +777,12 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                                 <tr>
                                   <td style={{ textAlign: 'center' }}>{selectedBookingItems.length + 1}</td>
                                   <td>
-                                    <strong>ค่ามัดจำประกันห้องพัก (รวม {totalRoomsCount} ห้อง)</strong>
+                                    <strong>ค่ามัดจำประกัน{loc.roomUnit}พัก (รวม {totalRoomsCount} {loc.roomUnit})</strong>
                                     <div className="table-sub-detail" style={{ color: '#059669', fontWeight: 600 }}>
-                                      ✓ ได้รับเงินมัดจำคืนเต็มจำนวน ณ วันเช็คเอ้าท์เมื่อตรวจสอบห้องพักเรียบร้อย
+                                      ✓ ได้รับเงินมัดจำคืนเต็มจำนวน ณ วันเช็คเอ้าท์เมื่อตรวจสอบ{loc.roomUnit}พักเรียบร้อย
                                     </div>
                                   </td>
-                                  <td style={{ textAlign: 'center' }}>{totalRoomsCount} ห้อง</td>
+                                  <td style={{ textAlign: 'center' }}>{totalRoomsCount} {loc.roomUnit}</td>
                                   <td style={{ textAlign: 'right' }}>฿{totalRoomsCount > 0 ? (totalDeposit / totalRoomsCount).toLocaleString() : '0'}</td>
                                   <td style={{ textAlign: 'right', fontWeight: 600 }}>฿{effectiveDepositToPay.toLocaleString()}</td>
                                 </tr>
@@ -694,12 +790,12 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                                 <tr>
                                   <td style={{ textAlign: 'center' }}>{selectedBookingItems.length + 1}</td>
                                   <td>
-                                    <strong>ค่ามัดจำประกันห้องพัก (ชำระวันเข้าพัก รวม {totalRoomsCount} ห้อง)</strong>
+                                    <strong>ค่ามัดจำประกัน{loc.roomUnit}พัก (ชำระวันเข้าพัก รวม {totalRoomsCount} {loc.roomUnit})</strong>
                                     <div className="table-sub-detail" style={{ color: '#d97706', fontWeight: 600 }}>
                                       ชำระ ฿{totalDeposit.toLocaleString()} หน้าเคาน์เตอร์วันเช็คอิน (คืนเงินมัดจำวันเช็คเอ้าท์)
                                     </div>
                                   </td>
-                                  <td style={{ textAlign: 'center' }}>{totalRoomsCount} ห้อง</td>
+                                  <td style={{ textAlign: 'center' }}>{totalRoomsCount} {loc.roomUnit}</td>
                                   <td style={{ textAlign: 'right' }}>-</td>
                                   <td style={{ textAlign: 'right', color: '#64748b', fontSize: '0.82rem' }}>ชำระหน้าเคาน์เตอร์</td>
                                 </tr>
@@ -716,8 +812,8 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                                 </strong>
                                 <span className="total-subtext">
                                   {isMonthly
-                                    ? `(รวมเงินมัดจำประกันห้อง ฿${totalDeposit.toLocaleString()} + ค่าคีย์การ์ด ฿${totalKeycardFee.toLocaleString()} | ค่าเช่าชำระรายเดือน ณ วันเข้าพัก)`
-                                    : (payDepositNow ? '(รวมค่าห้องและค่ามัดจำประกันห้องแล้ว)' : '(ยังไม่รวมค่ามัดจำประกันห้องที่ชำระวันเช็คอิน)')}
+                                    ? `(รวมเงินมัดจำประกัน{loc.roomUnit} ฿${totalDeposit.toLocaleString()} + ค่าคีย์การ์ด ฿${totalKeycardFee.toLocaleString()} | ค่าเช่า{loc.descPayMonth} ณ วันเข้าพัก)`
+                                    : (payDepositNow ? '(รวมค่า{loc.roomUnit}และค่ามัดจำประกัน{loc.roomUnit}แล้ว)' : '(ยังไม่รวมค่ามัดจำประกัน{loc.roomUnit}ที่ชำระวันเช็คอิน)')}
                                 </span>
                               </td>
                               <td colSpan={2} className="total-amount-cell">
@@ -730,17 +826,17 @@ export const BookingModal: React.FC<BookingModalProps> = ({
 
                       {(typeof customDeposit === 'number' && customDeposit < totalDeposit) && (
                         <div className="no-print" style={{ textAlign: 'right', color: '#b91c1c', fontSize: '0.9rem', marginTop: '4px', fontWeight: 'bold' }}>
-                          * ค้างชำระเงินมัดจำส่วนที่เหลืออีก ฿{(totalDeposit - customDeposit).toLocaleString()} บาท (ชำระในวันทำสัญญา/เข้าพัก)
+                          {loc.remainDep} ฿{(totalDeposit - customDeposit).toLocaleString()} {loc.remainDepSub}
                         </div>
                       )}
 
                       {/* Terms & Guidelines Box */}
                       <div className="formal-terms-box">
-                        <div className="terms-title">ข้อกำหนดการเข้าพักและเงื่อนไข (Terms & Guidelines):</div>
+                        <div className="terms-title">{loc.termTitle}</div>
                         <ul>
                           {isMonthly && (
                             <li style={{ color: '#004088', fontWeight: 'bold' }}>
-                              <strong>สัญญาเช่ารายเดือน:</strong> สัญญาเช่าขั้นต่ำ 12 เดือน (1 ปี) | กรณีสัญญาน้อยกว่า 12 เดือน ค่าเช่าห้องจะปรับเพิ่มขึ้น <strong>+1,000 บาท/เดือน</strong> ทุกประเภทห้อง (พักอาศัยครบตามสัญญา ได้รับคืนเงินมัดจำประกันครบถ้วน)
+                              <strong>สัญญาเช่ารายเดือน:</strong> สัญญาเช่าขั้นต่ำ 12 เดือน (1 ปี) | กรณีสัญญาน้อยกว่า 12 เดือน ค่าเช่า{loc.roomUnit}จะปรับเพิ่มขึ้น <strong>+1,000 บาท/เดือน</strong> ทุกประเภท{loc.roomUnit} (พักอาศัยครบตามสัญญา ได้รับคืนเงินมัดจำประกันครบถ้วน)
                             </li>
                           )}
                           {!isMonthly && (
@@ -749,11 +845,11 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                           
                           {isMonthly ? (
                             <>
-                              <li><strong>เงินมัดจำประกันห้อง:</strong> จะได้รับคืนเต็มจำนวนในวันเช็คเอ้าท์เมื่อลูกบ้านพักอยู่ครบสัญญาและออกตามสัญญา</li>
-                              <li><strong>การทำสัญญา:</strong> สามารถทำสัญญาได้หลังจากจ่ายค่ามัดจำห้องครบ</li>
+                              <li><strong>เงินมัดจำประกัน{loc.roomUnit}:</strong> จะได้รับคืนเต็มจำนวนในวันเช็คเอ้าท์เมื่อลูกบ้านพักอยู่ครบสัญญาและออกตามสัญญา</li>
+                              <li><strong>การทำสัญญา:</strong> สามารถทำสัญญาได้หลังจากจ่ายค่ามัดจำ{loc.roomUnit}ครบ</li>
                             </>
                           ) : (
-                            <li><strong>เงินมัดจำประกันห้อง:</strong> จะได้รับคืนเต็มจำนวนในวันเช็คเอ้าท์ หลังเจ้าหน้าที่ตรวจสอบความเรียบร้อยของห้องพัก</li>
+                            <li><strong>เงินมัดจำประกัน{loc.roomUnit}:</strong> จะได้รับคืนเต็มจำนวนในวันเช็คเอ้าท์ หลังเจ้าหน้าที่ตรวจสอบความเรียบร้อยของ{loc.roomUnit}พัก</li>
                           )}
                           
                           <li><strong>การยืนยันจอง:</strong> ติดต่อเจ้าหน้าที่แผนกต้อนรับทาง LINE Official: <code>0990954541</code> หรือโทร <code>099-095-4541</code></li>

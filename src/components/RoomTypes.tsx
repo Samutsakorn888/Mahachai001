@@ -6,6 +6,7 @@ import { LeaseModal } from './LeaseModal';
 import { RoomComparisonModal } from './RoomComparisonModal';
 import { PromptPayModal } from './PromptPayModal';
 import { UtilityCalculator } from './UtilityCalculator';
+import { translations } from '../i18n/translations';
 import { RoomDetailsModal } from './RoomTypes/RoomDetailsModal';
 import { DailyRoomCard, MonthlyRoomCard } from './RoomTypes/RoomCard';
 import { BookingModal } from './RoomTypes/BookingModal';
@@ -82,7 +83,8 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
             // Find index match for translations if needed, but for simplicity use db data
             let trans = null;
             if (language !== 'th') {
-              const matchedIdx = (t.monthlyRooms || []).findIndex(tr => tr.name === r.name);
+              const thMonthlyRooms = translations['th'].monthlyRooms || [];
+              const matchedIdx = thMonthlyRooms.findIndex(tr => tr.name === r.name);
               if (matchedIdx >= 0) trans = (t.monthlyRooms || [])[matchedIdx];
             }
             const features = parseArray(r.features);
