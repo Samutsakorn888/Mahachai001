@@ -720,21 +720,9 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                       </div>
 
                       {/* Signature & Issuer Seal */}
-                      <div className="formal-signature-bar" style={{ justifyContent: 'space-between', alignItems: 'flex-end' }}>
-                        <div className="no-print" style={{ flex: 1, paddingRight: '20px', color: '#e11d48', fontSize: '0.85rem', fontWeight: 600, lineHeight: 1.4 }}>
+                      <div className="formal-signature-bar" style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center' }}>
+                        <div className="no-print" style={{ color: '#e11d48', fontSize: '0.85rem', fontWeight: 600, lineHeight: 1.4 }}>
                           * รบกวนตรวจสอบข้อมูลลูกค้าให้ถูกต้องและกด "บันทึกเอกสาร" ก่อนส่งเข้าไลน์
-                        </div>
-                        <div className="signature-col">
-                          <div className="stamp-seal-badge">
-                            <span>VERIFIED DOCUMENT</span>
-                            <strong>แอทสมุทรสาคร (มหาชัย)</strong>
-                          </div>
-                          <div className="sig-line-container" style={{ position: 'relative', minHeight: '52px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', alignItems: 'center' }}>
-                            <div className="sig-line" style={{ width: '100%', margin: 0 }}></div>
-                          </div>
-                          <p style={{ margin: '6px 0 2px 0', fontSize: '0.85rem' }}><strong>(...................................................)</strong></p>
-                          <p style={{ margin: 0 }}><strong>ผู้ออกใบเสนอราคา / ผู้รับเงิน</strong></p>
-                          <p style={{ fontSize: '0.78rem', color: '#64748b', margin: 0 }}>สำนักงาน แอทสมุทรสาคร มหาชัย</p>
                         </div>
                       </div>
                     </>
