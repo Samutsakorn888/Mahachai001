@@ -313,7 +313,7 @@ function App() {
           onEditRoom={(index, tabType) => handleOpenEditSection('rooms', index, tabType)}
           onAddNewRoom={() => handleOpenEditSection('rooms')}
           refreshTrigger={refreshTrigger}
-          onRefreshData={() => setRefreshTrigger(prev => prev + 1)}
+
         />
 
         <Facilities t={t} />

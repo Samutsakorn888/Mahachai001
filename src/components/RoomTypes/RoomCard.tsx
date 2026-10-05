@@ -6,7 +6,7 @@ interface DailyRoomCardProps {
   roomIdx: number;
   isAdmin?: boolean;
   onEditRoom?: (index: number, tabType: 'daily') => void;
-  onToggleAvailability: (room: any, tabType: 'daily') => void;
+
   t: Translations;
   language?: Language;
   onViewDetails: (room: any) => void;
@@ -14,7 +14,7 @@ interface DailyRoomCardProps {
 }
 
 export const DailyRoomCard: React.FC<DailyRoomCardProps> = ({
-  room, roomIdx, isAdmin, onEditRoom, onToggleAvailability, t, language, onViewDetails, onBookNow
+  room, roomIdx, isAdmin, onEditRoom, t, language, onViewDetails, onBookNow
 }) => {
   return (
     <div className="room-card" style={{ position: 'relative' }}>
@@ -106,7 +106,7 @@ interface MonthlyRoomCardProps {
   roomIdx: number;
   isAdmin?: boolean;
   onEditRoom?: (index: number, tabType: 'monthly') => void;
-  onToggleAvailability: (room: any, tabType: 'monthly') => void;
+
   t: Translations;
   language?: Language;
   onViewDetails: (room: any) => void;
@@ -114,7 +114,7 @@ interface MonthlyRoomCardProps {
 }
 
 export const MonthlyRoomCard: React.FC<MonthlyRoomCardProps> = ({
-  room, roomIdx, isAdmin, onEditRoom, onToggleAvailability, t, language, onViewDetails, onBookNow
+  room, roomIdx, isAdmin, onEditRoom, t, language, onViewDetails, onBookNow
 }) => {
   const hasAvailable = room.availableRoomsList && room.availableRoomsList.length > 0;
   return (

@@ -20,8 +20,7 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
   isAdmin,
   onEditRoom,
   onAddNewRoom,
-  refreshTrigger = 0,
-  onRefreshData
+  refreshTrigger = 0
 }) => {
   const [internalTab, setInternalTab] = useState<'daily' | 'monthly'>('daily');
   const activeTab = propActiveTab !== undefined ? propActiveTab : internalTab;
@@ -113,28 +112,7 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
     fetchRooms();
   }, [language, t, refreshTrigger]);
 
-  const handleToggleAvailability = async (room: any, type: 'daily' | 'monthly') => {
-    if (!isAdmin) return;
-    try {
-      if (type === 'daily') {
-        const isCurrentlyAvailable = room.data.availableRooms > 0;
-        // If available, set occupied = total (so available = 0). If not available, set occupied = 0 (so available = total)
-        const newOccupied = isCurrentlyAvailable ? room.data.totalRooms : 0;
-        const { error } = await supabase.from('rooms').update({ occupied_rooms: newOccupied }).eq('id', room.key);
-        if (error) throw error;
-      } else {
-        const hasAvailable = room.availableRoomsList && room.availableRoomsList.length > 0;
-        // If available, clear list. If not available, set a generic room number '1'
-        const newList = hasAvailable ? [] : ['1'];
-        const { error } = await supabase.from('rooms').update({ available_room_numbers: newList }).eq('id', room.id);
-        if (error) throw error;
-      }
-      if (onRefreshData) onRefreshData();
-    } catch (err) {
-      console.error('Error toggling room availability:', err);
-      alert('เกิดข้อผิดพลาดในการเปลี่ยนสถานะห้องพัก');
-    }
-  };
+
 
   const handleOpenBooking = (room: any) => {
     const roomData = room.data || room;
@@ -381,7 +359,7 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
                   roomIdx={roomIdx}
                   isAdmin={isAdmin}
                   onEditRoom={onEditRoom}
-                  onToggleAvailability={handleToggleAvailability}
+
                   t={t}
                   language={language}
                   onViewDetails={setSelectedDetailsRoom}
@@ -586,7 +564,7 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
                   roomIdx={idx}
                   isAdmin={isAdmin}
                   onEditRoom={onEditRoom}
-                  onToggleAvailability={handleToggleAvailability}
+
                   t={t}
                   language={language}
                   onViewDetails={setSelectedDetailsRoom}
