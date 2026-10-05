@@ -24,31 +24,8 @@ if (typeof window !== 'undefined' && !localStorage.getItem('cache_cleared_images
   } catch (e) {}
 }
 
-const getInitialLanguage = (): Language => {
-  if (typeof window !== 'undefined') {
-    const saved = localStorage.getItem('ATS_LANGUAGE');
-    if (saved && ['th', 'en', 'cn', 'mm', 'jp', 'ru'].includes(saved)) {
-      return saved as Language;
-    }
-    const browserLang = navigator.language.toLowerCase();
-    if (browserLang.startsWith('th')) return 'th';
-    if (browserLang.startsWith('zh')) return 'cn';
-    if (browserLang.startsWith('my')) return 'mm';
-    if (browserLang.startsWith('ja')) return 'jp';
-    if (browserLang.startsWith('ru')) return 'ru';
-    if (browserLang.startsWith('en')) return 'en';
-  }
-  return 'th';
-};
-
 function App() {
-  const [language, setLanguage] = useState<Language>(getInitialLanguage);
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('ATS_LANGUAGE', language);
-    }
-  }, [language]);
+  const language: Language = 'th'; // Force Thai as base language for Google Translate
   const [activeSection, setActiveSection] = useState<string>('home');
   const [isLineModalOpen, setIsLineModalOpen] = useState<boolean>(false);
   const [adminMode, setAdminMode] = useState<'none' | 'login' | 'dashboard'>('none');
@@ -308,8 +285,6 @@ function App() {
       )}
 
       <Navbar
-        language={language}
-        setLanguage={setLanguage}
         t={t}
         activeSection={activeSection}
         setActiveSection={setActiveSection}

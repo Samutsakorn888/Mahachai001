@@ -148,6 +148,32 @@
       ]
     }
     </script>
+    <!-- Google Translate Script -->
+    <script type="text/javascript">
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement({pageLanguage: 'th', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+      }
+
+      // Auto-set translation language based on browser language on first visit
+      (function() {
+        try {
+          if (document.cookie.indexOf('googtrans=') === -1) {
+            var lang = navigator.language || navigator.userLanguage;
+            if (lang) {
+              var shortLang = lang.split('-')[0].toLowerCase();
+              if (shortLang !== 'th') {
+                if (shortLang === 'my') shortLang = 'my';
+                if (shortLang === 'zh') shortLang = 'zh-CN';
+                // Set the cookie for google translate
+                document.cookie = 'googtrans=/th/' + shortLang + '; path=/';
+                document.cookie = 'googtrans=/th/' + shortLang + '; domain=.' + location.hostname + '; path=/';
+              }
+            }
+          }
+        } catch(e) {}
+      })();
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
   </head>
   <body>
     <div id="root"></div>
