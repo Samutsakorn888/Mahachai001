@@ -17,7 +17,7 @@ export const UtilityCalculator: React.FC<UtilityCalculatorProps> = ({ t, languag
   const [elecUnits, setElecUnits] = useState<number>(100);
   const [waterUnits, setWaterUnits] = useState<number>(5);
   const [hasCar, setHasCar] = useState<boolean>(false);
-  const [hasMoto, setHasMoto] = useState<boolean>(false);
+  const [motoParkingType, setMotoParkingType] = useState<'none' | 'standard' | 'large'>('none');
   const [isShortTerm, setIsShortTerm] = useState<boolean>(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
@@ -64,7 +64,7 @@ export const UtilityCalculator: React.FC<UtilityCalculatorProps> = ({ t, languag
 
   // Parking costs
   const carCost = hasCar ? 1000 : 0;
-  const motoCost = hasMoto ? 100 : 0;
+  const motoCost = motoParkingType === 'standard' ? 150 : motoParkingType === 'large' ? 300 : 0;
 
   // Total monthly estimated expense
   const totalMonthlyCost = baseRoomPrice + shortTermFee + elecCost + waterCost + maintenanceCost + carCost + motoCost;
@@ -83,7 +83,7 @@ ${isShortTerm ? `➕ ค่าบริการสัญญาระยะส�
 ${t.calcWaterBreakdown || 'ค่าน้ำประปาประมาณ'}: (${waterUnits} ${unitLabel}) = ${waterCost.toLocaleString()} ${thb}
 ${t.calcCommonFeeBreakdown || 'ค่าส่วนกลาง'}: ${maintenanceCost.toLocaleString()} ${thb}
 ${t.calcCarBreakdown || 'ค่าจอดรถยนต์'}: ${carCost > 0 ? '1,000' : '0'} ${thb}
-${t.calcMotoBreakdown || 'ค่าจอดรถมอเตอร์ไซค์'}: ${motoCost > 0 ? '100' : '0'} ${thb}
+${t.calcMotoBreakdown || 'ค่าจอดรถมอเตอร์ไซค์'}: ${motoCost > 0 ? motoCost : '0'} ${thb}
 ------------------------------------------------
 ${t.calcTotalMonthly || 'ยอดรวมประมาณการรายเดือน'}: ${totalMonthlyCost.toLocaleString()} ${pm}
 🔐 ${t.calcMoveInDeposit || 'เงินประกันมัดจำแรกเข้า'}: ${roomDeposit.toLocaleString()} ${thb}
@@ -213,13 +213,21 @@ LINE ID: 099-095-4541`;
                     />
                     <span>{t.calcCarLabel || 'จอดรถยนต์ (1,000 บาท/เดือน)'}</span>
                   </label>
-                  <label className={`calc-checkbox-card ${hasMoto ? 'active' : ''}`}>
+                  <label className={`calc-checkbox-card ${motoParkingType === 'standard' ? 'active' : ''}`}>
                     <input
                       type="checkbox"
-                      checked={hasMoto}
-                      onChange={(e) => setHasMoto(e.target.checked)}
+                      checked={motoParkingType === 'standard'}
+                      onChange={() => setMotoParkingType(motoParkingType === 'standard' ? 'none' : 'standard')}
                     />
-                    <span>{t.calcMotoLabel || 'จอดมอเตอร์ไซค์ (100 บาท/เดือน)'}</span>
+                    <span>ค่าจอดมอเตอร์ไซค์ ธรรมดา (150 บาท/เดือน)</span>
+                  </label>
+                  <label className={`calc-checkbox-card ${motoParkingType === 'large' ? 'active' : ''}`}>
+                    <input
+                      type="checkbox"
+                      checked={motoParkingType === 'large'}
+                      onChange={() => setMotoParkingType(motoParkingType === 'large' ? 'none' : 'large')}
+                    />
+                    <span>ค่าจอดมอเตอร์ไซค์ ใหญ่ (300 บาท/เดือน)</span>
                   </label>
                 </div>
               </div>
@@ -258,10 +266,10 @@ LINE ID: 099-095-4541`;
                     <span>1,000 {thb}</span>
                   </div>
                 )}
-                {hasMoto && (
+                {motoCost > 0 && (
                   <div className="breakdown-item">
                     <span>{t.calcMotoBreakdown || 'ค่าจอดรถมอเตอร์ไซค์'}</span>
-                    <span>100 {thb}</span>
+                    <span>{motoCost} {thb}</span>
                   </div>
                 )}
               </div>
