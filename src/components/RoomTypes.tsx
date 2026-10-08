@@ -382,7 +382,7 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
                       </button>
                       <div style={{ marginTop: '20px', textAlign: 'center' }}>
                         <p style={{ fontWeight: 'bold', marginBottom: '10px', color: '#2c5282' }}>สแกน QR Code เพื่อชำระเงิน</p>
-                        <img src="/images/qr_payment.jpg" alt="QR Code Payment" style={{ width: '100%', maxWidth: '200px', height: 'auto', borderRadius: '8px', border: '1px solid #bee3f8' }} />
+                        <img src="https://promptpay.io/0661496282.png" alt="QR Code Payment" style={{ width: '100%', maxWidth: '200px', height: 'auto', borderRadius: '8px', border: '1px solid #bee3f8' }} />
                       </div>
                     </div>
 

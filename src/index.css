@@ -3823,9 +3823,11 @@ button {
 
 .nearby-card-header {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
 .nearby-icon {
@@ -4102,8 +4104,8 @@ button {
    NEARBY PLACE LOGOS STYLES
    ========================================================================== */
 .nearby-logo-wrapper {
-  width: 90px;
-  height: 90px;
+  width: 150px;
+  height: 120px;
   border-radius: 12px;
   overflow: hidden;
   background: #ffffff;
