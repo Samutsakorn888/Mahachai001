@@ -50,7 +50,7 @@ export const Footer: React.FC<FooterProps> = ({
             </div>
             
             <div className="footer-contact-item">
-              <span className="footer-contact-label">Line Official</span>
+              <span className="footer-contact-label">LINE</span>
               <span className="footer-contact-val">{lineId}</span>
             </div>
 
