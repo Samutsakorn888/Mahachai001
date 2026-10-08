@@ -367,7 +367,7 @@ export const translations: Record<Language, Translations> = {
       "ชำระแล้วส่งสลิป พร้อมถ่ายบัตรประชาชนและแจ้งเลขห้องที่เข้าพัก LINE ID: 099-095-4541",
       "ให้พนักงานตรวจสอบความถูกต้องและรับกุญแจห้องพัก",
       "ลูกค้าต้องพกคีย์การ์ดเพื่อเปิดประตู",
-      "Wi-Fi: กรุณาเลือก User ตามชั้นที่ท่านพัก (รหัส Wi-Fi: 123456789)"
+      "Wi-Fi: กรุณาเลือก User ตามชั้นที่ท่านพัก"
     ],
     checkOutTitle: "วิธีการเช็คเอ้าท์ (Daily Check-out)",
     checkOutSteps: [
@@ -381,7 +381,7 @@ export const translations: Record<Language, Translations> = {
     bankNameVal: "ธนาคารกรุงเทพ",
     bankAccountName: "ชื่อบัญชี: นาง อรอนงค์ เตชะเกษมสุข",
     wifiTitle: "รหัส Wi-Fi",
-    wifiPass: "123456789",
+    wifiPass: "",
     lineModalTitle: "ติดต่อเราผ่าน Line Official",
     lineModalDesc: "สแกนเพื่อติดต่อเรา หรือแอด ID: 0990954541",
     copyIdBtn: "คัดลอก ID Line",
@@ -732,7 +732,7 @@ export const translations: Record<Language, Translations> = {
       "Send payment slip, ID card photo, and room number via LINE ID: 0990954541",
       "Staff will verify details and hand over the room keys",
       "Please carry your keycard to unlock the door",
-      "Wi-Fi: Please select User according to your floor (Wi-Fi password: 123456789)"
+      "Wi-Fi: Please select User according to your floor"
     ],
     checkOutTitle: "Daily Check-out Process",
     checkOutSteps: [
@@ -746,7 +746,7 @@ export const translations: Record<Language, Translations> = {
     bankNameVal: "Bangkok Bank",
     bankAccountName: "Account Name: Onanong Techakasemsook",
     wifiTitle: "Wi-Fi Password",
-    wifiPass: "123456789",
+    wifiPass: "",
     lineModalTitle: "Contact via Line Official",
     lineModalDesc: "Scan to chat or add ID: 0990954541",
     copyIdBtn: "Copy Line ID",
@@ -1068,7 +1068,7 @@ export const translations: Record<Language, Translations> = {
       "付款后将凭证、身份证件照片及房间号发送至 LINE ID: 0990954541",
       "工作人员核对无误后发放房间钥匙",
       "请随身携带感应卡开门",
-      "Wi-Fi: 请根据所在楼层选择对应用户名 (Wi-Fi 密码: 123456789)"
+      "Wi-Fi: 请根据所在楼层选择对应用户名"
     ],
     checkOutTitle: "日租退房流程 (Daily Check-out)",
     checkOutSteps: [
@@ -1082,7 +1082,7 @@ export const translations: Record<Language, Translations> = {
     bankNameVal: "盘谷银行 (Bangkok Bank)",
     bankAccountName: "户名: Onanong Techakasemsook",
     wifiTitle: "Wi-Fi 密码",
-    wifiPass: "123456789",
+    wifiPass: "",
     lineModalTitle: "通过 Line 官方联系",
     lineModalDesc: "扫描二维码或添加账号: 0990954541",
     copyIdBtn: "复制 Line ID",
@@ -1404,7 +1404,7 @@ export const translations: Record<Language, Translations> = {
       "ငွေလွှဲပြီးပါက ပြေစာ၊ မှတ်ပုံတင်ဓာတ်ပုံနှင့် အခန်းနံပါတ်ကို LINE ID: 0990954541 သို့ ပို့ပါ",
       "ဝန်ထမ်းမှ စစ်ဆေးပြီးပါက အခန်းသော့ ထုတ်ယူပါ",
       "တံခါးဖွင့်ရန် ကီးကဒ်ကို ယူဆောင်ထားပါ",
-      "Wi-Fi: သင်တည်းခိုသည့် အထပ်အလိုက် User ကိုရွေးချယ်ပါ (Wi-Fi Password: 123456789)"
+      "Wi-Fi: သင်တည်းခိုသည့် အထပ်အလိုက် User ကိုရွေးချယ်ပါ"
     ],
     checkOutTitle: "နေ့စဉ် Check-out ပြုလုပ်ရန် အဆင့်များ",
     checkOutSteps: [
@@ -1418,7 +1418,7 @@ export const translations: Record<Language, Translations> = {
     bankNameVal: "Bangkok Bank",
     bankAccountName: "အကောင့်အမည်: Onanong Techakasemsook",
     wifiTitle: "Wi-Fi Password",
-    wifiPass: "123456789",
+    wifiPass: "",
     lineModalTitle: "Line Official မှတဆင့် ဆက်သွယ်ပါ",
     lineModalDesc: "ဆက်သွယ်ရန် စကန်ဖတ်ပါ သို့မဟုတ် ID: 0990954541 ကို ထည့်ပါ",
     copyIdBtn: "Line ID ကူးယူပါ",
