@@ -3456,12 +3456,14 @@ button {
   display: flex;
   flex-direction: column;
   gap: 24px;
+  min-width: 0;
 }
 
 .calc-group {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  min-width: 0;
 }
 
 .calc-label-row {
@@ -3495,6 +3497,8 @@ button {
   color: var(--text-color);
   outline: none;
   transition: border-color 0.2s;
+  width: 100%;
+  max-width: 100%;
 }
 
 .calc-select:focus {
@@ -3515,12 +3519,25 @@ button {
   justify-content: space-between;
   font-size: 0.78rem;
   color: var(--text-light);
+  gap: 4px;
+}
+
+@media (max-width: 768px) {
+  .calc-range-labels {
+    font-size: 0.65rem;
+  }
 }
 
 .calc-checkbox-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
+}
+
+@media (max-width: 768px) {
+  .calc-checkbox-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .calc-checkbox-card {
@@ -3540,6 +3557,11 @@ button {
   background: #f0f7ff;
   border-color: var(--primary-color);
   color: var(--primary-color);
+}
+
+.calc-checkbox-card span {
+  flex: 1;
+  line-height: 1.4;
 }
 
 .calculator-results {
