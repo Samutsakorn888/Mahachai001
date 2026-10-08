@@ -3395,10 +3395,19 @@ button {
   background: #ffffff;
   border-radius: 20px;
   box-shadow: 0 12px 40px rgba(0, 64, 136, 0.08);
-  border: 1px solid #e2ebd8;
   border: 1px solid #d0e2ff;
   overflow: hidden;
   padding: 36px;
+}
+
+@media (max-width: 768px) {
+  .calculator-card {
+    margin: 0 -24px;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+    padding: 24px 16px;
+  }
 }
 
 .calculator-header {
@@ -3406,11 +3415,23 @@ button {
   margin-bottom: 36px;
 }
 
+@media (max-width: 768px) {
+  .calculator-header {
+    margin-bottom: 24px;
+  }
+}
+
 .calculator-title {
   font-size: 1.85rem;
   font-weight: 700;
   color: var(--primary-color);
   margin-bottom: 8px;
+}
+
+@media (max-width: 768px) {
+  .calculator-title {
+    font-size: 1.4rem;
+  }
 }
 
 .calculator-subtitle {
