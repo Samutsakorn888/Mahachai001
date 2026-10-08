@@ -77,6 +77,9 @@ export interface Translations {
   facilitiesTitle: string;
   facilitiesSubtitle: string;
   facilitiesList: { icon: string; title: string; desc: string }[];
+  securityTitle?: string;
+  securitySubtitle?: string;
+  securityList?: { icon: string; title: string; desc: string }[];
   nearbyTitle: string;
   nearbySubtitle: string;
   nearbyList: { icon: string; title: string; distance: string; desc: string }[];
@@ -392,6 +395,16 @@ export const translations: Record<Language, Translations> = {
       { icon: "❄️", title: "เครื่องปรับอากาศ & เฟอร์นิเจอร์ครบ", desc: "พร้อมเข้าอยู่อาศัยทันที ของใช้อย่างดี" },
       { icon: "🧺", title: "จุดบริการเครื่องซักผ้า", desc: "มีเครื่องซักผ้าหยอดเหรียญให้บริการ" },
       { icon: "📍", title: "ทำเลใจกลางเมืองมหาชัย", desc: "ตรงข้าม Big C มหาชัย ถนนเศรษฐกิจ การเดินทางสะดวกสบาย" }
+    ],
+    securityTitle: "ระบบรักษาความปลอดภัย",
+    securitySubtitle: "มั่นใจและปลอดภัยตลอดการเข้าพัก ด้วยระบบรักษาความปลอดภัยมาตรฐาน",
+    securityList: [
+      { icon: "👮", title: "เจ้าหน้าที่ตำรวจ", desc: "ดูแลรักษาความปลอดภัยตลอด 24 ชั่วโมง" },
+      { icon: "💳", title: "ระบบตัดไฟด้วยคีย์การ์ด", desc: "ปลอดภัยและประหยัดพลังงาน ตัดไฟอัตโนมัติเมื่อออกจากห้อง" },
+      { icon: "🧯", title: "ตู้ดับเพลิงทุกชั้น", desc: "อุปกรณ์ดับเพลิงติดตั้งครอบคลุมทุกพื้นที่" },
+      { icon: "🔥", title: "Heat & Smoke Detector", desc: "ระบบตรวจจับความร้อนและควันไฟตลอด 24 ชั่วโมง" },
+      { icon: "📹", title: "กล้องวงจรปิด CCTV 24 ชั่วโมง", desc: "บันทึกภาพตลอดเวลา ทุกชั้นและรอบอาคาร" },
+      { icon: "⚡", title: "เสาล่อฟ้าป้องกัน", desc: "ติดตั้งระบบป้องกันฟ้าผ่า เพื่อความปลอดภัยสูงสุด" }
     ],
     nearbyTitle: "สถานที่สำคัญใกล้เคียง",
     nearbySubtitle: "ทำเลศักยภาพ เชื่อมต่อทุกการเดินทาง แหล่งช้อปปิ้ง และสถานบริการสาธารณะ",
@@ -744,6 +757,16 @@ export const translations: Record<Language, Translations> = {
       { icon: "🧺", title: "Laundry Service Area", desc: "Coin washing machines available on-site" },
       { icon: "📍", title: "Prime Location in Mahachai", desc: "Opposite Big C Mahachai, Sethakit Road, easy transportation" }
     ],
+    securityTitle: "Security System",
+    securitySubtitle: "Rest assured with our standard security systems during your stay",
+    securityList: [
+      { icon: "👮", title: "Police / Security Guards", desc: "24/7 security personnel on site" },
+      { icon: "💳", title: "Keycard Power Cut-off", desc: "Safe and energy-saving automatic power cut-off" },
+      { icon: "🧯", title: "Fire Extinguishers", desc: "Fire extinguishing equipment installed on every floor" },
+      { icon: "🔥", title: "Heat & Smoke Detector", desc: "24-hour heat and smoke detection system" },
+      { icon: "📹", title: "24/7 CCTV", desc: "Continuous recording on all floors and around the building" },
+      { icon: "⚡", title: "Lightning Rod", desc: "Lightning protection system installed for maximum safety" }
+    ],
     nearbyTitle: "Nearby Key Locations",
     nearbySubtitle: "Prime location connecting transportation, shopping centers, and public services",
     nearbyList: [
@@ -1066,6 +1089,16 @@ export const translations: Record<Language, Translations> = {
       { icon: "🧺", title: "自助洗衣点", desc: "提供自助投币洗衣机" },
       { icon: "📍", title: "玛哈猜市中心优越位置", desc: "Big C 玛哈猜正对面，瑟塔吉路，交通便捷" }
     ],
+    securityTitle: "安保系统",
+    securitySubtitle: "提供标准的安全保护系统，让您安心入住",
+    securityList: [
+      { icon: "👮", title: "警察 / 安保人员", desc: "24小时安保人员值守" },
+      { icon: "💳", title: "房卡断电系统", desc: "安全节能的自动断电系统" },
+      { icon: "🧯", title: "消防栓", desc: "每层楼均配备消防灭火设备" },
+      { icon: "🔥", title: "热量与烟雾探测器", desc: "24小时热量与烟雾探测系统" },
+      { icon: "📹", title: "24小时监控录像", desc: "所有楼层及建筑周围全天候录像" },
+      { icon: "⚡", title: "避雷针防护", desc: "安装避雷系统，确保最大安全" }
+    ],
     nearbyTitle: "周边重要地标",
     nearbySubtitle: "优越地理位置，轻松连接交通、购物中心及公共服务",
     nearbyList: [
@@ -1387,6 +1420,16 @@ export const translations: Record<Language, Translations> = {
       { icon: "❄️", title: "အဲကွန်းနှင့် ပရိဘောဂအပြည့်အစုံ", desc: "အသင့်နေထိုင်နိုင်ရန် အရည်အသွေးမြင့် ပစ္စည်းများ ပါဝင်သည်" },
       { icon: "🧺", title: "အဝတ်လျှော်စက် ဝန်ဆောင်မှု", desc: "အကြွေစေ့သုံး အဝတ်လျှော်စက်များ ရှိသည်" },
       { icon: "📍", title: "မဟာချိုင်မြို့လယ်ခေါင် နေရာကောင်း", desc: "Big C မဟာချိုင် မျက်စောင်းထိုး၊ သွားလာရ လွယ်ကူသည်" }
+    ],
+    securityTitle: "လုံခြုံရေးစနစ်",
+    securitySubtitle: "စံချိန်မီ လုံခြုံရေးစနစ်များဖြင့် စိတ်ချမ်းသာစွာ တည်းခိုပါ",
+    securityList: [
+      { icon: "👮", title: "ရဲ / လုံခြုံရေး", desc: "၂၄ နာရီ လုံခြုံရေး ဝန်ထမ်းများ ရှိသည်" },
+      { icon: "💳", title: "ကီးကဒ် မီးဖြတ်စနစ်", desc: "လုံခြုံပြီး လျှပ်စစ်ချွေတာသော အလိုအလျောက် မီးဖြတ်စနစ်" },
+      { icon: "🧯", title: "မီးသတ်ဘူးများ", desc: "အထပ်တိုင်းတွင် မီးသတ်ပစ္စည်းများ တပ်ဆင်ထားသည်" },
+      { icon: "🔥", title: "အပူနှင့် မီးခိုးရှာဖွေရေးကိရိယာ", desc: "၂၄ နာရီ အပူနှင့် မီးခိုးရှာဖွေရေး စနစ်" },
+      { icon: "📹", title: "၂၄ နာရီ CCTV", desc: "အထပ်တိုင်းနှင့် အဆောက်အဦပတ်လည်တွင် အမြဲမှတ်တမ်းတင်နေသည်" },
+      { icon: "⚡", title: "မိုးကြိုးလွှဲစနစ်", desc: "အမြင့်ဆုံး လုံခြုံရေးအတွက် မိုးကြိုးလွှဲစနစ် တပ်ဆင်ထားသည်" }
     ],
     nearbyTitle: "အနီးအနားရှိ အရေးကြီးသောနေရာများ",
     nearbySubtitle: "သွားလာရေး၊ စျေးဝယ်စင်တာများနှင့် အများသုံးဝန်ဆောင်မှုများ သွားလာရ လွယ်ကူသော နေရာကောင်း",
