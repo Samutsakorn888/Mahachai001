@@ -443,9 +443,9 @@ export const translations: Record<Language, Translations> = {
     chatbotSubtitle: "สอบถามข้อมูลห้องพัก กฎระเบียบ การคืนมัดจำ หรือการเดินทาง",
     chatbotBadge: "แชทสด Chatbot",
     fanFutonRoom: {
-      name: "ห้องฟูกพัดลม (Fan Futon Room)",
-      desc: "ห้องพักราคาประหยัด บรรยากาศสบาย พร้อมพัดลมและชุดฟูกที่นอน",
-      features: ["🌀 พัดลม", "🛏️ ฟูกที่นอน", "📶 ฟรี Wi-Fi", "🚿 ห้องน้ำในตัว"],
+      name: "ห้องเตียงพัดลม (Fan Bed Room)",
+      desc: "ห้องพักราคาประหยัด บรรยากาศสบาย พร้อมพัดลมและเตียงนอน",
+      features: ["🌀 พัดลม", "🛏️ เตียงนอน", "📶 ฟรี Wi-Fi", "🚿 ห้องน้ำในตัว"],
       price: "450"
     },
     suiteRoom: {
@@ -586,9 +586,9 @@ export const translations: Record<Language, Translations> = {
       price: "899"
     },
     fanFutonRoom: {
-      name: "Fan Futon Room",
-      desc: "Budget-friendly comfortable room with fan and soft futon mattress bedding",
-      features: ["🌀 Fan", "🛏️ Futon Bed", "📶 Free Wi-Fi", "🚿 Private Bathroom"],
+      name: "Fan Bed Room",
+      desc: "Budget-friendly comfortable room with fan and bed",
+      features: ["🌀 Fan", "🛏️ Bed", "📶 Free Wi-Fi", "🚿 Private Bathroom"],
       price: "450"
     },
     suiteRoom: {

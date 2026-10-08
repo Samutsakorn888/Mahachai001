@@ -692,15 +692,6 @@ export const AdminEditModal: React.FC<AdminEditModalProps> = ({
                     onChange={e => setLocalData({ ...localData, bankAccountName: e.target.value })}
                   />
                 </div>
-                <div className="form-group">
-                  <label>รหัสผ่าน Wi-Fi:</label>
-                  <input
-                    type="text"
-                    className="admin-input"
-                    value={localData.wifiPass || ''}
-                    onChange={e => setLocalData({ ...localData, wifiPass: e.target.value })}
-                  />
-                </div>
               </div>
 
               <div className="admin-modal-actions">

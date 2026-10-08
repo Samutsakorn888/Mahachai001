@@ -1583,15 +1583,6 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout, onGoTo
                   </div>
                 </div>
 
-                <div style={{ marginBottom: '20px' }}>
-                  <label style={{ display: 'block', fontWeight: '600', marginBottom: '6px' }}>📶 รหัสผ่าน Wi-Fi</label>
-                  <input
-                    type="text"
-                    value={siteData.wifiPass || ''}
-                    onChange={e => setSiteData({ ...siteData, wifiPass: e.target.value })}
-                    style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #cbd5e0', fontSize: '1rem' }}
-                  />
-                </div>
 
                 <button
                   onClick={handleSaveSettings}

@@ -314,44 +314,7 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
               </div>
             ) : (
               <>
-                {/* Daily Rooms Availability Overview Banner */}
-            <div style={{
-              background: 'linear-gradient(135deg, #004088 0%, #1e56a0 100%)',
-              color: '#ffffff',
-              borderRadius: '14px',
-              padding: '16px 20px',
-              marginBottom: '24px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              flexWrap: 'wrap',
-              gap: '12px',
-              boxShadow: '0 4px 12px rgba(0, 64, 136, 0.15)'
-            }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                <span style={{ fontSize: '1.6rem' }}></span>
-                <div>
-                  <h4 style={{ margin: 0, fontSize: '1.05rem', fontWeight: 'bold', color: '#ffffff' }}>
-                    {(t.dailyRoomsOverviewTitle || 'สถานะห้องพักรายวัน (รวมทั้งหมด {total} ห้อง)').replace('{total}', String(totalDailyRoomsCount))}
-                  </h4>
-                  <span style={{ fontSize: '0.82rem', opacity: 0.9 }}>
-                    {t.dailyRoomsOverviewSub || 'เช็คความพร้อม จำนวนห้องทั้งหมด เต็มแล้วกี่ห้อง และเหลือว่างกี่ห้อง'}
-                  </span>
-                </div>
-              </div>
 
-              <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-                <div style={{ backgroundColor: 'rgba(255,255,255,0.18)', padding: '6px 14px', borderRadius: '8px', fontSize: '0.88rem', fontWeight: 'bold' }}>
-                  {t.totalRoomsLabel || 'ทั้งหมด:'} <strong>{totalDailyRoomsCount}</strong> {t.roomsUnit || 'ห้อง'}
-                </div>
-                <div style={{ backgroundColor: 'rgba(239, 68, 68, 0.3)', padding: '6px 14px', borderRadius: '8px', fontSize: '0.88rem', fontWeight: 'bold' }}>
-                  {t.occupiedRoomsLabel || 'เต็มแล้ว:'} <strong>{totalDailyOccupiedCount}</strong> {t.roomsUnit || 'ห้อง'}
-                </div>
-                <div style={{ backgroundColor: 'rgba(34, 197, 94, 0.3)', padding: '6px 14px', borderRadius: '8px', fontSize: '0.88rem', fontWeight: 'bold' }}>
-                  {t.availableRoomsLabel || 'เหลือว่าง:'} <strong>{totalDailyAvailableCount}</strong> {t.roomsUnit || 'ห้อง'}
-                </div>
-              </div>
-            </div>
 
             <div className="rooms-grid">
               {dailyRooms.map((room, roomIdx) => (
@@ -421,6 +384,10 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
                       >
                         คัดลอกเลขบัญชี ({t.bankAccountVal})
                       </button>
+                      <div style={{ marginTop: '20px', textAlign: 'center' }}>
+                        <p style={{ fontWeight: 'bold', marginBottom: '10px', color: '#2c5282' }}>สแกน QR Code เพื่อชำระเงิน</p>
+                        <img src="/images/qr_payment.jpg" alt="QR Code Payment" style={{ width: '100%', maxWidth: '200px', height: 'auto', borderRadius: '8px', border: '1px solid #bee3f8' }} />
+                      </div>
                     </div>
 
                     {/* Steps list */}
@@ -434,31 +401,6 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
                         </li>
                       ))}
                     </ol>
-                  </div>
-
-                  {/* Wi-Fi Info Box */}
-                  <div style={{
-                    backgroundColor: '#f7fafc',
-                    border: '1px solid #e2e8f0',
-                    borderRadius: '8px',
-                    padding: '12px 16px',
-                    marginTop: '20px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    flexWrap: 'wrap',
-                    gap: '8px'
-                  }}>
-                    <div>
-                      <span style={{ fontWeight: 'bold' }}>{t.wifiTitle}:</span> <code style={{ backgroundColor: '#edf2f7', padding: '2px 8px', borderRadius: '4px', fontSize: '1.1rem', fontWeight: 'bold', color: '#2d3748' }}>{t.wifiPass}</code>
-                    </div>
-                    <button
-                      className="btn btn-outline"
-                      style={{ padding: '4px 10px', fontSize: '0.8rem' }}
-                      onClick={() => handleCopyText(t.wifiPass, 'รหัส Wi-Fi')}
-                    >
-                      คัดลอกรหัส Wi-Fi
-                    </button>
                   </div>
                 </div>
 

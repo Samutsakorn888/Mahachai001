@@ -72,13 +72,13 @@ export const getDefaultSiteData = (): CustomSiteData => {
     dailyRooms: [
       {
         key: 'fanFuton',
-        name: 'ห้องฟูกพัดลม (Fan Futon Room)',
-        desc: 'ห้องพักราคาประหยัด บรรยากาศสบาย พร้อมพัดลมและชุดฟูกที่นอน',
+        name: 'ห้องเตียงพัดลม (Fan Bed Room)',
+        desc: 'ห้องพักราคาประหยัด บรรยากาศสบาย พร้อมพัดลมและเตียงนอน',
         price: '450',
         deposit: '500',
         totalRooms: 1,
         occupiedRooms: 0,
-        features: ['🌀 พัดลม', '🛏️ ฟูกที่นอน', '📶 ฟรี Wi-Fi', '🚿 ห้องน้ำในตัว'],
+        features: ['🌀 พัดลม', '🛏️ เตียงนอน', '📶 ฟรี Wi-Fi', '🚿 ห้องน้ำในตัว'],
         image: '/images/fan_futon.png'
       },
       {

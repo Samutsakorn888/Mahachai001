@@ -64,6 +64,11 @@ export const PromptPayModal: React.FC<PromptPayModalProps> = ({ isOpen, onClose,
               </div>
 
               <p className="acc-name" style={{ marginTop: '12px' }}>{t.bankAccNameLabel || 'ชื่อบัญชี:'} <strong>นาง อรอนงค์ เตชะเกษมสุข<br/><span style={{fontSize: '0.9em', fontWeight: 'normal'}}>ONANONG TECHAKASEMSUK</span></strong></p>
+              
+              <div style={{ marginTop: '20px', textAlign: 'center' }}>
+                <p style={{ fontWeight: 'bold', marginBottom: '10px', color: '#2d3748' }}>สแกน QR Code เพื่อชำระเงิน</p>
+                <img src="/images/qr_payment.jpg" alt="QR Code Payment" style={{ width: '100%', maxWidth: '240px', height: 'auto', borderRadius: '12px', border: '2px solid #e2e8f0', boxShadow: '0 4px 6px rgba(0,0,0,0.05)' }} />
+              </div>
             </div>
 
             <div className="deposit-info-banner">
