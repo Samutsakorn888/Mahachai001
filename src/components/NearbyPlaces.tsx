@@ -20,14 +20,18 @@ export const NearbyPlaces: React.FC<NearbyPlacesProps> = ({ t }) => {
               '/images/nearby_central.jpg',
               '/images/nearby_train.jpg'
             ];
-            const imgUrl = (item as any).image || nearbyImages[idx] || nearbyImages[0];
+            const imgUrl = (item as any).image || nearbyImages[idx];
 
             return (
               <div key={idx} className="nearby-card">
                 <div>
                   <div className="nearby-card-header">
                     <div className="nearby-logo-wrapper">
-                      <img src={imgUrl} alt={item.title} className="nearby-logo-img" />
+                      {imgUrl ? (
+                        <img src={imgUrl} alt={item.title} className="nearby-logo-img" />
+                      ) : (
+                        <span style={{ fontSize: '4rem' }}>{item.icon}</span>
+                      )}
                     </div>
                     <span className="nearby-badge">{item.distance}</span>
                   </div>
