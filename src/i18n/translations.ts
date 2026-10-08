@@ -410,7 +410,7 @@ export const translations: Record<Language, Translations> = {
     nearbySubtitle: "ทำเลศักยภาพ เชื่อมต่อทุกการเดินทาง แหล่งช้อปปิ้ง และสถานบริการสาธารณะ",
     nearbyList: [
       { icon: "🛒", title: "Big C มหาชัย", distance: "ตรงข้ามที่พัก (เดิน 2 นาที)", desc: "ศูนย์การค้า ห้างสรรพสินค้า และซูเปอร์มาร์เก็ตครบวงจร" },
-      { icon: "🏥", title: "โรงพยาบาลมหาชัย / รพ.สมุทรสาคร", distance: "5 นาที (1.5 กม.)", desc: "สถานพยาบาลชั้นนำ ดูแลสุขภาพตลอด 24 ชั่วโมง" },
+      { image: "/images/nearby_hospital.png", icon: "🏥", title: "โรงพยาบาลมหาชัย / รพ.สมุทรสาคร", distance: "5 นาที (1.5 กม.)", desc: "สถานพยาบาลชั้นนำ ดูแลสุขภาพตลอด 24 ชั่วโมง" },
       { icon: "🛍️", title: "เซ็นทรัล มหาชัย (Central Mahachai)", distance: "8 นาที (3.2 กม.)", desc: "ศูนย์การค้าขนาดใหญ่ ร้านอาหาร แฟชั่น และโรงภาพยนตร์" },
       { icon: "🚆", title: "สถานีรถไฟมหาชัย & ตลาดสดมหาชัย", distance: "10 นาที (2.5 กม.)", desc: "แหล่งอาหารทะเลสดๆ และจุดเดินทางเข้าสู่กรุงเทพฯ" },
       { image: "/images/nearby_homepro.jpg", icon: "🏠", title: "โฮมโปร มหาชัย (HomePro)", distance: "ขับรถประมาณ 3 นาที", desc: "ศูนย์รวมสินค้าเกี่ยวกับบ้านและของตกแต่งบ้านครบวงจร" },
@@ -775,7 +775,7 @@ export const translations: Record<Language, Translations> = {
     nearbySubtitle: "Prime location connecting transportation, shopping centers, and public services",
     nearbyList: [
       { icon: "🛒", title: "Big C Mahachai", distance: "Opposite (2 mins walk)", desc: "Hypermarket, shopping mall, and complete supermarket" },
-      { icon: "🏥", title: "Mahachai Hospital / Samutsakorn Hosp.", distance: "5 mins (1.5 km)", desc: "Leading healthcare facilities available 24 hours" },
+      { image: "/images/nearby_hospital.png", icon: "🏥", title: "Mahachai Hospital / Samutsakorn Hosp.", distance: "5 mins (1.5 km)", desc: "Leading healthcare facilities available 24 hours" },
       { icon: "🛍️", title: "Central Mahachai", distance: "8 mins (3.2 km)", desc: "Major shopping center, restaurants, fashion, and cinema" },
       { icon: "🚆", title: "Mahachai Railway & Fresh Market", distance: "10 mins (2.5 km)", desc: "Fresh seafood market and train transport to Bangkok" },
       { image: "/images/nearby_homepro.jpg", icon: "🏠", title: "HomePro Mahachai", distance: "3 mins drive", desc: "Comprehensive home improvement and decor center" },
@@ -1111,7 +1111,7 @@ export const translations: Record<Language, Translations> = {
     nearbySubtitle: "优越地理位置，轻松连接交通、购物中心及公共服务",
     nearbyList: [
       { icon: "🛒", title: "Big C 玛哈猜", distance: "正对面 (步行2分钟)", desc: "大型超市、购物商场与全方位便利店" },
-      { icon: "🏥", title: "玛哈猜医院 / 龙仔厝医院", distance: "5分钟 (1.5公里)", desc: "24小时全天候顶尖医疗保障" },
+      { image: "/images/nearby_hospital.png", icon: "🏥", title: "玛哈猜医院 / 龙仔厝医院", distance: "5分钟 (1.5公里)", desc: "24小时全天候顶尖医疗保障" },
       { icon: "🛍️", title: "Central 玛哈猜 (Central Mahachai)", distance: "8分钟 (3.2公里)", desc: "大型综合购物中心、餐饮、时尚与电影院" },
       { icon: "🚆", title: "玛哈猜火车站 & 鲜活海鲜市场", distance: "10分钟 (2.5公里)", desc: "新鲜海鲜市场及前往曼谷的火车站点" },
       { image: "/images/nearby_homepro.jpg", icon: "🏠", title: "HomePro 玛哈猜", distance: "车程约 3 分钟", desc: "全面的家居建材与装饰中心" },
@@ -1447,7 +1447,7 @@ export const translations: Record<Language, Translations> = {
     nearbySubtitle: "သွားလာရေး၊ စျေးဝယ်စင်တာများနှင့် အများသုံးဝန်ဆောင်မှုများ သွားလာရ လွယ်ကူသော နေရာကောင်း",
     nearbyList: [
       { icon: "🛒", title: "Big C မဟာချိုင်", distance: "မျက်စောင်းထိုး (လမ်းလျှောက် ၂ မိနစ်)", desc: "ကုန်တိုက်နှင့် စူပါမားကတ် အပြည့်အစုံ" },
-      { icon: "🏥", title: "မဟာချိုင် ဆေးရုံ / စမုတ်စာခွန် ဆေးရုံ", distance: "၅ မိနစ် (၁.၅ ကီလိုမီတာ)", desc: "၂၄ နာရီ အဆင့်မြင့် ကျန်းမာရေးစောင့်ရှောက်မှု" },
+      { image: "/images/nearby_hospital.png", icon: "🏥", title: "မဟာချိုင် ဆေးရုံ / စမုတ်စာခွန် ဆေးရုံ", distance: "၅ မိနစ် (၁.၅ ကီလိုမီတာ)", desc: "၂၄ နာရီ အဆင့်မြင့် ကျန်းမာရေးစောင့်ရှောက်မှု" },
       { icon: "🛍️", title: "Central မဟာချိုင်", distance: "၈ မိနစ် (၃.၂ ကီလိုမီတာ)", desc: "အဆင့်မြင့် စျေးဝယ်စင်တာ၊ စားသောက်ဆိုင်များနှင့် ရုပ်ရှင်ရုံ" },
       { icon: "🚆", title: "မဟာချိုင် ရထားဘူတာနှင့် ပင်လယ်စာစျေး", distance: "၁၀ မိနစ် (၂.၅ ကီလိုမီတာ)", desc: "လတ်ဆတ်သော ပင်လယ်စာနှင့် ဘန်ကောက်သို့ သွားရောက်နိုင်သည့် ရထားဘူတာ" },
       { image: "/images/nearby_homepro.jpg", icon: "🏠", title: "HomePro မဟာချိုင်", distance: "ကားဖြင့် ၃ မိနစ်ခန့်", desc: "အိမ်အလှဆင်ပစ္စည်းနှင့် အိမ်သုံးပစ္စည်းစင်တာ" },
