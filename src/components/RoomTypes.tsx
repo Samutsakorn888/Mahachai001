@@ -234,10 +234,6 @@ export const RoomTypes: React.FC<RoomTypesProps> = ({
 
   const dailyRooms = dbDailyRooms;
 
-  const totalDailyRoomsCount = dailyRooms.reduce((acc, r) => acc + (r.data.totalRooms || 0), 0);
-  const totalDailyOccupiedCount = dailyRooms.reduce((acc, r) => acc + (r.data.occupiedRooms || 0), 0);
-  const totalDailyAvailableCount = dailyRooms.reduce((acc, r) => acc + (r.data.availableRooms || 0), 0);
-
   const monthlyRoomsData = dbMonthlyRooms;
 
 
