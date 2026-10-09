@@ -403,7 +403,7 @@ export const translations: Record<Language, Translations> = {
       { icon: "👮", title: "เจ้าหน้าที่ตำรวจ", desc: "ดูแลรักษาความปลอดภัยตลอด 24 ชั่วโมง" },
       { icon: "💳", title: "ระบบตัดไฟด้วยคีย์การ์ด", desc: "ปลอดภัยและประหยัดพลังงาน ตัดไฟอัตโนมัติเมื่อออกจากห้อง" },
       { icon: "🧯", title: "ตู้ดับเพลิงทุกชั้น", desc: "อุปกรณ์ดับเพลิงติดตั้งครอบคลุมทุกพื้นที่" },
-      { icon: "🔥", title: "Heat & Smoke Detector", desc: "ระบบตรวจจับความร้อนและควันไฟตลอด 24 ชั่วโมง" },
+      { icon: "🔥", title: "Heat & Smoke Detector", desc: "ระบบตรวจจับความร้อนและควันไฟตลอด 24 ชั่วโมง พร้อมกริ่งเหตุเพลิงไหม้ทุกชั้น" },
       { icon: "📹", title: "กล้องวงจรปิด CCTV 24 ชั่วโมง", desc: "บันทึกภาพตลอดเวลา ทุกชั้นและรอบอาคาร" },
       { icon: "⚡", title: "เสาล่อฟ้าป้องกัน", desc: "ติดตั้งระบบป้องกันฟ้าผ่า เพื่อความปลอดภัยสูงสุด" }
     ],
@@ -769,7 +769,7 @@ export const translations: Record<Language, Translations> = {
       { icon: "👮", title: "Police / Security Guards", desc: "24/7 security personnel on site" },
       { icon: "💳", title: "Keycard Power Cut-off", desc: "Safe and energy-saving automatic power cut-off" },
       { icon: "🧯", title: "Fire Extinguishers", desc: "Fire extinguishing equipment installed on every floor" },
-      { icon: "🔥", title: "Heat & Smoke Detector", desc: "24-hour heat and smoke detection system" },
+      { icon: "🔥", title: "Heat & Smoke Detector", desc: "24-hour heat and smoke detection system with fire alarm bells on all floors" },
       { icon: "📹", title: "24/7 CCTV", desc: "Continuous recording on all floors and around the building" },
       { icon: "⚡", title: "Lightning Rod", desc: "Lightning protection system installed for maximum safety" }
     ],
@@ -1106,7 +1106,7 @@ export const translations: Record<Language, Translations> = {
       { icon: "👮", title: "警察 / 安保人员", desc: "24小时安保人员值守" },
       { icon: "💳", title: "房卡断电系统", desc: "安全节能的自动断电系统" },
       { icon: "🧯", title: "消防栓", desc: "每层楼均配备消防灭火设备" },
-      { icon: "🔥", title: "热量与烟雾探测器", desc: "24小时热量与烟雾探测系统" },
+      { icon: "🔥", title: "热量与烟雾探测器", desc: "24小时热量与烟雾探测系统，每层均配备消防警铃" },
       { icon: "📹", title: "24小时监控录像", desc: "所有楼层及建筑周围全天候录像" },
       { icon: "⚡", title: "避雷针防护", desc: "安装避雷系统，确保最大安全" }
     ],
@@ -1443,7 +1443,7 @@ export const translations: Record<Language, Translations> = {
       { icon: "👮", title: "ရဲ / လုံခြုံရေး", desc: "၂၄ နာရီ လုံခြုံရေး ဝန်ထမ်းများ ရှိသည်" },
       { icon: "💳", title: "ကီးကဒ် မီးဖြတ်စနစ်", desc: "လုံခြုံပြီး လျှပ်စစ်ချွေတာသော အလိုအလျောက် မီးဖြတ်စနစ်" },
       { icon: "🧯", title: "မီးသတ်ဘူးများ", desc: "အထပ်တိုင်းတွင် မီးသတ်ပစ္စည်းများ တပ်ဆင်ထားသည်" },
-      { icon: "🔥", title: "အပူနှင့် မီးခိုးရှာဖွေရေးကိရိယာ", desc: "၂၄ နာရီ အပူနှင့် မီးခိုးရှာဖွေရေး စနစ်" },
+      { icon: "🔥", title: "အပူနှင့် မီးခိုးရှာဖွေရေးကိရိယာ", desc: "၂၄ နာရီ အပူနှင့် မီးခိုးရှာဖွေရေး စနစ်၊ အထပ်တိုင်းတွင် မီးသတ်ခေါင်းလောင်းများ ပါရှိသည်" },
       { icon: "📹", title: "၂၄ နာရီ CCTV", desc: "အထပ်တိုင်းနှင့် အဆောက်အဦပတ်လည်တွင် အမြဲမှတ်တမ်းတင်နေသည်" },
       { icon: "⚡", title: "မိုးကြိုးလွှဲစနစ်", desc: "အမြင့်ဆုံး လုံခြုံရေးအတွက် မိုးကြိုးလွှဲစနစ် တပ်ဆင်ထားသည်" }
     ],
