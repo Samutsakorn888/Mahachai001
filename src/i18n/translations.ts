@@ -88,6 +88,8 @@ export interface Translations {
   faqTitle: string;
   faqSubtitle: string;
   faqList: { q: string; a: string }[];
+  faqShowMore?: string;
+  faqShowLess?: string;
   reviewsTitle: string;
   reviewsSubtitle: string;
   reviewsList: { name: string; role: string; text: string; rating: number }[];
