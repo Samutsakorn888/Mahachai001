@@ -123,6 +123,10 @@ export const Hero: React.FC<HeroProps> = ({
               <span className="pill-icon"></span>
               <span>{t.heroWifi || 'ฟรี Wi-Fi'}</span>
             </div>
+            <div className="hero-pill-item">
+              <span className="pill-icon"></span>
+              <span>{t.heroElevatorParking || 'มีลิฟต์โดยสาร & ที่จอดรถในอาคาร'}</span>
+            </div>
           </div>
 
           {/* Hotel Booking & Action Card */}

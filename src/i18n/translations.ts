@@ -119,6 +119,7 @@ export interface Translations {
   heroOpposite?: string;
   heroSecurity?: string;
   heroWifi?: string;
+  heroElevatorParking?: string;
   heroLocationLabel?: string;
   heroLocationVal?: string;
   heroCheckInOutLabel?: string;
@@ -476,6 +477,7 @@ export const translations: Record<Language, Translations> = {
     heroOpposite: "ตรงข้าม Big C มหาชัย",
     heroSecurity: "คีย์การ์ด & CCTV 24 ชม.",
     heroWifi: "ฟรี Wi-Fi",
+    heroElevatorParking: "มีลิฟต์โดยสาร & ที่จอดรถในอาคาร",
     heroLocationLabel: "ทำเลที่ตั้ง (Location)",
     heroLocationVal: "ใจกลางมหาชัย (ตรงข้าม Big C)",
     heroCheckInOutLabel: "เวลาเช็คอิน / เช็คเอ้าท์",
@@ -812,6 +814,7 @@ export const translations: Record<Language, Translations> = {
     heroOpposite: "Opposite Big C Mahachai",
     heroSecurity: "Keycard & 24h CCTV",
     heroWifi: "Free High-Speed Wi-Fi",
+    heroElevatorParking: "Elevator & Indoor Parking",
     heroLocationLabel: "Prime Location",
     heroLocationVal: "Center of Mahachai (Opposite Big C)",
     heroCheckInOutLabel: "Check-in / Check-out Time",
@@ -1148,6 +1151,7 @@ export const translations: Record<Language, Translations> = {
     heroOpposite: "Big C 玛哈猜正对面",
     heroSecurity: "门禁刷卡 & 24小时监控",
     heroWifi: "全覆盖高速免费 Wi-Fi",
+    heroElevatorParking: "电梯 & 室内停车场",
     heroLocationLabel: "地理位置",
     heroLocationVal: "玛哈猜市中心 (Big C 正对面)",
     heroCheckInOutLabel: "入住 / 退房时间",
@@ -1484,6 +1488,7 @@ export const translations: Record<Language, Translations> = {
     heroOpposite: "Big C မဟာချိုင် မျက်စောင်းထိုး",
     heroSecurity: "ကီးကဒ်နှင့် ၂၄ နာရီ CCTV",
     heroWifi: "အခမဲ့ အမြန်နှုန်းမြင့် Wi-Fi",
+    heroElevatorParking: "ဓာတ်လှေကားနှင့် အဆောက်အအုံတွင်း ကားပါကင်",
     heroLocationLabel: "တည်နေရာ",
     heroLocationVal: "မဟာချိုင်မြို့လယ်ခေါင် (Big C မျက်စောင်းထိုး)",
     heroCheckInOutLabel: "Check-in / Check-out အချိန်",
