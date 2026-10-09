@@ -82,11 +82,11 @@ export const Faq: React.FC<FaqProps> = ({ t }) => {
             <button
               onClick={() => { setShowAll(!showAll); if (showAll) setOpenIdx(null); }}
               style={{
-                background: 'linear-gradient(135deg, var(--primary-color), var(--primary-dark))',
-                color: 'white',
+                background: '#1a4b8c',
+                color: '#ffffff',
                 border: 'none',
                 padding: '12px 32px',
-                borderRadius: 'var(--border-radius-md)',
+                borderRadius: '12px',
                 fontSize: '1rem',
                 fontWeight: '600',
                 cursor: 'pointer',
@@ -95,8 +95,8 @@ export const Faq: React.FC<FaqProps> = ({ t }) => {
               }}
             >
               {showAll
-                ? (t.faqShowLess || '▲ ย่อรายการ')
-                : `▼ ${t.faqShowMore || 'ดูเพิ่มเติม'} (${allItems.length - 3})`}
+                ? '▲ ย่อรายการ'
+                : `▼ ดูเพิ่มเติม (${allItems.length - 3})`}
             </button>
           </div>
         )}
