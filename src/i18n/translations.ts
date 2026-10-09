@@ -83,6 +83,8 @@ export interface Translations {
   nearbyTitle: string;
   nearbySubtitle: string;
   nearbyList: { icon: string; image?: string; title: string; distance: string; desc: string }[];
+  nearbyShowMore?: string;
+  nearbyShowLess?: string;
   faqTitle: string;
   faqSubtitle: string;
   faqList: { q: string; a: string }[];
@@ -430,6 +432,8 @@ export const translations: Record<Language, Translations> = {
       { icon: "🏪", title: "CJ MORE", distance: "5 นาที", desc: "ซูเปอร์มาร์เก็ตและร้านสะดวกซื้อ" },
       { icon: "🏛️", title: "อบต. ท่าทราย", distance: "5 นาที", desc: "องค์การบริหารส่วนตำบลท่าทราย" }
     ],
+    nearbyShowMore: "▼ ดูสถานที่ใกล้เคียงเพิ่มเติม",
+    nearbyShowLess: "▲ ย่อรายการ",
     faqTitle: "คำถามที่พบบ่อย (FAQ)",
     faqSubtitle: "ไขข้อข้องใจเกี่ยวกับการเข้าพักและการเช่าห้องพักรายวัน / รายเดือน",
     faqList: [
@@ -807,6 +811,8 @@ export const translations: Record<Language, Translations> = {
       { icon: "🏪", title: "CJ MORE", distance: "5 mins", desc: "Supermarket and convenience store" },
       { icon: "🏛️", title: "Tha Sai Subdistrict Administrative Organization", distance: "5 mins", desc: "Local government office" }
     ],
+    nearbyShowMore: "▼ See More Nearby Places",
+    nearbyShowLess: "▲ Show Less",
     faqTitle: "Frequently Asked Questions (FAQ)",
     faqSubtitle: "Find answers regarding daily stays and monthly room rentals",
     faqList: [
@@ -1155,6 +1161,8 @@ export const translations: Record<Language, Translations> = {
       { icon: "🏪", title: "CJ MORE", distance: "5分钟", desc: "超市和便利店" },
       { icon: "🏛️", title: "Tha Sai 街道办事处", distance: "5分钟", desc: "当地政府办事处" }
     ],
+    nearbyShowMore: "▼ 查看更多附近地点",
+    nearbyShowLess: "▲ 收起",
     faqTitle: "常见问题解答 (FAQ)",
     faqSubtitle: "了解关于日租入住与月租租赁的解答",
     faqList: [
@@ -1503,6 +1511,8 @@ export const translations: Record<Language, Translations> = {
       { icon: "🏪", title: "CJ MORE", distance: "၅ မိနစ်", desc: "စူပါမားကတ်နှင့် ကုန်စုံဆိုင်" },
       { icon: "🏛️", title: "Tha Sai ရပ်ကွက်အုပ်ချုပ်ရေးရုံး", distance: "၅ မိနစ်", desc: "ဒေသအုပ်ချုပ်ရေးရုံး" }
     ],
+    nearbyShowMore: "▼ အနားနာရှိသော နေရအနားကို ဆက်သွား",
+    nearbyShowLess: "▲ လေောများ",
     faqTitle: "မေးလေ့ရှိသော မေးခွန်းများ (FAQ)",
     faqSubtitle: "နေ့စဉ်နှင့် လစဉ် တည်းခိုမှုဆိုင်ရာ အချက်အလက်များ",
     faqList: [

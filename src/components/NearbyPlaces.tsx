@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import type { Translations } from '../i18n/translations';
 
 interface NearbyPlacesProps {
@@ -6,6 +6,11 @@ interface NearbyPlacesProps {
 }
 
 export const NearbyPlaces: React.FC<NearbyPlacesProps> = ({ t }) => {
+  const [showAll, setShowAll] = useState(false);
+
+  const allItems = t.nearbyList || [];
+  const visibleItems = showAll ? allItems : allItems.slice(0, 4);
+
   return (
     <section id="nearby" className="section" style={{ backgroundColor: 'var(--bg-offset)' }}>
       <div className="container">
@@ -13,7 +18,7 @@ export const NearbyPlaces: React.FC<NearbyPlacesProps> = ({ t }) => {
         <p className="section-subtitle">{t.nearbySubtitle}</p>
 
         <div className="nearby-grid">
-          {(t.nearbyList || []).map((item, idx) => {
+          {visibleItems.map((item, idx) => {
             const nearbyImages = [
               '/images/nearby_bigc.jpg',
               '/images/nearby_hospital.jpg',
@@ -42,6 +47,19 @@ export const NearbyPlaces: React.FC<NearbyPlacesProps> = ({ t }) => {
             );
           })}
         </div>
+
+        {allItems.length > 4 && (
+          <div style={{ textAlign: 'center', marginTop: '24px' }}>
+            <button
+              className="nearby-show-more-btn"
+              onClick={() => setShowAll(!showAll)}
+            >
+              {showAll
+                ? (t.nearbyShowLess || '▲ ย่อรายการ')
+                : `${t.nearbyShowMore || '▼ ดูสถานที่ใกล้เคียงเพิ่มเติม'} (${allItems.length - 4} แห่ง)`}
+            </button>
+          </div>
+        )}
 
         {/* Embedded Interactive Map Card */}
         <div className="interactive-map-card">

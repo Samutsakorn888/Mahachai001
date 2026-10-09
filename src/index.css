@@ -3920,6 +3920,34 @@ button {
   border-radius: 30px;
 }
 
+/* Show More Button for Nearby Places */
+.nearby-show-more-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 32px;
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color, #c0392b));
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
+  letter-spacing: 0.3px;
+}
+
+.nearby-show-more-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  opacity: 0.92;
+}
+
+.nearby-show-more-btn:active {
+  transform: translateY(0);
+}
+
 /* ==========================================================================
    CHATBOT FLOATING WIDGET STYLES
    ========================================================================== */
