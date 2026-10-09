@@ -32,11 +32,21 @@ export const NearbyPlaces: React.FC<NearbyPlacesProps> = ({ t }) => {
                 <div>
                   <div className="nearby-card-header">
                     <div className="nearby-logo-wrapper">
-                      {imgUrl ? (
-                        <img src={imgUrl} alt={item.title} className="nearby-logo-img" />
-                      ) : (
-                        <span style={{ fontSize: '4rem' }}>{item.icon}</span>
+                      {imgUrl && (
+                        <img 
+                          src={imgUrl} 
+                          alt={item.title} 
+                          className="nearby-logo-img" 
+                          onError={(e) => {
+                            e.currentTarget.style.display = 'none';
+                            const nextSibling = e.currentTarget.nextElementSibling as HTMLElement;
+                            if (nextSibling) nextSibling.style.display = 'inline';
+                          }}
+                        />
                       )}
+                      <span style={{ fontSize: '4rem', display: imgUrl ? 'none' : 'inline' }}>
+                        {item.icon}
+                      </span>
                     </div>
                     <span className="nearby-badge">{item.distance}</span>
                   </div>
