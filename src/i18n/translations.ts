@@ -430,7 +430,7 @@ export const translations: Record<Language, Translations> = {
       { image: "/images/nearby_amazon.png", icon: "☕", title: "กาแฟอเมซอน (Café Amazon)", distance: "0.5 นาที", desc: "ร้านกาแฟสด" },
       { image: "/images/nearby_7eleven.png", icon: "🏪", title: "7-Eleven", distance: "0.5 นาที", desc: "ร้านสะดวกซื้อเปิดตลอด 24 ชั่วโมง" },
       { image: "/images/nearby_cj.png", icon: "🏪", title: "CJ MORE", distance: "5 นาที", desc: "ซูเปอร์มาร์เก็ตและร้านสะดวกซื้อ" },
-      { icon: "🏛️", title: "อบต. ท่าทราย", distance: "5 นาที", desc: "องค์การบริหารส่วนตำบลท่าทราย" }
+      { image: "/images/nearby_thasai.png", icon: "🏛️", title: "อบต. ท่าทราย", distance: "5 นาที", desc: "องค์การบริหารส่วนตำบลท่าทราย" }
     ],
     nearbyShowMore: "▼ ดูสถานที่ใกล้เคียงเพิ่มเติม",
     nearbyShowLess: "▲ ย่อรายการ",
@@ -809,7 +809,7 @@ export const translations: Record<Language, Translations> = {
       { image: "/images/nearby_amazon.png", icon: "☕", title: "Café Amazon", distance: "0.5 min", desc: "Fresh coffee shop" },
       { image: "/images/nearby_7eleven.png", icon: "🏪", title: "7-Eleven", distance: "0.5 min", desc: "24-hour convenience store" },
       { image: "/images/nearby_cj.png", icon: "🏪", title: "CJ MORE", distance: "5 mins", desc: "Supermarket and convenience store" },
-      { icon: "🏛️", title: "Tha Sai Subdistrict Administrative Organization", distance: "5 mins", desc: "Local government office" }
+      { image: "/images/nearby_thasai.png", icon: "🏛️", title: "Tha Sai Subdistrict Administrative Organization", distance: "5 mins", desc: "Local government office" }
     ],
     nearbyShowMore: "▼ See More Nearby Places",
     nearbyShowLess: "▲ Show Less",
@@ -1159,7 +1159,7 @@ export const translations: Record<Language, Translations> = {
       { image: "/images/nearby_amazon.png", icon: "☕", title: "Café Amazon", distance: "0.5分钟", desc: "咖啡店" },
       { image: "/images/nearby_7eleven.png", icon: "🏪", title: "7-Eleven", distance: "0.5分钟", desc: "24小时便利店" },
       { image: "/images/nearby_cj.png", icon: "🏪", title: "CJ MORE", distance: "5分钟", desc: "超市和便利店" },
-      { icon: "🏛️", title: "Tha Sai 街道办事处", distance: "5分钟", desc: "当地政府办事处" }
+      { image: "/images/nearby_thasai.png", icon: "🏛️", title: "Tha Sai 街道办事处", distance: "5分钟", desc: "当地政府办事处" }
     ],
     nearbyShowMore: "▼ 查看更多附近地点",
     nearbyShowLess: "▲ 收起",
@@ -1509,7 +1509,7 @@ export const translations: Record<Language, Translations> = {
       { image: "/images/nearby_amazon.png", icon: "☕", title: "Café Amazon", distance: "၀.၅ မိနစ်", desc: "ကော်ဖီဆိုင်" },
       { image: "/images/nearby_7eleven.png", icon: "🏪", title: "7-Eleven", distance: "၀.၅ မိနစ်", desc: "၂၄ နာရီ ဖွင့်သော ကုန်စုံဆိုင်" },
       { image: "/images/nearby_cj.png", icon: "🏪", title: "CJ MORE", distance: "၅ မိနစ်", desc: "စူပါမားကတ်နှင့် ကုန်စုံဆိုင်" },
-      { icon: "🏛️", title: "Tha Sai ရပ်ကွက်အုပ်ချုပ်ရေးရုံး", distance: "၅ မိနစ်", desc: "ဒေသအုပ်ချုပ်ရေးရုံး" }
+      { image: "/images/nearby_thasai.png", icon: "🏛️", title: "Tha Sai ရပ်ကွက်အုပ်ချုပ်ရေးရုံး", distance: "၅ မိနစ်", desc: "ဒေသအုပ်ချုပ်ရေးရုံး" }
     ],
     nearbyShowMore: "▼ အနားနာရှိသော နေရအနားကို ဆက်သွား",
     nearbyShowLess: "▲ လေောများ",
