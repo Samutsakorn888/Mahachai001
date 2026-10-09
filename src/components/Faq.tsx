@@ -7,10 +7,14 @@ interface FaqProps {
 
 export const Faq: React.FC<FaqProps> = ({ t }) => {
   const [openIdx, setOpenIdx] = useState<number | null>(0);
+  const [showAll, setShowAll] = useState(false);
 
   const toggleFaq = (idx: number) => {
     setOpenIdx(openIdx === idx ? null : idx);
   };
+
+  const allItems = t.faqList || [];
+  const visibleItems = showAll ? allItems : allItems.slice(0, 3);
 
   return (
     <section id="faq" className="section" style={{ backgroundColor: 'var(--white)' }}>
@@ -19,7 +23,7 @@ export const Faq: React.FC<FaqProps> = ({ t }) => {
         <p className="section-subtitle">{t.faqSubtitle}</p>
 
         <div style={{ marginTop: '36px', display: 'flex', flexDirection: 'column', gap: '14px' }}>
-          {(t.faqList || []).map((item, idx) => {
+          {visibleItems.map((item, idx) => {
             const isOpen = openIdx === idx;
             return (
               <div
@@ -72,6 +76,30 @@ export const Faq: React.FC<FaqProps> = ({ t }) => {
             );
           })}
         </div>
+
+        {allItems.length > 3 && (
+          <div style={{ textAlign: 'center', marginTop: '24px' }}>
+            <button
+              onClick={() => { setShowAll(!showAll); if (showAll) setOpenIdx(null); }}
+              style={{
+                background: 'linear-gradient(135deg, var(--primary-color), var(--primary-dark))',
+                color: 'white',
+                border: 'none',
+                padding: '12px 32px',
+                borderRadius: 'var(--border-radius-md)',
+                fontSize: '1rem',
+                fontWeight: '600',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+                boxShadow: '0 2px 8px rgba(0,0,0,0.15)'
+              }}
+            >
+              {showAll
+                ? (t.faqShowLess || '▲ ย่อรายการ')
+                : `▼ ${t.faqShowMore || 'ดูเพิ่มเติม'} (${allItems.length - 3})`}
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );
